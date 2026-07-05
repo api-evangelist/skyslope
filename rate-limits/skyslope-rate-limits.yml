@@ -1,0 +1,64 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: SkySlope
+providerId: skyslope
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Real Estate
+- Transaction Management
+- Digital Forms
+- Rate Limiting
+- Quotas
+description: >-
+  SkySlope does not publish fixed numeric rate limits for its public APIs. The
+  Partnership / Forms API and Offers API reference documentation describes
+  standard HTTP response codes and OAuth 2.0 bearer authentication but does not
+  state explicit per-minute or per-day request caps. Practical usage limits are
+  governed by the partner/brokerage agreement (API access is gated) and by
+  platform allowances such as envelope counts per user on the underlying
+  product plan rather than by a documented API request quota.
+notes: >-
+  No numeric per-account or per-endpoint API limits are documented as of the
+  review date. Assume the provider may throttle; implement exponential backoff
+  with jitter and honor Retry-After on 429 responses. Confirm any contractual
+  API rate limits with SkySlope during partner onboarding.
+sources:
+- https://forms.skyslope.com/partner/api/docs
+- https://offers.skyslope.com/offers-api/reference
+- https://skyslope.com/general/unlocking-the-power-of-your-data/
+responseCodes:
+  throttled: 429
+limits:
+- name: Partnership / Forms API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Partnership / Forms API.
+- name: Offers API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Offers API.
+- name: Envelope Allowance
+  scope: user
+  metric: envelopes
+  limit: per plan
+  notes: E-signature envelopes per user per year are governed by the product plan tier, not by the API.
+- name: OAuth Access Token Lifetime
+  scope: application
+  metric: tokens
+  limit: refreshable
+  notes: Access tokens are bearer tokens; the Partnership API auth-code flow issues refresh tokens to obtain new access tokens without re-authenticating.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: HTTPS Required
+  description: All API requests must be made over HTTPS; plain HTTP and unauthenticated requests fail.
+- name: Partner-Gated Access
+  description: API credentials are issued to partners/brokerages; usage is bounded by the partner agreement rather than a public quota.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

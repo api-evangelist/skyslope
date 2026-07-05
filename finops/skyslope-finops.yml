@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: SkySlope
+providerId: skyslope
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Real Estate
+- Transaction Management
+- Digital Forms
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of SkySlope spend. SkySlope is a subscription SaaS billed
+  primarily per user/seat on tiered plans (Essentials, Professional,
+  Enterprise), with quote-based pricing that varies by brokerage size and
+  transaction volume. Incremental costs come from add-ons such as SMS signer
+  notifications, identity verification, regional compliance features, and
+  one-time data migration/training. API access (Partnership / Forms API, Offers
+  API, Transaction Management API BETA) is bundled into the partner/brokerage
+  relationship rather than billed as a separate metered API line item.
+notes: >-
+  Per-user rates and add-on unit costs are third-party estimates and are not
+  reconciled here; verify with SkySlope sales. The dominant cost driver is
+  seat count across the brokerage plus consumption add-ons.
+sources:
+- https://skyslope.com/pricing/
+- https://skyslope.com/general/unlocking-the-power-of-your-data/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: SkySlope
+serviceCategory: Real Estate Transaction Management
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: SkySlope
+  ServiceCategory: Real Estate Transaction Management
+  ProviderName: SkySlope
+  PublisherName: SkySlope
+  InvoiceIssuerName: SkySlope
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: seats
+  description: Active user/agent seats subscribed on a plan tier, the primary billing driver.
+  unit: seats
+  aggregation: max
+  dimensions:
+  - account
+  - plan
+  - office
+- name: sms_notifications
+  description: SMS signer notifications, billed per message as an add-on.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+- name: identity_verifications
+  description: Signer identity verifications, billed per verification as an add-on.
+  unit: verifications
+  aggregation: sum
+  dimensions:
+  - account
+- name: onboarding
+  description: One-time data migration and training fees.
+  unit: engagements
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track seat counts per office/team and add-on consumption (SMS, identity verification) against the plan.
+- name: Allocation
+  description: Map seats and add-ons to offices/teams so cost lands on the right cost center within the brokerage.
+- name: Optimization
+  description: Right-size seats to active agents, choose the plan tier matching transaction volume and envelope needs, and control per-message/per-verification add-ons.
+- name: Accountability
+  description: Assign an owner for the SkySlope contract; review seat utilization and add-on spend against budget each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

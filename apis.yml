@@ -1,0 +1,111 @@
+aid: skyslope
+url: https://raw.githubusercontent.com/api-evangelist/skyslope/refs/heads/main/apis.yml
+name: SkySlope
+kind: company
+description: SkySlope is a real estate transaction management and digital forms
+  platform used by brokerages, teams, and agents across the U.S. and Canada to
+  store, manage, and audit transaction documents for compliance, prepare and
+  e-sign forms, and manage offers. SkySlope exposes a partner-oriented public API
+  program - a Partnership / Forms API (OAuth 2.0 authorization-code flow with PKCE)
+  for creating and managing listing and transaction files, documents, contacts,
+  envelopes, forms libraries, and templates; an Offers API (OAuth 2.0
+  client-credentials flow) for retrieving listings, offers, and offer/listing
+  analytics from SkySlope Offers; and a broader Transaction Management API (BETA)
+  positioned for brokerages to query and extract their SkySlope data for
+  reporting and enterprise integration. API access is partner/brokerage-gated -
+  reference documentation is public but obtaining OAuth client credentials
+  requires working with SkySlope.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Real Estate
+- Transaction Management
+- Digital Forms
+- E-Signature
+- Compliance
+- PropTech
+- Documents
+created: '2026-07-04'
+modified: '2026-07-04'
+specificationVersion: '0.19'
+apis:
+- aid: skyslope:skyslope-forms-partnership-api
+  name: SkySlope Partnership (Forms) API
+  tags:
+  - Files
+  - Documents
+  - Forms
+  - Contacts
+  - Envelopes
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  properties:
+  - url: https://forms.skyslope.com/partner/api/docs
+    type: APIReference
+  - url: openapi/skyslope-forms-partnership-openapi.yml
+    type: OpenAPI
+  description: Create and manage SkySlope listing and transaction files and their
+    documents, contacts, envelopes, forms, libraries, and templates. Retrieve
+    signed documents and subscribe to a signed-documents webhook. Authenticated
+    with OAuth 2.0 authorization-code flow (PKCE) via accounts.skyslope.com, scope
+    forms.files. Some endpoints are marked as partner-only / coming soon in the
+    published reference.
+- aid: skyslope:skyslope-offers-api
+  name: SkySlope Offers API
+  tags:
+  - Offers
+  - Listings
+  - Analytics
+  - Reporting
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://offers.skyslope.com/offers-api/reference
+  baseURL: https://offers.skyslope.com/offers-api
+  properties:
+  - url: https://offers.skyslope.com/offers-api/reference
+    type: APIReference
+  - url: openapi/skyslope-offers-openapi.yml
+    type: OpenAPI
+  description: Retrieve listings, offers, offer details, and counts/analytics of
+    listings and offers from SkySlope Offers for a given agent or date range.
+    Authenticated with OAuth 2.0 client-credentials flow (POST /ext/token for a
+    Bearer access token). Read-oriented external (ext) reporting surface.
+- aid: skyslope:skyslope-transaction-management-api
+  name: SkySlope Transaction Management API (BETA)
+  tags:
+  - Transactions
+  - Reporting
+  - Enterprise
+  - Beta
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://skyslope.com/general/unlocking-the-power-of-your-data/
+  baseURL: https://api.skyslope.com/api
+  properties:
+  - url: https://skyslope.com/general/unlocking-the-power-of-your-data/
+    type: Documentation
+  description: SkySlope's broader enterprise Transaction Management API, positioned
+    for brokerages to query, extract, and build on top of their SkySlope
+    transaction data for reporting tools, dashboards, and enterprise
+    applications. The api.skyslope.com host is live and requires authentication
+    (returns 401 without a token), but a complete public reference for this BETA
+    surface was not reachable at review time - endpoints are not modeled here to
+    avoid fabricating an unverified surface. Access is partner/brokerage-gated.
+common:
+- type: Website
+  url: https://skyslope.com
+- type: LinkedIn
+  url: https://www.linkedin.com/company/skyslope
+- type: Documentation
+  url: https://forms.skyslope.com/partner/api/docs
+- type: Documentation
+  url: https://skyslope.com/general/unlocking-the-power-of-your-data/
+- type: Integrations
+  url: https://skyslope.com/integrations/
+- type: Plans
+  url: plans/skyslope-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/skyslope-rate-limits.yml
+- type: FinOps
+  url: finops/skyslope-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

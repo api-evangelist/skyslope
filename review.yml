@@ -1,0 +1,127 @@
+aid: skyslope
+name: SkySlope
+review:
+  question: Does SkySlope expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. SkySlope's documented public API surface
+    (the Partnership / Forms API and the Offers API) is request/response REST
+    over HTTPS. The only push-style mechanism found is a signed-documents
+    webhook on the Partnership API (POST /documents/sign/subscribe/{fileId}),
+    which delivers events by HTTP callback to a subscriber URL - not a
+    server-push WebSocket transport. There is no ws:// or wss:// endpoint
+    documented on any SkySlope API to model.
+findings:
+  summary: |
+    SkySlope does not publish a documented public WebSocket API. SkySlope is a
+    real estate transaction management and digital forms platform. Its public,
+    partner-oriented APIs are REST over HTTPS: the Partnership / Forms API
+    (base https://forms.skyslope.com/partner/api, OAuth 2.0 authorization-code
+    flow with PKCE via accounts.skyslope.com, scope forms.files) and the Offers
+    API (base https://offers.skyslope.com/offers-api, OAuth 2.0
+    client-credentials flow). A broader Transaction Management API (BETA) is
+    referenced on api.skyslope.com; that host is live and returns 401 without a
+    token, but a complete public reference was not reachable at review time.
+    The only near-real-time mechanism is the Partnership API signed-documents
+    webhook (HTTP callback), not a WebSocket. No realtime, bidirectional, or
+    streaming WebSocket endpoint is documented on any SkySlope API.
+  accessModel: |
+    API access is partner/brokerage-gated. The Partnership / Forms API and
+    Offers API reference documentation is public (rendered with Redoc), but
+    obtaining OAuth client credentials requires working with SkySlope as a
+    partner/brokerage. Some Partnership API endpoints are explicitly marked in
+    the reference as partner-only / coming soon.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://forms.skyslope.com/partner/api
+      documented: true
+      note: Partnership / Forms API. Staging and integ hosts also documented.
+    - protocol: REST
+      scheme: https
+      baseURL: https://offers.skyslope.com/offers-api
+      documented: true
+      note: Offers API. Staging host also documented.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.skyslope.com/api
+      documented: partial
+      note: Transaction Management API (BETA). Host live (401 without auth); full public reference not reachable at review time.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Signed-documents webhook on the Partnership API (POST /documents/sign/subscribe/{fileId}). HTTP callback, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented on any SkySlope API as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://forms.skyslope.com/partner/api/files
+    - GET    https://forms.skyslope.com/partner/api/files
+    - GET    https://forms.skyslope.com/partner/api/files/{fileId}
+    - PUT    https://forms.skyslope.com/partner/api/files/{fileId}
+    - PATCH  https://forms.skyslope.com/partner/api/files/{fileId}
+    - POST   https://forms.skyslope.com/partner/api/files/{fileId}/contacts
+    - POST   https://forms.skyslope.com/partner/api/files/{fileId}/contacts/bulk
+    - PUT    https://forms.skyslope.com/partner/api/files/contacts/{contactId}
+    - DELETE https://forms.skyslope.com/partner/api/files/{fileId}/contacts/{contactId}
+    - GET    https://forms.skyslope.com/partner/api/files/{fileId}/documents
+    - PATCH  https://forms.skyslope.com/partner/api/files/{fileId}/documents
+    - POST   https://forms.skyslope.com/partner/api/files/{fileId}/documents/upload
+    - GET    https://forms.skyslope.com/partner/api/files/{fileId}/documents/download
+    - GET    https://forms.skyslope.com/partner/api/files/{fileId}/documents/download/pdf
+    - GET    https://forms.skyslope.com/partner/api/files/{fileId}/envelopes
+    - POST   https://forms.skyslope.com/partner/api/files/{fileId}/envelopes
+    - POST   https://forms.skyslope.com/partner/api/files/{fileId}/templates
+    - GET    https://forms.skyslope.com/partner/api/documents/{documentId}
+    - PATCH  https://forms.skyslope.com/partner/api/documents/{documentId}
+    - DELETE https://forms.skyslope.com/partner/api/documents/{documentId}
+    - GET    https://forms.skyslope.com/partner/api/documents/signed/{fileId}
+    - POST   https://forms.skyslope.com/partner/api/documents/sign/subscribe/{fileId}
+    - GET    https://forms.skyslope.com/partner/api/forms
+    - GET    https://forms.skyslope.com/partner/api/templates
+    - GET    https://forms.skyslope.com/partner/api/libraries
+    - GET    https://forms.skyslope.com/partner/api/libraries/{libraryId}/form-versions
+    - GET    https://forms.skyslope.com/partner/api/tags
+    - GET    https://forms.skyslope.com/partner/api/buyer-agreements/market
+    - GET    https://forms.skyslope.com/partner/api/users/profile
+    - POST   https://forms.skyslope.com/partner/api/group
+    - POST   https://forms.skyslope.com/partner/api/groups/{groupId}/child
+    - POST   https://forms.skyslope.com/partner/api/users/{userId}/groups/{groupId}
+    - DELETE https://forms.skyslope.com/partner/api/users/{userId}/groups/{groupId}
+    - POST   https://offers.skyslope.com/offers-api/ext/token
+    - GET    https://offers.skyslope.com/offers-api/ext/offers
+    - GET    https://offers.skyslope.com/offers-api/ext/offer/{offerId}
+    - GET    https://offers.skyslope.com/offers-api/ext/agent/{agentId}/listings
+    - GET    https://offers.skyslope.com/offers-api/ext/report
+sources:
+  - url: https://forms.skyslope.com/partner/api/docs
+    type: APIReference
+    note: SkySlope Partnership API Reference (v1.0.0, Redoc). 25 REST paths; OAuth 2.0 auth-code + PKCE. No WebSocket.
+  - url: https://offers.skyslope.com/offers-api/reference
+    type: APIReference
+    note: SkySlope Offers API Reference (Redoc). 5 REST paths; OAuth 2.0 client-credentials. No WebSocket.
+  - url: https://skyslope.com/general/unlocking-the-power-of-your-data/
+    type: Documentation
+    note: SkySlope open API ecosystem overview - Transaction Management, Forms, and Offers APIs for brokerages.
+  - url: https://api.skyslope.com/
+    type: APIBase
+    note: Transaction Management API (BETA) host - live, returns 401 without auth; full public reference not reachable at review time.
+  - url: https://skyslope.com/integrations/
+    type: Integrations
+    note: SkySlope integrations marketplace.
+  - url: https://skyslope.com/pricing/
+    type: Pricing
+    note: Pricing is quote-based (contact sales); tiered plans for brokerages, teams, and agents.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. SkySlope's documented public APIs
+    (Partnership / Forms API and Offers API) are request/response REST over
+    HTTPS, and the only push mechanism is an HTTP callback webhook for signed
+    documents. No AsyncAPI document was created because there is no server-push
+    WebSocket or SSE transport on any SkySlope API to model.

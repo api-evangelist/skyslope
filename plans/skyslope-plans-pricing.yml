@@ -1,0 +1,111 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: SkySlope
+providerId: skyslope
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Real Estate
+- Transaction Management
+- Digital Forms
+- E-Signature
+- Plans
+description: >-
+  SkySlope does not publicly disclose exact list pricing; plans are quote-based
+  and vary by brokerage size, transaction volume, and add-ons (contact sales).
+  Third-party sources describe tiered plans - roughly an Essentials tier for
+  individual agents / small teams (basic transaction management, digital
+  checklists, and e-signature), a Professional tier for growing teams
+  (unlimited transactions, more envelopes, advanced compliance and automated
+  workflows), and an Enterprise tier for large brokerages (custom pricing).
+  Reported per-user figures cluster around the low-tens to ~$60/user/month, and
+  the SkySlope Suite is reported starting around $340/month for brokerages.
+  These figures are third-party estimates, not official SkySlope rates. The
+  Partnership / Forms API and Offers API do not have a separately published
+  metered price; API access is partner/brokerage-gated and tied to the platform
+  relationship.
+notes: >-
+  All numeric figures below are third-party estimates and are unreconciled.
+  Verify current plans, per-user rates, envelope allowances, and API/partner
+  terms directly with SkySlope sales. Add-ons (SMS signer notifications,
+  identity verification, regional compliance, data migration, training) can add
+  incremental cost.
+sources:
+- https://skyslope.com/pricing/
+- https://skyslope.com/general/unlocking-the-power-of-your-data/
+- https://skyslope.com/products-services/skyslope/
+plans:
+- id: skyslope-essentials
+  name: Essentials
+  type: subscription
+  description: >-
+    Entry tier for individual agents and small teams - core transaction
+    management, digital checklists, document storage/audit, and e-signature.
+    Quote-based; reported in the low-tens of dollars per user per month.
+  entries:
+  - label: Per User
+    name: essentials_per_user
+    type: flat
+    metric: seat
+    limit: -1
+    timeFrame: month
+    geo: US-CA
+    unit: 1
+    price: quote-based (reported ~$25+/user/month)
+    userMultiplied: true
+  elements:
+  - name: Transaction Management
+  - name: Digital Checklists
+  - name: Document Storage and Audit
+  - name: E-Signature
+- id: skyslope-professional
+  name: Professional
+  type: subscription
+  description: >-
+    Growing-team tier - unlimited transactions, higher envelope allowance per
+    user, advanced compliance tooling, and automated workflows. Quote-based;
+    reported around $40/user/month.
+  entries:
+  - label: Per User
+    name: professional_per_user
+    type: flat
+    metric: seat
+    limit: -1
+    timeFrame: month
+    geo: US-CA
+    unit: 1
+    price: quote-based (reported ~$40/user/month)
+    userMultiplied: true
+  elements:
+  - name: Unlimited Transactions
+  - name: Higher Envelope Allowance
+  - name: Advanced Compliance Tools
+  - name: Automated Workflows
+- id: skyslope-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Large-brokerage tier with custom pricing, enterprise onboarding, and access
+    to the API program (Partnership / Forms API, Offers API, and the
+    Transaction Management API BETA) for reporting and system integration.
+    Contact SkySlope.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: US-CA
+    unit: 1
+    price: contact sales (reported ~$60/user/month for large deployments)
+    userMultiplied: false
+  elements:
+  - name: Custom Pricing
+  - name: API / Partner Access
+  - name: Enterprise Onboarding and Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
