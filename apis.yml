@@ -90,6 +90,8 @@ apis:
     surface was not reachable at review time - endpoints are not modeled here to
     avoid fabricating an unverified surface. Access is partner/brokerage-gated.
 common:
+- type: AgenticAccess
+  url: agentic-access/skyslope-agentic-access.yml
 - type: DomainSecurity
   url: security/skyslope-domain-security.yml
 - type: Website
