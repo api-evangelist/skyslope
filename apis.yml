@@ -15,7 +15,19 @@ description: SkySlope is a real estate transaction management and digital forms
   reporting and enterprise integration. API access is partner/brokerage-gated -
   reference documentation is public but obtaining OAuth client credentials
   requires working with SkySlope.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: approval
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Requires approval
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/skyslope.png
 tags:
 - Real Estate
 - Transaction Management
@@ -28,47 +40,6 @@ created: '2026-07-04'
 modified: '2026-07-04'
 specificationVersion: '0.19'
 apis:
-- aid: skyslope:skyslope-forms-partnership-api
-  name: SkySlope Partnership (Forms) API
-  tags:
-  - Files
-  - Documents
-  - Forms
-  - Contacts
-  - Envelopes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://forms.skyslope.com/partner/api/docs
-  baseURL: https://forms.skyslope.com/partner/api
-  properties:
-  - url: https://forms.skyslope.com/partner/api/docs
-    type: APIReference
-  - url: openapi/skyslope-forms-partnership-openapi.yml
-    type: OpenAPI
-  description: Create and manage SkySlope listing and transaction files and their
-    documents, contacts, envelopes, forms, libraries, and templates. Retrieve
-    signed documents and subscribe to a signed-documents webhook. Authenticated
-    with OAuth 2.0 authorization-code flow (PKCE) via accounts.skyslope.com, scope
-    forms.files. Some endpoints are marked as partner-only / coming soon in the
-    published reference.
-- aid: skyslope:skyslope-offers-api
-  name: SkySlope Offers API
-  tags:
-  - Offers
-  - Listings
-  - Analytics
-  - Reporting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://offers.skyslope.com/offers-api/reference
-  baseURL: https://offers.skyslope.com/offers-api
-  properties:
-  - url: https://offers.skyslope.com/offers-api/reference
-    type: APIReference
-  - url: openapi/skyslope-offers-openapi.yml
-    type: OpenAPI
-  description: Retrieve listings, offers, offer details, and counts/analytics of
-    listings and offers from SkySlope Offers for a given agent or date range.
-    Authenticated with OAuth 2.0 client-credentials flow (POST /ext/token for a
-    Bearer access token). Read-oriented external (ext) reporting surface.
 - aid: skyslope:skyslope-transaction-management-api
   name: SkySlope Transaction Management API (BETA)
   tags:
@@ -82,13 +53,208 @@ apis:
   properties:
   - url: https://skyslope.com/general/unlocking-the-power-of-your-data/
     type: Documentation
-  description: SkySlope's broader enterprise Transaction Management API, positioned
-    for brokerages to query, extract, and build on top of their SkySlope
-    transaction data for reporting tools, dashboards, and enterprise
-    applications. The api.skyslope.com host is live and requires authentication
-    (returns 401 without a token), but a complete public reference for this BETA
-    surface was not reachable at review time - endpoints are not modeled here to
-    avoid fabricating an unverified surface. Access is partner/brokerage-gated.
+  description: >-
+    SkySlope's broader enterprise Transaction Management API, positioned for brokerages to query, extract,
+    and build on top of their SkySlope transaction data for reporting tools, dashboards, and enterprise
+    applications. The api.skyslope.com host is live and requires authentication (returns 401 without a
+    token), but a complete public reference for this BETA surface was not reachable at review time - endpoints
+    are not modeled here to avoid fabricating an unverified surface. Access is partner/brokerage-gated.
+- aid: skyslope:skyslope-agents-listings-api
+  name: SkySlope Agents, Listings API
+  description: The Agents, Listings API from SkySlope — 1 operation(s) for agents, listings.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Agents, Listings
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-agents-listings-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-auth-api
+  name: SkySlope Auth API
+  description: The Auth API from SkySlope — 1 operation(s) for auth.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-auth-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-buyer-agreements-api
+  name: SkySlope Buyer Agreements API
+  description: The Buyer Agreements API from SkySlope — 1 operation(s) for buyer agreements.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Buyer Agreements
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-buyer-agreements-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-contacts-api
+  name: SkySlope Contacts API
+  description: The Contacts API from SkySlope — 4 operation(s) for contacts.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-contacts-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-documents-api
+  name: SkySlope Documents API
+  description: The Documents API from SkySlope — 5 operation(s) for documents.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-documents-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-envelopes-api
+  name: SkySlope Envelopes API
+  description: The Envelopes API from SkySlope — 1 operation(s) for envelopes.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Envelopes
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-envelopes-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-files-api
+  name: SkySlope Files API
+  description: The Files API from SkySlope — 14 operation(s) for files.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-files-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-forms-api
+  name: SkySlope Forms API
+  description: The Forms API from SkySlope — 1 operation(s) for forms.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-forms-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-libraries-api
+  name: SkySlope Libraries API
+  description: The Libraries API from SkySlope — 3 operation(s) for libraries.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Libraries
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-libraries-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-offers-api
+  name: SkySlope Offers API
+  description: The Offers API from SkySlope — 2 operation(s) for offers.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-offers-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-report-api
+  name: SkySlope Report API
+  description: The Report API from SkySlope — 1 operation(s) for report.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Report
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-report-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-templates-api
+  name: SkySlope Templates API
+  description: The Templates API from SkySlope — 1 operation(s) for templates.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-templates-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-users-api
+  name: SkySlope Users API
+  description: The Users API from SkySlope — 4 operation(s) for users.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-users-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
+- aid: skyslope:skyslope-webhooks-api
+  name: SkySlope Webhooks API
+  description: The Webhooks API from SkySlope — 1 operation(s) for webhooks.
+  humanURL: https://forms.skyslope.com/partner/api/docs
+  baseURL: https://forms.skyslope.com/partner/api
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/skyslope-webhooks-api-openapi.yml
+  - type: APIReference
+    url: https://forms.skyslope.com/partner/api/docs
+  - type: APIReference
+    url: https://offers.skyslope.com/offers-api/reference
 common:
 - type: AgenticAccess
   url: agentic-access/skyslope-agentic-access.yml
