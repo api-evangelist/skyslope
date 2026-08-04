@@ -1,0 +1,40 @@
+{
+  "provider": "skyslope",
+  "sources": [
+    "skyslope-agents-listings-api-openapi.yml",
+    "skyslope-auth-api-openapi.yml",
+    "skyslope-buyer-agreements-api-openapi.yml",
+    "skyslope-contacts-api-openapi.yml",
+    "skyslope-documents-api-openapi.yml",
+    "skyslope-envelopes-api-openapi.yml",
+    "skyslope-files-api-openapi.yml",
+    "skyslope-forms-api-openapi.yml",
+    "skyslope-libraries-api-openapi.yml",
+    "skyslope-offers-api-openapi.yml",
+    "skyslope-report-api-openapi.yml",
+    "skyslope-templates-api-openapi.yml",
+    "skyslope-users-api-openapi.yml",
+    "skyslope-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "skyslope-agents-listings-api-openapi.yml",
+    "skyslope-auth-api-openapi.yml",
+    "skyslope-buyer-agreements-api-openapi.yml",
+    "skyslope-contacts-api-openapi.yml",
+    "skyslope-documents-api-openapi.yml",
+    "skyslope-envelopes-api-openapi.yml",
+    "skyslope-files-api-openapi.yml",
+    "skyslope-forms-api-openapi.yml",
+    "skyslope-libraries-api-openapi.yml",
+    "skyslope-offers-api-openapi.yml",
+    "skyslope-report-api-openapi.yml",
+    "skyslope-templates-api-openapi.yml",
+    "skyslope-users-api-openapi.yml",
+    "skyslope-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,862 @@
+openapi: 3.0.0
+info:
+  title: SkySlope Offers API Reference
+  x-logo:
+    url: https://s3.amazonaws.com/cdn.skyslope.com/offer-management/om-logo-w-padding.png
+    altText: Offers Logo
+    href: https://skyslope.com/offer-management-login/
+  description: '# Introduction
+
+    The SkySlope Offers API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
+
+    Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded
+    responses,
+
+    and uses standard HTTP response codes, authentication, and verbs.
+
+    # Authentication
+
+    The SkySlope Offers API uses [OAuth 2.0 client credentials flow](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/)
+
+    to obtain an access token that can be used to authenticate subsequent API requests.
+
+
+    To obtain an access token, see **[this endpoint](https://offers.skyslope.com/offers-api/reference#tag/Auth/paths/~1mls~1token/post)**.
+
+
+    Authentication to the API is performed by including your access token in the **Authorization** header
+    of your
+
+    API requests with the Bearer authentication scheme.
+
+
+    All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain
+    HTTP will fail.
+
+    API requests without authentication will also fail.
+
+    '
+  termsOfService: https://skyslope.com/terms-conditions/
+  contact:
+    name: Support
+    url: https://support.skyslope.com/hc/en-us
+    email: support@skyslope.com
+servers:
+- url: https://offers.skyslope.com/offers-api
+  description: Production server
+- url: https://staging-offers.skyslope.com/offers-api
+  description: Staging server
+components:
+  schemas:
+    RESOOffer:
+      type: object
+      properties:
+        OfferId:
+          type: string
+        OfferOriginatingSystemId:
+          type: string
+        OfferSourceSystemId:
+          type: string
+        ModificationTimestamp:
+          type: IsoDate
+        OfferSubmissionDate:
+          type: IsoDate
+        OfferProperty:
+          type: object
+          properties:
+            OfferAgentId:
+              type: string
+            ListingId:
+              type: string
+            ListingKey:
+              type: string
+            Market:
+              type: string
+            PropertyType:
+              type: string
+            ListingStatus:
+              type: string
+            StreetNumber:
+              type: string
+            StreetName:
+              type: string
+            UnitNumber:
+              type: string
+            City:
+              type: string
+            StateOrProvince:
+              type: string
+            PostalCode:
+              type: string
+            CountyOrParish:
+              type: string
+            ParcelNumber:
+              type: string
+        OfferTerms:
+          type: object
+          properties:
+            OfferPrice:
+              type: number
+            OfferStatus:
+              type: string
+            CreditAtClosing:
+              type: any
+            EarnestMoney:
+              type: number
+            OfferClosingDate:
+              type: IsoDate
+            OfferClosingDays:
+              type: number
+            Deposit:
+              type: number
+            OfferExpirationDate:
+              type: IsoDate
+            AdditionalTerms:
+              type: string
+            Contingencies:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  _:
+                    type: any
+            EscalationClause:
+              type: any
+            HomeWarranty:
+              type: string
+            IncreasedDeposit:
+              type: number
+            BuyerFinancing:
+              type: string
+            OfferVersionNumber:
+              type: number
+paths:
+  /ext/agent/:agentId/listings?startDate=2023-01-01:
+    get:
+      summary: Retrieve an up-to-date agent listings & offers count
+      description: 'Retrieve the ten listings owned by this agent, that have most recently received offers.
+        Sorted descending by offer submission date (most recent first).
+
+        '
+      tags:
+      - Agents, Listings
+      parameters:
+      - in: path
+        name: agentId
+        schema:
+          type: string
+          required: true
+        description: 'The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.
+
+          '
+      - in: query
+        name: startDate
+        schema:
+          type: Date
+        required: false
+        description: '<code>yyyy-mm-dd</code>
+
+          <p>Optional parameter in ISO format <code>yyyy-mm-ddT00:00:00.000Z</code> to help separating
+          listings with new offers from the rest.</p>
+
+          <p>If <code>startDate</code> is not provided, it''s assumed to be 7 days prior to today.</p>
+
+          <p>If there exists listings with offers newer than <code>startDate</code>, the <code>hasNewOffers</code>
+          indicator will be true otherwise false.</p>
+
+          '
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: '<code>Bearer ACCESS_TOKEN</code>
+
+
+          <p>"ACCESS_TOKEN" is the token returned from /ext/token</p>
+
+          '
+      x-codeSamples:
+      - lang: cURL
+        source: 'curl -X GET "https://offers.skyslope.com/offers-api/ext/agent/:agentId/listings?startDate=2023-01-01"
+          -H "Authorization: Bearer ACCESS_TOKEN"
+
+          '
+      - lang: Javascript
+        source: "fetch(\"https://offers.skyslope.com/offers-api/ext/agent/:agentId/listings?startDate=2023-01-01\"\
+          , {\n  headers: {\n    \"Authorization\": \"ACCESS_TOKEN\"\n  }\n})\n.then(response => {\n \
+          \ console.info(response);\n})\n.catch(error => {\n  console.error(error);\n});\n"
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://offers.skyslope.com/offers-api/ext/report"
+
+          params = {"startDate": "2023-01-01", "endDate": "2023-04-26"}
+
+          headers = {"Authorization": "ACCESS_TOKEN"}
+
+
+          response = requests.get(url, params=params, headers=headers)
+
+          print(response.content.decode())
+
+          '
+      - lang: C#
+        source: "using System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n\
+          {\n    static async Task Main(string[] args)\n    {\n        using (var client = new HttpClient())\n\
+          \        {\n            client.DefaultRequestHeaders.Add(\"Authorization\": \"ACCESS_TOKEN\"\
+          );\n            var response = await client.GetAsync(\"https://offers.skyslope.com/offers-api/ext/agent/:agentId/listings?startDate=2023-01-01\"\
+          );\n            Console.WriteLine(await response.Content.ReadAsStringAsync());\n        }\n\
+          \    }\n}\n"
+      - lang: PHP
+        source: '$ch = curl_init();
+
+          curl_setopt($ch, CURLOPT_URL, "https://offers.skyslope.com/offers-api/ext/agent/:agentId/listings?startDate=2023-01-01");
+
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization": "ACCESS_TOKEN"));
+
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+
+
+          echo $response;
+
+          '
+      - lang: Ruby
+        source: 'require ''uri''
+
+          require ''net/http''
+
+
+          url = URI("https://offers.skyslope.com/offers-api/ext/agent/:agentId/listings?startDate=2023-01-01")
+
+
+          http = Net::HTTP.new(url.host, url.port)
+
+          http.use_ssl = true
+
+
+          request = Net::HTTP::Get.new(url)
+
+          request["Authorization"] = "ACCESS_TOKEN"
+
+
+          response = http.request(request)
+
+          puts response.read_body
+
+          '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hasNewOffers:
+                    type: boolean
+                  listings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        fileId:
+                          type: number
+                        listingName:
+                          type: string
+                        offersCount:
+                          type: number
+                        latestOfferDate:
+                          type: ISO Date
+                        hasNewOffers:
+                          type: boolean
+                        viewOffersLink:
+                          type: string
+              example:
+                hasNewOffers: true
+                listings:
+                - fileId: 12345
+                  listingName: property X
+                  offersCount: 3
+                  hasNewOffers: true
+                  latestOfferDate: '2023-06-27T14:58:25.439Z'
+                  viewOffersLink: https://offers.skyslope.com/file/12345
+                - fileId: 67890
+                  listingName: property Y
+                  offersCount: 4
+                  hasNewOffers: false
+                  latestOfferDate: '2022-06-27T14:58:25.439Z'
+                  viewOffersLink: https://offers.skyslope.com/file/67890
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request - Missing or invalid request parameters
+        '401':
+          description: Unauthorized - Missing or invalid API key
+        '500':
+          description: Internal Server Error
+  /ext/offer/:offerId:
+    get:
+      summary: Retrieve the offer details
+      description: Retrieves the offer details given the offer identifier
+      tags:
+      - Offers
+      parameters:
+      - in: path
+        name: offerId
+        schema:
+          type: String
+        required: true
+        description: 'Offer Identifier
+
+          '
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: '<code>Bearer ACCESS_TOKEN</code>
+
+
+          "ACCESS_TOKEN" is the token returned from /ext/token
+
+          '
+      x-codeSamples:
+      - lang: cURL
+        source: 'curl -X GET "https://offers.skyslope.com/offers-api/ext/offer/64510abe7d7e1f1dfac47393"
+          -H "Authorization: Bearer ACCESS_TOKEN"
+
+          '
+      - lang: Javascript
+        source: "fetch(\"https://offers.skyslope.com/offers-api/ext/offer/64510abe7d7e1f1dfac47393\",\
+          \ {\n  headers: {\n    \"Authorization\": \"ACCESS_TOKEN\"\n  }\n})\n.then(response => {\n \
+          \ console.info(response);\n})\n.catch(error => {\n  console.error(error);\n});\n"
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://offers.skyslope.com/offers-api/ext/offer"
+
+          params = {"offerId": "64510abe7d7e1f1dfac47393"}
+
+          headers = {"Authorization": "ACCESS_TOKEN"}
+
+
+          response = requests.get(url, params=params, headers=headers)
+
+          print(response.content.decode())
+
+          '
+      - lang: C#
+        source: "using System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n\
+          {\n    static async Task Main(string[] args)\n    {\n        using (var client = new HttpClient())\n\
+          \        {\n            client.DefaultRequestHeaders.Add(\"Authorization\": \"ACCESS_TOKEN\"\
+          );\n            var response = await client.GetAsync(\"https://offers.skyslope.com/offers-api/ext/offer/64510abe7d7e1f1dfac47393\"\
+          );\n            Console.WriteLine(await response.Content.ReadAsStringAsync());\n        }\n\
+          \    }\n}\n"
+      - lang: PHP
+        source: '$ch = curl_init();
+
+          curl_setopt($ch, CURLOPT_URL, "https://offers.skyslope.com/offers-api/ext/offer/64510abe7d7e1f1dfac47393");
+
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization": "ACCESS_TOKEN"));
+
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+
+
+          echo $response;
+
+          '
+      - lang: Ruby
+        source: 'require ''uri''
+
+          require ''net/http''
+
+
+          url = URI("https://offers.skyslope.com/offers-api/ext/offer/64510abe7d7e1f1dfac47393")
+
+
+          http = Net::HTTP.new(url.host, url.port)
+
+          http.use_ssl = true
+
+
+          request = Net::HTTP::Get.new(url)
+
+          request["Authorization"] = "ACCESS_TOKEN"
+
+
+          response = http.request(request)
+
+          puts response.read_body
+
+          '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESOOffer'
+              example:
+                OfferId: 64510abe7d7e1f1dfac47393
+                OfferOriginatingSystemId: SkySlope
+                OfferSourceSystemId: SkySlope
+                ModificationTimestamp: '2023-05-02T13:18:21.439Z'
+                OfferSubmissionDate: '2023-05-01T13:18:21.439Z'
+                OfferProperty:
+                  OfferAgentId: Agent123
+                  ListingId: Listing456
+                  ListingKey: Key789
+                  Market: Residential
+                  PropertyType: Single Family
+                  ListingStatus: Active
+                  StreetNumber: '1266'
+                  StreetName: Ocala
+                  UnitNumber: Apt 4
+                  City: TALLAHASSEE
+                  StateOrProvince: FL
+                  PostalCode: '32304'
+                  CountyOrParish: Leon
+                  ParcelNumber: Parcel123
+                OfferTerms:
+                  OfferPrice: 250000
+                  OfferStatus: Submitted
+                  CreditAtClosing: To be determined
+                  EarnestMoney: 1000
+                  OfferClosingDate: '2023-06-01T04:00:00.000Z'
+                  OfferClosingDays: 30
+                  Deposit: 3000
+                  OfferExpirationDate: '2023-05-15T04:00:00.000Z'
+                  AdditionalTerms: Small pets allowed
+                  Contingencies: []
+                  EscalationClause: None
+                  HomeWarranty: Seller
+                  IncreasedDeposit: 500
+                  BuyerFinancing: Conventional
+                  OfferVersionNumber: 1
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request - Missing or invalid request parameters
+        '401':
+          description: Unauthorized - Missing or invalid access token
+        '500':
+          description: Internal Server Error
+  /ext/offers:
+    get:
+      summary: Retrieve all offers for a given date range.
+      description: Retrieve all offers for a given date range.
+      tags:
+      - Offers
+      parameters:
+      - in: query
+        name: startDate
+        schema:
+          type: Date
+        required: true
+        description: "<code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+      - in: query
+        name: endDate
+        schema:
+          type: Date
+        required: false
+        description: '<code>2023-01-31</code>
+
+
+          The end of the date range in UTC format.  Max date range is 31 days.  When larger range is requested,
+          result for 31 days is returned.
+
+          '
+      - in: query
+        name: page
+        schema:
+          type: Number
+        required: false
+        description: Page number
+      - in: query
+        name: pageSize
+        schema:
+          type: Number
+        required: false
+        description: Page size
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: '<code>Bearer ACCESS_TOKEN</code>
+
+
+          "ACCESS_TOKEN" is the token returned from /ext/token
+
+          '
+      x-codeSamples:
+      - lang: cURL
+        source: 'curl -X GET "https://offers.skyslope.com/offers-api/ext/offers/?startDate=2023-01-01&endDate=2023-01-31"
+          -H "Authorization: Bearer ACCESS_TOKEN"
+
+          '
+      - lang: Javascript
+        source: "fetch(\"https://offers.skyslope.com/offers-api/ext/offers/?startDate=2023-01-01&endDate=2023-01-31\"\
+          , {\n  headers: {\n    \"Authorization\": \"ACCESS_TOKEN\"\n  }\n})\n.then(response => {\n \
+          \ console.info(response);\n})\n.catch(error => {\n  console.error(error);\n});\n"
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://offers.skyslope.com/offers-api/ext/offers"
+
+          params = {"startDate": "2023-01-01", "endDate": "2023-01-31"}
+
+          headers = {"Authorization": "ACCESS_TOKEN"}
+
+
+          response = requests.get(url, params=params, headers=headers)
+
+          print(response.content.decode())
+
+          '
+      - lang: C#
+        source: "using System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n\
+          {\n    static async Task Main(string[] args)\n    {\n        using (var client = new HttpClient())\n\
+          \        {\n            client.DefaultRequestHeaders.Add(\"Authorization\": \"ACCESS_TOKEN\"\
+          );\n            var response = await client.GetAsync(\"https://offers.skyslope.com/offers-api/ext/offers/?startDate=2023-01-01&endDate=2023-01-31\"\
+          );\n            Console.WriteLine(await response.Content.ReadAsStringAsync());\n        }\n\
+          \    }\n}\n"
+      - lang: PHP
+        source: '$ch = curl_init();
+
+          curl_setopt($ch, CURLOPT_URL, "https://offers.skyslope.com/offers-api/ext/offers/?startDate=2023-01-01&endDate=2023-01-31");
+
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization": "ACCESS_TOKEN"));
+
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+
+
+          echo $response;
+
+          '
+      - lang: Ruby
+        source: 'require ''uri''
+
+          require ''net/http''
+
+
+          url = URI("https://offers.skyslope.com/offers-api/ext/offers/?startDate=2023-01-01&endDate=2023-01-31")
+
+
+          http = Net::HTTP.new(url.host, url.port)
+
+          http.use_ssl = true
+
+
+          request = Net::HTTP::Get.new(url)
+
+          request["Authorization"] = "ACCESS_TOKEN"
+
+
+          response = http.request(request)
+
+          puts response.read_body
+
+          '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RESOOffer'
+              example:
+              - OfferId: 64510abe7d7e1f1dfac47393
+                OfferOriginatingSystemId: SkySlope
+                OfferSourceSystemId: SkySlope
+                ModificationTimestamp: '2023-05-02T13:18:21.439Z'
+                OfferSubmissionDate: '2023-05-01T13:18:21.439Z'
+                OfferProperty:
+                  OfferAgentId: Agent123
+                  ListingId: Listing456
+                  ListingKey: Key789
+                  Market: Residential
+                  PropertyType: Single Family
+                  ListingStatus: Active
+                  StreetNumber: '1266'
+                  StreetName: Ocala
+                  UnitNumber: Apt 4
+                  City: TALLAHASSEE
+                  StateOrProvince: FL
+                  PostalCode: '32304'
+                  CountyOrParish: Leon
+                  ParcelNumber: Parcel123
+                OfferTerms:
+                  OfferPrice: 250000
+                  OfferStatus: Submitted
+                  CreditAtClosing: To be determined
+                  EarnestMoney: 1000
+                  OfferClosingDate: '2023-06-01T04:00:00.000Z'
+                  OfferClosingDays: 30
+                  Deposit: 3000
+                  OfferExpirationDate: '2023-05-15T04:00:00.000Z'
+                  AdditionalTerms: Small pets allowed
+                  Contingencies: []
+                  EscalationClause: None
+                  HomeWarranty: Seller
+                  IncreasedDeposit: 500
+                  BuyerFinancing: Conventional
+                  OfferVersionNumber: 1
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request - Missing or invalid request parameters
+        '401':
+          description: Unauthorized - Missing or invalid access token
+        '500':
+          description: Internal Server Error
+  /ext/report:
+    get:
+      summary: Retrieve count of listings & offers
+      description: Retrieves a count of listings & offers for the provided date range.
+      tags:
+      - Report
+      parameters:
+      - in: query
+        name: startDate
+        schema:
+          type: Date
+        required: true
+        description: "<code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+      - in: query
+        name: endDate
+        schema:
+          type: Date
+        required: true
+        description: '<code>2023-05-01</code>
+
+
+          The end of the date range in UTC format
+
+          '
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: '<code>Bearer ACCESS_TOKEN</code>
+
+
+          "ACCESS_TOKEN" is the token returned from /ext/token
+
+          '
+      x-codeSamples:
+      - lang: cURL
+        source: 'curl -X GET "https://offers.skyslope.com/offers-api/ext/report?startDate=2023-01-01&endDate=2023-04-26"
+          -H "Authorization: Bearer ACCESS_TOKEN"
+
+          '
+      - lang: Javascript
+        source: "fetch(\"https://offers.skyslope.com/offers-api/ext/report?startDate=2023-01-01&endDate=2023-04-26\"\
+          , {\n  headers: {\n    \"Authorization\": \"ACCESS_TOKEN\"\n  }\n})\n.then(response => {\n \
+          \ console.info(response);\n})\n.catch(error => {\n  console.error(error);\n});\n"
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://offers.skyslope.com/offers-api/ext/report"
+
+          params = {"startDate": "2023-01-01", "endDate": "2023-04-26"}
+
+          headers = {"Authorization": "ACCESS_TOKEN"}
+
+
+          response = requests.get(url, params=params, headers=headers)
+
+          print(response.content.decode())
+
+          '
+      - lang: C#
+        source: "using System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n\
+          {\n    static async Task Main(string[] args)\n    {\n        using (var client = new HttpClient())\n\
+          \        {\n            client.DefaultRequestHeaders.Add(\"Authorization\": \"ACCESS_TOKEN\"\
+          );\n            var response = await client.GetAsync(\"https://offers.skyslope.com/offers-api/ext/report?startDate=2023-01-01&endDate=2023-04-26\"\
+          );\n            Console.WriteLine(await response.Content.ReadAsStringAsync());\n        }\n\
+          \    }\n}\n"
+      - lang: PHP
+        source: '$ch = curl_init();
+
+          curl_setopt($ch, CURLOPT_URL, "https://offers.skyslope.com/offers-api/ext/report?startDate=2023-01-01&endDate=2023-04-26");
+
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization": "ACCESS_TOKEN"));
+
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+          $response = curl_exec($ch);
+
+          curl_close($ch);
+
+
+          echo $response;
+
+          '
+      - lang: Ruby
+        source: 'require ''uri''
+
+          require ''net/http''
+
+
+          url = URI("https://offers.skyslope.com/offers-api/ext/report?startDate=2023-01-01&endDate=2023-04-26")
+
+
+          http = Net::HTTP.new(url.host, url.port)
+
+          http.use_ssl = true
+
+
+          request = Net::HTTP::Get.new(url)
+
+          request["Authorization"] = "ACCESS_TOKEN"
+
+
+          response = http.request(request)
+
+          puts response.read_body
+
+          '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mlsMarket:
+                    type: string
+                  offerCount:
+                    type: number
+                  listingCount:
+                    type: number
+              example:
+                mlsMarket: your-market
+                offerCount: 100
+                listingCount: 10
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request - Missing or invalid request body
+        '401':
+          description: Unauthorized - Missing or invalid API key
+        '500':
+          description: Internal Server Error
+  /ext/token:
+    post:
+      summary: Retrieve an access token
+      description: Retrieve an access token to authenticate requests with.
+      tags:
+      - Auth
+      parameters:
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: '<code>Basic BASE64_CREDENTIALS</code>
+
+
+          "BASE64_CREDENTIALS" is the Base64-encoded value of your Client ID and Client Secret, separated
+          by a colon
+
+          '
+      x-codeSamples:
+      - lang: cURL
+        source: 'curl --location --request POST ''https://offers.skyslope.com/offers-api/ext/token'' \
+          --header ''Authorization: Basic BASE64_CREDENTIALS''
+
+          '
+      - lang: Javascript
+        source: "var myHeaders = new Headers(); myHeaders.append(\"Authorization\", \"Basic BASE64_CREDENTIALS);\n\
+          var requestOptions = {\n  method: 'POST',\n  headers: myHeaders,\n  redirect: 'follow'\n};\n\
+          fetch(\"https://offers.skyslope.com/offers-api/ext/token\", requestOptions)\n  .then(response\
+          \ => response.text())\n  .then(result => console.info(result))\n  .catch(error => console.info('error',\
+          \ error));\n"
+      - lang: Python
+        source: "import requests\n\nurl = \"https://offers.skyslope.com/offers-api/ext/token\"\n\npayload\
+          \ = {}\nheaders = {\n  'Authorization': 'Basic BASE64_CREDENTIALS'\n}\n\nresponse = requests.request(\"\
+          POST\", url, headers=headers, data=payload)\n\nprint(response.text)\n"
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          var request = new HttpRequestMessage(HttpMethod.Post, "https://offers.skyslope.com/offers-api/ext/token");
+
+          request.Headers.Add("Authorization", "Basic BASE64_CREDENTIALS");
+
+
+          var response = await client.SendAsync(request);
+
+          response.EnsureSuccessStatusCode();
+
+
+          Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+          '
+      - lang: PHP
+        source: "<?php\n$curl = curl_init();\ncurl_setopt_array($curl, array(\n  CURLOPT_URL => 'https://offers.skyslope.com/offers-api/ext/token',\n\
+          \  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => '',\n  CURLOPT_MAXREDIRS => 10,\n\
+          \  CURLOPT_TIMEOUT => 0,\n  CURLOPT_FOLLOWLOCATION => true,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n\
+          \  CURLOPT_CUSTOMREQUEST => 'POST',\n  CURLOPT_HTTPHEADER => array(\n    'Authorization: Basic\
+          \ BASE64_CREDENTIALS'\n  ),\n));\n$response = curl_exec($curl);\ncurl_close($curl); echo $response;\n"
+      - lang: Ruby
+        source: 'require "uri" require "net/http"
+
+          url = URI("https://offers.skyslope.com/offers-api/ext/token")
+
+          http = Net::HTTP.new(url.host, url.port); request = Net::HTTP::Post.new(url) request["Authorization"]
+          = "Basic Basic BASE64_CREDENTIALS"
+
+          response = http.request(request) puts response.read_body
+
+          '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: number
+                  access_token:
+                    type: string
+              example:
+                token_type: Bearer
+                expires_in: 3600
+                access_token: ACCESS_TOKEN
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error

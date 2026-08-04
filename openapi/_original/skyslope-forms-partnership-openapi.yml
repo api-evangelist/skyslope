@@ -1,0 +1,4538 @@
+openapi: 3.1.3
+info:
+  x-logo:
+    url: https://s3.amazonaws.com/cdn.skyslope.com/forms/forms-logo-w-top-padding.png
+    href: https://skyslope.com/
+    altText: SkySlope
+  title: SkySlope Partnership API Reference
+  version: 1.0.0
+  description: "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n\
+    \  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded\
+    \ responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE:\
+    \ Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  #\
+    \ Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n\
+    \  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access\
+    \ Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization\
+    \ endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n  \
+    \  &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n  \
+    \  &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n\
+    \  ```\n  After the user authorizes your application, they'll be redirected back to your redirect\
+    \ URI with an authorization code.\n  Exchange this code for an access token by making a POST request\
+    \ to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type:\
+    \ application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n\
+    \  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n\
+    \  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by\
+    \ including your access token in the **Authorization** header of your\n  API requests with the Bearer\
+    \ authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n \
+    \ Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS).\
+    \ Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n \
+    \ ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the\
+    \ user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access\
+    \ token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access`\
+    \ scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n\
+    \    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n\
+    \    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make\
+    \ a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n\
+    \  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n\
+    \  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will\
+    \ return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh\
+    \ tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest\
+    \ using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual\
+    \ refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using\
+    \ the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens"
+  termsOfService: https://skyslope.com/terms-conditions/
+  contact:
+    name: Support
+    url: https://support.skyslope.com/hc/en-us
+    email: support@skyslope.com
+components:
+  schemas: {}
+paths:
+  /files:
+    post:
+      summary: Create Listing or Transaction File
+      tags:
+      - Files
+      description: 'Creates a listing or a transaction file and returns the file id.<div style="color:
+        rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED
+        SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  description: The name of the file.
+                representationType:
+                  type: string
+                  enum:
+                  - Buyer
+                  - Seller
+                  - Tenant
+                  - Landlord
+                  description: The representation type of the file.
+                property:
+                  type: object
+                  description: The property that the file is associated with.
+                  additionalProperties: false
+                  properties:
+                    streetNumber:
+                      type: string
+                      description: The street number of the property.
+                    streetName:
+                      type: string
+                      description: The street name of the property.
+                    unitNumber:
+                      type: string
+                      description: The unit number of the property.
+                    city:
+                      type: string
+                      description: The city of the property.
+                    state:
+                      type: string
+                      description: The abbreviation for the state/province of the property.
+                      minLength: 2
+                      maxLength: 2
+                    postalCode:
+                      type: string
+                      description: The postal code of the property.
+                    county:
+                      type: string
+                      description: The county of the property.
+                  required:
+                  - streetNumber
+                  - streetName
+                  - city
+                  - state
+                  - postalCode
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileId:
+                    type: number
+                    description: The id of the file that was created.
+              example:
+                fileId: 477309
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    get:
+      summary: Get Files
+      tags:
+      - Files
+      description: 'Retrieve the files that the user has access to.<div style="color: rgba(38, 50, 56,
+        0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div
+        style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25);
+        padding: 0px 5px;">forms.files.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+          default: 1
+        in: query
+        name: page
+        required: false
+        description: The page number to retrieve.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 10
+        in: query
+        name: pageSize
+        required: false
+        description: The number of files returned per page.
+      - schema:
+          type: string
+        in: query
+        name: filters
+        required: false
+        description: 'A comma separated sieve filter to that will be applied to the results. Ex: filters=representationtype==Buyer,(createddate)>=2024-01-01,(createddate)<=2024-01-31'
+      - schema:
+          type: string
+        in: query
+        name: sorts
+        required: false
+        description: A sieve list of sort fields to sort the results by.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of files found for the authenticated user.
+                  files:
+                    type: array
+                    description: An array containing the files found for the authenticated user.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: The id of the file.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the file.
+                        createdDate:
+                          type: string
+                          description: The date and time the file was created.
+                        createdBy:
+                          type: string
+                          description: The id of the user who created the file.
+                        lastUpdated:
+                          type: string
+                          description: The date and time the file was last updated.
+                        updatedBy:
+                          type: string
+                          description: The id of the user who last updated the file.
+                        name:
+                          type: string
+                          description: The name of the file.
+                        address:
+                          type: string
+                          description: The address of the file combined into a single string.
+                        contactInfo:
+                          type: string
+                          description: A semicolon seperated list of all of the contacts in the file.
+                        type:
+                          type: string
+                          enum:
+                          - File
+                          - Template
+                          - BrokerTemplate
+                          description: The type of the file.
+                        representationType:
+                          type: string
+                          enum:
+                          - Buyer
+                          - Seller
+                          - Tenant
+                          - Landlord
+                          description: The representation type of the file.
+                        templateCategory:
+                          type: string
+                          enum:
+                          - Buyer
+                          - Seller
+                          - Tenant
+                          - Landlord
+                          - Other
+                          description: The category of the template of the file.
+                        documentCount:
+                          type: number
+                          description: The number of documents in the file.
+                        envelopeCount:
+                          type: number
+                          description: The number of envelopes in the file.
+                        isArchived:
+                          type: boolean
+                          description: Evaluates to true if the file has been archived.
+                        meta:
+                          type:
+                          - 'null'
+                          - object
+                          description: The meta data of the file.
+                          properties:
+                            externalId:
+                              type: string
+                              description: The external id of the file.
+                            regions:
+                              type: array
+                              description: An array of regions for the file.
+                              items:
+                                type: object
+                                properties:
+                                  country:
+                                    type: string
+                                    description: The country of the account group.
+                                  region:
+                                    type: string
+                                    description: The region of the account group.
+                            brokerTemplateStatus:
+                              type: string
+                              enum:
+                              - Draft
+                              - Published
+                              description: The status of the broker template for the file.
+                            brokerTemplateStatusUpdatedOn:
+                              type: string
+                              description: The date and time the broker template status was last updated.
+                            accountGroups:
+                              type: array
+                              description: An array of account groups for the file.
+                              items:
+                                type: object
+                                properties:
+                                  groupId:
+                                    type: string
+                                    description: The id of the account group.
+                        mlsNumber:
+                          type: string
+                          description: The mls number of the file.
+                        mlsMarketName:
+                          type: string
+                          description: The mls market name of the file.
+                        photoUrl:
+                          type: string
+                          description: The url of the photo for the file.
+                        transactionMeta:
+                          type:
+                          - 'null'
+                          - object
+                          description: The transaction meta data of the file.
+                          additionalProperties: true
+              example:
+                totalRecords: 1
+                files:
+                - id: 1
+                  name: File Name
+                  address: 111 One Drive Sacramento, CA 95826
+                  contactInfo: Contact info
+                  type: File
+                  representationType: Buyer
+                  templateCategory: Landlord
+                  documentCount: 1
+                  envelopeCount: 0
+                  isArchived: false
+                  createdDate: '2023-12-31T12:12:12.123Z'
+                  createdBy: iajv98j498j98vasj4h
+                  lastUpdated: '2023-12-31T12:12:12.123Z'
+                  updatedBy: iajv98j498j98vasj4h
+                  ownedBy: iajv98j498j98vasj4h
+                  meta:
+                    status: pre-contract
+                  mlsNumber: '1589519'
+                  mlsMarketName: treb
+                  photoUrl: http://image-source.com/image.png
+                  transactionMeta:
+                    status: pre-contract
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}:
+    patch:
+      summary: Update File Details
+      tags:
+      - Files
+      description: 'Update the file details of a listing or transaction file.<div style="color: rgba(38,
+        50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  description: The name of the file.
+                fileData:
+                  type: object
+                  description: File data that can be updated.
+                  additionalProperties: true
+                  properties:
+                    mlsNumber:
+                      type: string
+                      description: The mls number of the file.
+                    purchasePrice:
+                      type: number
+                      description: The purchase price of the property.
+                    closingDate:
+                      type: string
+                      description: The closing date of the file in the format of YYYY-MM-DDTHH:MM:SSZ.
+                    acceptanceDate:
+                      type: string
+                      description: The acceptanced date of the file in the format of YYYY-MM-DDTHH:MM:SSZ.
+                    premisesAddress:
+                      type: object
+                      description: The property that the file is associated with.
+                      additionalProperties: false
+                      properties:
+                        streetNumber:
+                          type: string
+                          description: The street number of the property.
+                        streetName:
+                          type: string
+                          description: The street name of the property.
+                        unitNumber:
+                          type: string
+                          description: The unit number of the property.
+                        city:
+                          type: string
+                          description: The city of the property.
+                        state:
+                          type: string
+                          description: The abbreviation for the state/province of the property.
+                          minLength: 2
+                          maxLength: 2
+                        postalCode:
+                          type: string
+                          description: The postal code of the property.
+                        county:
+                          type: string
+                          description: The county of the property.
+                      required:
+                      - streetNumber
+                      - streetName
+                      - city
+                      - state
+                      - postalCode
+      parameters:
+      - schema:
+          type: integer
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileId:
+                    type: number
+                    description: The id of the file that was updated.
+                  didAddendumsChange:
+                    type: boolean
+                    description: Evaluates to true if addendums were changed.
+              example:
+                fileId: 477309
+                didAddendumsChange: false
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    put:
+      summary: Update File
+      tags:
+      - Files
+      description: 'Update the file of a listing or transaction file.<div style="color: rgba(38, 50, 56,
+        0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - property
+              - commissions
+              - contacts
+              properties:
+                mlsNumber:
+                  type: string
+                  description: The mls number of the file.
+                purchasePrice:
+                  type: number
+                  description: The purchase price of the property.
+                closingDateTime:
+                  type: string
+                  description: The closing date of the file in the format of YYYY-MM-DDTHH:MM:SSZ.
+                acceptanceDateTime:
+                  type: string
+                  description: The acceptanced date of the file in the format of YYYY-MM-DDTHH:MM:SSZ.
+                property:
+                  type: object
+                  description: The property that the file is associated with.
+                  additionalProperties: false
+                  properties:
+                    streetNumber:
+                      type: string
+                      description: The street number of the property.
+                    streetName:
+                      type: string
+                      description: The street name of the property.
+                    unitNumber:
+                      type: string
+                      description: The unit number of the property.
+                    city:
+                      type: string
+                      description: The city of the property.
+                    state:
+                      type: string
+                      description: The abbreviation for the state/province of the property.
+                      minLength: 2
+                      maxLength: 2
+                    postalCode:
+                      type: string
+                      description: The postal code of the property.
+                    county:
+                      type: string
+                      description: The county of the property.
+                  required:
+                  - streetNumber
+                  - streetName
+                  - city
+                  - state
+                  - postalCode
+                commissions:
+                  type: array
+                  description: An array of the commissions for the file.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The id of the commission.
+                      type:
+                        type: string
+                        enum:
+                        - Listing
+                        - Referral
+                        - Sale
+                        description: The type of the commission.
+                      calculationType:
+                        type: string
+                        enum:
+                        - Flat
+                        - Percent
+                        description: The calculation type of the commission.
+                      amount:
+                        type: number
+                        description: The amount of the commission.
+                      createdBy:
+                        type: string
+                        description: The id of the user who created the commission.
+                      updatedBy:
+                        type: string
+                        description: The id of the user who last updated the commission.
+                      createdOn:
+                        type: string
+                        description: The date and time the commission was created.
+                      updatedOn:
+                        type: string
+                        description: The date and time the commission was last updated.
+                      ownedBy:
+                        type: string
+                        description: The id of the user who owns the commission.
+                contacts:
+                  type: array
+                  description: An array of contacts for the file.
+                  items:
+                    type: object
+                    additionalProperties: false
+                    properties:
+                      id:
+                        type: string
+                        description: The id of the contact.
+                      type:
+                        type: string
+                        description: The role that a contact has been assigned.
+                        enum:
+                        - Broker
+                        - Buyer
+                        - BuyerAgent
+                        - BuyersLawyer
+                        - EscrowOfficer
+                        - LoanOfficer
+                        - Other
+                        - Seller
+                        - SellerAgent
+                        - SellersLawyer
+                        - TitleOfficer
+                      actionAttribute:
+                        type: string
+                        description: Actions for contact to participate in.
+                        enum:
+                        - Empty
+                        - NeedsToSign
+                        - CanView
+                        - ReceivesCopy
+                        - NoAction
+                      firstName:
+                        type: string
+                        description: The first name of the contact.
+                      middleName:
+                        type: string
+                        description: The middle name of the contact.
+                      lastName:
+                        type: string
+                        description: The last name of the contact.
+                      suffix:
+                        type: string
+                        description: The suffix of the contact.
+                      email:
+                        type: string
+                        description: The email of the contact.
+                      primaryPhoneNumber:
+                        type: string
+                        description: The primary phone number of the contact.
+                      brokeragePhoneNumber:
+                        type: string
+                        description: The brokerage phone number of the contact.
+                      faxPhoneNumber:
+                        type: string
+                        description: The fax phone number of the contact.
+                      companyName:
+                        type: string
+                        description: The company name that the contact belongs to.
+                      isEntity:
+                        type: boolean
+                        description: Evaluates to true if the contact is an entity.
+                      isUser:
+                        type: boolean
+                        description: Evaluates to true if the contact is the also the agent (self).
+                      isFileOwner:
+                        type: boolean
+                        description: Evaluates to true if the contact is the file owner.
+                      lenderLicenseNumber:
+                        type: string
+                        description: The lender license number of the contact.
+                      agentLicenseNumber:
+                        type: string
+                        description: The agent license number of the contact.
+                      agentMLSCode:
+                        type: string
+                        description: The agent mls code of the contact.
+                      brokerLicenseNumber:
+                        type: string
+                        description: The broker license number of the contact.
+                      brokerMLSCode:
+                        type: string
+                        description: The broker mls code of the contact.
+                      brokerageLicenseNumber:
+                        type: string
+                        description: The brokerage license number of the contact.
+                      brokerageMLSCode:
+                        type: string
+                        description: The brokerage mls code of the contact.
+                      primaryAddress:
+                        type: object
+                        description: The primary address of the contact.
+                        additionalProperties: false
+                        properties:
+                          streetNumber:
+                            type: string
+                            description: The street number of the property.
+                          streetName:
+                            type: string
+                            description: The street name of the property.
+                          unitNumber:
+                            type: string
+                            description: The unit number of the property.
+                          city:
+                            type: string
+                            description: The city of the property.
+                          state:
+                            type: string
+                            description: The abbreviation for the state/province of the property.
+                            minLength: 2
+                            maxLength: 2
+                          postalCode:
+                            type: string
+                            description: The postal code of the property.
+                          county:
+                            type: string
+                            description: The county of the property.
+                        required:
+                        - streetNumber
+                        - streetName
+                        - city
+                        - state
+                        - postalCode
+                      contactInformation:
+                        type: object
+                        description: An object containing all of the contact information for the contact.
+                        additionalProperties: true
+        required: true
+      parameters:
+      - schema:
+          type: integer
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileId:
+                    type: number
+                    description: The id of the file that was updated.
+                  commissions:
+                    type: array
+                    description: An array of the commissions for the file.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The id of the commission.
+                        type:
+                          type: string
+                          enum:
+                          - Listing
+                          - Referral
+                          - Sale
+                          description: The type of the commission.
+                        calculationType:
+                          type: string
+                          enum:
+                          - Flat
+                          - Percent
+                          description: The calculation type of the commission.
+                        amount:
+                          type: number
+                          description: The amount of the commission.
+                        createdBy:
+                          type: string
+                          description: The id of the user who created the commission.
+                        updatedBy:
+                          type: string
+                          description: The id of the user who last updated the commission.
+                        createdOn:
+                          type: string
+                          description: The date and time the commission was created.
+                        updatedOn:
+                          type: string
+                          description: The date and time the commission was last updated.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the commission.
+                  contacts:
+                    type: array
+                    description: An array of contacts for the file.
+                    items:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: string
+                          description: The id of the contact.
+                        type:
+                          type: string
+                          description: The role that a contact has been assigned.
+                          enum:
+                          - Broker
+                          - Buyer
+                          - BuyerAgent
+                          - BuyersLawyer
+                          - EscrowOfficer
+                          - LoanOfficer
+                          - Other
+                          - Seller
+                          - SellerAgent
+                          - SellersLawyer
+                          - TitleOfficer
+                        actionAttribute:
+                          type: string
+                          description: Actions for contact to participate in.
+                          enum:
+                          - Empty
+                          - NeedsToSign
+                          - CanView
+                          - ReceivesCopy
+                          - NoAction
+                        firstName:
+                          type: string
+                          description: The first name of the contact.
+                        middleName:
+                          type: string
+                          description: The middle name of the contact.
+                        lastName:
+                          type: string
+                          description: The last name of the contact.
+                        suffix:
+                          type: string
+                          description: The suffix of the contact.
+                        email:
+                          type: string
+                          description: The email of the contact.
+                        primaryPhoneNumber:
+                          type: string
+                          description: The primary phone number of the contact.
+                        brokeragePhoneNumber:
+                          type: string
+                          description: The brokerage phone number of the contact.
+                        faxPhoneNumber:
+                          type: string
+                          description: The fax phone number of the contact.
+                        companyName:
+                          type: string
+                          description: The company name that the contact belongs to.
+                        isEntity:
+                          type: boolean
+                          description: Evaluates to true if the contact is an entity.
+                        isUser:
+                          type: boolean
+                          description: Evaluates to true if the contact is the also the agent (self).
+                        isFileOwner:
+                          type: boolean
+                          description: Evaluates to true if the contact is the file owner.
+                        lenderLicenseNumber:
+                          type: string
+                          description: The lender license number of the contact.
+                        agentLicenseNumber:
+                          type: string
+                          description: The agent license number of the contact.
+                        agentMLSCode:
+                          type: string
+                          description: The agent mls code of the contact.
+                        brokerLicenseNumber:
+                          type: string
+                          description: The broker license number of the contact.
+                        brokerMLSCode:
+                          type: string
+                          description: The broker mls code of the contact.
+                        brokerageLicenseNumber:
+                          type: string
+                          description: The brokerage license number of the contact.
+                        brokerageMLSCode:
+                          type: string
+                          description: The brokerage mls code of the contact.
+                        primaryAddress:
+                          type: object
+                          description: The primary address of the contact.
+                          additionalProperties: false
+                          properties:
+                            streetNumber:
+                              type: string
+                              description: The street number of the property.
+                            streetName:
+                              type: string
+                              description: The street name of the property.
+                            unitNumber:
+                              type: string
+                              description: The unit number of the property.
+                            city:
+                              type: string
+                              description: The city of the property.
+                            state:
+                              type: string
+                              description: The abbreviation for the state/province of the property.
+                              minLength: 2
+                              maxLength: 2
+                            postalCode:
+                              type: string
+                              description: The postal code of the property.
+                            county:
+                              type: string
+                              description: The county of the property.
+                          required:
+                          - streetNumber
+                          - streetName
+                          - city
+                          - state
+                          - postalCode
+                        contactInformation:
+                          type: object
+                          description: An object containing all of the contact information for the contact.
+                          additionalProperties: true
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    get:
+      summary: Get File
+      tags:
+      - Files
+      description: 'Retrieve the details of a listing or transaction file.<div style="color: rgba(38,
+        50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div
+        style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25);
+        padding: 0px 5px;">forms.files.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to retrieve.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: The id of the file.
+                  ownedBy:
+                    type: string
+                    description: The id of the user who owns the file.
+                  createdDate:
+                    type: string
+                    description: The date and time the file was created.
+                  createdBy:
+                    type: string
+                    description: The id of the user who created the file.
+                  lastUpdated:
+                    type: string
+                    description: The date and time the file was last updated.
+                  updatedBy:
+                    type: string
+                    description: The id of the user who last updated the file.
+                  name:
+                    type: string
+                    description: The name of the file.
+                  address:
+                    type: string
+                    description: The address of the file combined into a single string.
+                  contactInfo:
+                    type: string
+                    description: A semicolon seperated list of all of the contacts in the file.
+                  fileType:
+                    type: string
+                    enum:
+                    - File
+                    - Template
+                    - BrokerTemplate
+                    description: The type of the file.
+                  representationType:
+                    type: string
+                    enum:
+                    - Buyer
+                    - Seller
+                    - Tenant
+                    - Landlord
+                    description: The representation type of the file.
+                  templateCategory:
+                    type: string
+                    enum:
+                    - Buyer
+                    - Seller
+                    - Tenant
+                    - Landlord
+                    - Other
+                    description: The category of the template of the file.
+                  closingDateTime:
+                    type: string
+                    description: The date and time the file is closing.
+                  acceptanceDateTime:
+                    type: string
+                    description: The date and time the file was accepted.
+                  mlsNumber:
+                    type: string
+                    description: The mls number of the file.
+                  purchasePrice:
+                    type: number
+                    description: The purchase price of the property.
+                  documentData:
+                    type: object
+                    description: The data of the documents in the file.
+                    additionalProperties: true
+                  fileData:
+                    type: object
+                    description: An object containing all of the file details for the file.
+                    additionalProperties: true
+                  transactionMeta:
+                    type:
+                    - 'null'
+                    - object
+                    description: The transaction meta data of the file.
+                    additionalProperties: true
+                  property:
+                    type: object
+                    description: The property that the file is associated with.
+                    additionalProperties: false
+                    properties:
+                      streetNumber:
+                        type: string
+                        description: The street number of the property.
+                      streetName:
+                        type: string
+                        description: The street name of the property.
+                      unitNumber:
+                        type: string
+                        description: The unit number of the property.
+                      city:
+                        type: string
+                        description: The city of the property.
+                      state:
+                        type: string
+                        description: The abbreviation for the state/province of the property.
+                        minLength: 2
+                        maxLength: 2
+                      postalCode:
+                        type: string
+                        description: The postal code of the property.
+                      county:
+                        type: string
+                        description: The county of the property.
+                    required:
+                    - streetNumber
+                    - streetName
+                    - city
+                    - state
+                    - postalCode
+                  contacts:
+                    type: array
+                    description: An array of contacts for the file.
+                    items:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: string
+                          description: The id of the contact.
+                        type:
+                          type: string
+                          description: The role that a contact has been assigned.
+                          enum:
+                          - Broker
+                          - Buyer
+                          - BuyerAgent
+                          - BuyersLawyer
+                          - EscrowOfficer
+                          - LoanOfficer
+                          - Other
+                          - Seller
+                          - SellerAgent
+                          - SellersLawyer
+                          - TitleOfficer
+                        actionAttribute:
+                          type: string
+                          description: Actions for contact to participate in.
+                          enum:
+                          - Empty
+                          - NeedsToSign
+                          - CanView
+                          - ReceivesCopy
+                          - NoAction
+                        firstName:
+                          type: string
+                          description: The first name of the contact.
+                        middleName:
+                          type: string
+                          description: The middle name of the contact.
+                        lastName:
+                          type: string
+                          description: The last name of the contact.
+                        suffix:
+                          type: string
+                          description: The suffix of the contact.
+                        email:
+                          type: string
+                          description: The email of the contact.
+                        primaryPhoneNumber:
+                          type: string
+                          description: The primary phone number of the contact.
+                        brokeragePhoneNumber:
+                          type: string
+                          description: The brokerage phone number of the contact.
+                        faxPhoneNumber:
+                          type: string
+                          description: The fax phone number of the contact.
+                        companyName:
+                          type: string
+                          description: The company name that the contact belongs to.
+                        isEntity:
+                          type: boolean
+                          description: Evaluates to true if the contact is an entity.
+                        isUser:
+                          type: boolean
+                          description: Evaluates to true if the contact is the also the agent (self).
+                        isFileOwner:
+                          type: boolean
+                          description: Evaluates to true if the contact is the file owner.
+                        lenderLicenseNumber:
+                          type: string
+                          description: The lender license number of the contact.
+                        agentLicenseNumber:
+                          type: string
+                          description: The agent license number of the contact.
+                        agentMLSCode:
+                          type: string
+                          description: The agent mls code of the contact.
+                        brokerLicenseNumber:
+                          type: string
+                          description: The broker license number of the contact.
+                        brokerMLSCode:
+                          type: string
+                          description: The broker mls code of the contact.
+                        brokerageLicenseNumber:
+                          type: string
+                          description: The brokerage license number of the contact.
+                        brokerageMLSCode:
+                          type: string
+                          description: The brokerage mls code of the contact.
+                        primaryAddress:
+                          type: object
+                          description: The primary address of the contact.
+                          additionalProperties: false
+                          properties:
+                            streetNumber:
+                              type: string
+                              description: The street number of the property.
+                            streetName:
+                              type: string
+                              description: The street name of the property.
+                            unitNumber:
+                              type: string
+                              description: The unit number of the property.
+                            city:
+                              type: string
+                              description: The city of the property.
+                            state:
+                              type: string
+                              description: The abbreviation for the state/province of the property.
+                              minLength: 2
+                              maxLength: 2
+                            postalCode:
+                              type: string
+                              description: The postal code of the property.
+                            county:
+                              type: string
+                              description: The county of the property.
+                          required:
+                          - streetNumber
+                          - streetName
+                          - city
+                          - state
+                          - postalCode
+                        contactInformation:
+                          type: object
+                          description: An object containing all of the contact information for the contact.
+                          additionalProperties: true
+                  commissions:
+                    type: array
+                    description: An array of the commissions for the file.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The id of the commission.
+                        type:
+                          type: string
+                          enum:
+                          - Listing
+                          - Referral
+                          - Sale
+                          description: The type of the commission.
+                        calculationType:
+                          type: string
+                          enum:
+                          - Flat
+                          - Percent
+                          description: The calculation type of the commission.
+                        amount:
+                          type: number
+                          description: The amount of the commission.
+                        createdBy:
+                          type: string
+                          description: The id of the user who created the commission.
+                        updatedBy:
+                          type: string
+                          description: The id of the user who last updated the commission.
+                        createdOn:
+                          type: string
+                          description: The date and time the commission was created.
+                        updatedOn:
+                          type: string
+                          description: The date and time the commission was last updated.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the commission.
+                  isDeleted:
+                    type: boolean
+                    description: Evaluates to true if the file has been deleted.
+                  isArchived:
+                    type: boolean
+                    description: Evaluates to true if the file has been archived.
+                  meta:
+                    type:
+                    - 'null'
+                    - object
+                    description: The meta data of the file.
+                    properties:
+                      id:
+                        type: number
+                        description: The id of the metadata.
+                      ownedBy:
+                        type: string
+                        description: The id of the user who owns the metadata.
+                      createdDate:
+                        type: string
+                        description: The date and time the metadata was created.
+                      createdBy:
+                        type: string
+                        description: The id of the user who created the metadata.
+                      lastUpdated:
+                        type: string
+                        description: The date and time the metadata was last updated.
+                      updatedBy:
+                        type: string
+                        description: The id of the user who last updated the metadata.
+                      externalId:
+                        type: string
+                        description: The external id of the file.
+                      regions:
+                        type: array
+                        description: An array of regions for the file.
+                        items:
+                          type: object
+                          properties:
+                            country:
+                              type: string
+                              description: The country of the account group.
+                            region:
+                              type: string
+                              description: The region of the account group.
+                      brokerTemplateStatus:
+                        type: string
+                        enum:
+                        - Draft
+                        - Published
+                        description: The status of the broker template for the file.
+                      brokerTemplateStatusUpdatedOn:
+                        type: string
+                        description: The date and time the broker template status was last updated.
+                      accountGroups:
+                        type: array
+                        description: An array of account groups for the file.
+                        items:
+                          type: object
+                          properties:
+                            groupId:
+                              type: string
+                              description: The id of the account group.
+              example:
+                id: 1
+                name: File Name
+                type: File
+                representationType: Buyer
+                templateCategory: Landlord
+                closingDateTime: '2023-12-31T12:12:12.123Z'
+                acceptanceDateTime: '2023-12-31T12:12:12.123Z'
+                meta:
+                  status: pre-contract
+                mlsNumber: '1589519'
+                purchasePrice: 1598000
+                fileData:
+                  mlsNumber: '1589519'
+                transactionMeta:
+                  status: pre-contract
+                property:
+                  streetNumber: '9999'
+                  streetName: Main Street
+                  unitNumber: '12'
+                  state: CA
+                  county: null
+                  postalCode: '95825'
+                  isCompleteAddress: true
+                contacts:
+                - id: 1
+                  type: Buyer
+                  actionAttribute: NeedsToSign
+                  lastName: Jonsey
+                  middleName: ''
+                  firstName: Jimmy
+                  suffix: ''
+                  email: someone@email.com
+                  primaryPhoneNumber: '5558887777'
+                  brokeragePhoneNumber: ''
+                  faxPhoneNumber: ''
+                  companyName: Your Realty
+                  isEntity: false
+                  isUser: false
+                  isFileOwner: false
+                  lenderLicenseNumber: null
+                  agentLicenseNumber: null
+                  agentMLSCode: null
+                  brokerageLicenseNumber: null
+                  brokerageMLSCode: null
+                  brokerLicenseNumber: null
+                  brokerMLSCode: null
+                  primaryAddress:
+                    id: 1
+                    streetNumber: '7380'
+                    streetName: N. La What Blvd
+                    unitNumber: ''
+                    city: Tucson
+                    state: AZ
+                    postalCode: '85555'
+                    county: ''
+                  contactInformation:
+                    lenderLicenseNumber: '2929849'
+                    agentLicenseNumber: null
+                    agentMlsCode: null
+                    brokerageLicenseNumber: null
+                    brokerageMlsCode: null
+                    brokerLicenseNumber: null
+                    brokerMlsCode: null
+                  createdBy: iajv98j498j98vasj4h
+                  updatedBy: iajv98j498j98vasj4h
+                  createdOn: '2023-12-26T20:51:09Z'
+                  updatedOn: '2023-12-26T20:51:09Z'
+                  ownedBy: iajv98j498j98vasj4h
+                commissions:
+                - id: 1
+                  type: Listing
+                  calculationType: Flat
+                  amount: 0
+                  createdBy: iajv98j498j98vasj4h
+                  updatedBy: iajv98j498j98vasj4h
+                  createdOn: '2020-01-22T23:39:10Z'
+                  updatedOn: '2021-09-07T16:34:21Z'
+                  ownedBy: iajv98j498j98vasj4h
+                documentData:
+                - '184629'
+                - '185099'
+                - '185100'
+                isDeleted: false
+                isArchived: false
+                createdDate: '2023-12-31T12:12:12.123Z'
+                createdBy: iajv98j498j98vasj4h
+                lastUpdated: '2023-12-31T12:12:12.123Z'
+                updatedBy: iajv98j498j98vasj4h
+                ownedBy: iajv98j498j98vasj4h
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /templates:
+    get:
+      summary: Get Templates
+      tags:
+      - Templates
+      description: 'Retrieve templates. Defaults to personal templates (type=Template). Use type=BrokerTemplate
+        for broker templates.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38,
+        50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap:
+        5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color:
+        rgba(64,64,255,0.25); padding: 0px 5px;">forms.templates.read</div><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.files.read</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      parameters:
+      - schema:
+          type: string
+          default: Template
+        in: query
+        name: type
+        required: false
+        description: The type of templates to retrieve. Defaults to Template (personal templates).
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of templates found for the authenticated user.
+                  files:
+                    type: array
+                    description: An array containing the templates found for the authenticated user.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: The id of the template.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the template.
+                        createdDate:
+                          type: string
+                          description: The date and time the template was created.
+                        createdBy:
+                          type: string
+                          description: The id of the user who created the template.
+                        lastUpdated:
+                          type: string
+                          description: The date and time the template was last updated.
+                        updatedBy:
+                          type: string
+                          description: The id of the user who last updated the template.
+                        name:
+                          type: string
+                          description: The name of the template.
+                        type:
+                          type: string
+                          enum:
+                          - File
+                          - Template
+                          - BrokerTemplate
+                          description: The type of the template.
+                        representationType:
+                          type: string
+                          enum:
+                          - Buyer
+                          - Seller
+                          - Tenant
+                          - Landlord
+                          description: The representation type of the template.
+                        documentCount:
+                          type: number
+                          description: The number of documents in the template.
+                        brokerTemplateStatus:
+                          type: string
+                          enum:
+                          - Draft
+                          - Published
+                          description: The status of the broker template. Only present for BrokerTemplate
+                            type.
+                        brokerTemplateStatusUpdatedOn:
+                          type: string
+                          description: The date and time the broker template status was last updated.
+                            Only present for BrokerTemplate type.
+                        accountGroups:
+                          type: array
+                          description: An array of account groups for the template.
+                          items:
+                            type: object
+                            properties:
+                              groupId:
+                                type: string
+                                description: The id of the account group.
+                        regions:
+                          type: array
+                          description: An array of regions for the template.
+                          items:
+                            type: object
+                            properties:
+                              country:
+                                type: string
+                                description: The country of the region.
+                              region:
+                                type: string
+                                description: The region.
+              example:
+                totalRecords: 1
+                files:
+                - id: 1
+                  name: Personal Template Name
+                  type: Template
+                  representationType: Buyer
+                  documentCount: 3
+                  createdDate: '2023-12-31T12:12:12.123Z'
+                  createdBy: iajv98j498j98vasj4h
+                  lastUpdated: '2023-12-31T12:12:12.123Z'
+                  updatedBy: iajv98j498j98vasj4h
+                  ownedBy: iajv98j498j98vasj4h
+                  accountGroups: []
+                  regions: []
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/contacts:
+    post:
+      summary: Add Contact to File
+      tags:
+      - Files
+      - Contacts
+      description: 'Add a contact to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px
+        solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The body of the request to add a contact to a file.
+              required:
+              - firstName
+              - lastName
+              - type
+              additionalProperties: false
+              properties:
+                actionAttribute:
+                  type: string
+                  enum:
+                  - Empty
+                  - NeedsToSign
+                  - CanView
+                  - ReceivesCopy
+                  - NoAction
+                  description: "Actions for contact to participate in.\n <br><p><strong>NeedsToSign:</strong>\
+                    \ Contact will will receive an email containing a document needing to be signed\n\
+                    </p><p><strong>ReceivesCopy:</strong> Contact to receive a copy of Signed Documents\
+                    \ once signing is complete</p><p><strong>No Action:</strong> Contact needs not further\
+                    \ action</p>"
+                type:
+                  type: string
+                  enum:
+                  - Broker
+                  - Buyer
+                  - BuyerAgent
+                  - BuyersLawyer
+                  - EscrowOfficer
+                  - LoanOfficer
+                  - Other
+                  - Seller
+                  - SellerAgent
+                  - SellersLawyer
+                  - TitleOfficer
+                  description: The role that a contact has been assigned.
+                isEntity:
+                  type: boolean
+                  description: Evaluates to true if the contact is an entity.
+                isUser:
+                  type: boolean
+                  description: Evaluates to true if the contact is the also the agent (self).
+                firstName:
+                  type: string
+                  description: The first name of the contact.
+                middleName:
+                  type: string
+                  description: The middle name of the contact.
+                lastName:
+                  type: string
+                  description: The last name of the contact.
+                suffix:
+                  type: string
+                  description: The suffix of the contact.
+                email:
+                  type: string
+                  description: The email of the contact.
+                primaryPhoneNumber:
+                  type: string
+                  description: The primary phone number of the contact.
+                brokeragePhoneNumber:
+                  type: string
+                  description: The brokerage phone number of the contact.
+                faxPhoneNumber:
+                  type: string
+                  description: The fax phone number of the contact.
+                primaryAddress:
+                  type: object
+                  description: The primary address of the contact.
+                  additionalProperties: false
+                  properties:
+                    streetNumber:
+                      type: string
+                      description: The street number of the property.
+                    streetName:
+                      type: string
+                      description: The street name of the property.
+                    unitNumber:
+                      type: string
+                      description: The unit number of the property.
+                    city:
+                      type: string
+                      description: The city of the property.
+                    state:
+                      type: string
+                      description: The abbreviation for the state/province of the property.
+                      minLength: 2
+                      maxLength: 2
+                    postalCode:
+                      type: string
+                      description: The postal code of the property.
+                    county:
+                      type: string
+                      description: The county of the property.
+                  required:
+                  - streetNumber
+                  - streetName
+                  - city
+                  - state
+                  - postalCode
+                companyName:
+                  type: string
+                  description: The company name that the contact belongs to.
+                agentLicenseNumber:
+                  type: string
+                  description: The agent license number of the contact.
+                agentMLSCode:
+                  type: string
+                  description: The agent mls code of the contact.
+                brokerLicenseNumber:
+                  type: string
+                  description: The broker license number of the contact.
+                brokerMLSCode:
+                  type: string
+                  description: The broker mls code of the contact.
+                brokerageLicenseNumber:
+                  type: string
+                  description: The brokerage license number of the contact.
+                brokerageMLSCode:
+                  type: string
+                  description: The brokerage mls code of the contact.
+                lenderLicenseNumber:
+                  type: string
+                  description: The lender license number of the contact.
+        required: true
+        description: The body of the request to add a contact to a file.
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to add the contact to.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contactId:
+                    type: number
+                    description: The id of the contact that was added to the file.
+              example:
+                contactId: 123456
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/contacts/{contactId}:
+    put:
+      summary: Update Contact in File.
+      tags:
+      - Files
+      - Contacts
+      description: 'Update a contact in a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The body of the request to add a contact to a file.
+              required:
+              - firstName
+              - lastName
+              - type
+              additionalProperties: false
+              properties:
+                actionAttribute:
+                  type: string
+                  enum:
+                  - Empty
+                  - NeedsToSign
+                  - CanView
+                  - ReceivesCopy
+                  - NoAction
+                  description: "Actions for contact to participate in.\n <br><p><strong>NeedsToSign:</strong>\
+                    \ Contact will will receive an email containing a document needing to be signed\n\
+                    </p><p><strong>ReceivesCopy:</strong> Contact to receive a copy of Signed Documents\
+                    \ once signing is complete</p><p><strong>No Action:</strong> Contact needs not further\
+                    \ action</p>"
+                type:
+                  type: string
+                  enum:
+                  - Broker
+                  - Buyer
+                  - BuyerAgent
+                  - BuyersLawyer
+                  - EscrowOfficer
+                  - LoanOfficer
+                  - Other
+                  - Seller
+                  - SellerAgent
+                  - SellersLawyer
+                  - TitleOfficer
+                  description: The role that a contact has been assigned.
+                isEntity:
+                  type: boolean
+                  description: Evaluates to true if the contact is an entity.
+                isUser:
+                  type: boolean
+                  description: Evaluates to true if the contact is the also the agent (self).
+                firstName:
+                  type: string
+                  description: The first name of the contact.
+                middleName:
+                  type: string
+                  description: The middle name of the contact.
+                lastName:
+                  type: string
+                  description: The last name of the contact.
+                suffix:
+                  type: string
+                  description: The suffix of the contact.
+                email:
+                  type: string
+                  description: The email of the contact.
+                primaryPhoneNumber:
+                  type: string
+                  description: The primary phone number of the contact.
+                brokeragePhoneNumber:
+                  type: string
+                  description: The brokerage phone number of the contact.
+                faxPhoneNumber:
+                  type: string
+                  description: The fax phone number of the contact.
+                primaryAddress:
+                  type: object
+                  description: The primary address of the contact.
+                  additionalProperties: false
+                  properties:
+                    streetNumber:
+                      type: string
+                      description: The street number of the property.
+                    streetName:
+                      type: string
+                      description: The street name of the property.
+                    unitNumber:
+                      type: string
+                      description: The unit number of the property.
+                    city:
+                      type: string
+                      description: The city of the property.
+                    state:
+                      type: string
+                      description: The abbreviation for the state/province of the property.
+                      minLength: 2
+                      maxLength: 2
+                    postalCode:
+                      type: string
+                      description: The postal code of the property.
+                    county:
+                      type: string
+                      description: The county of the property.
+                  required:
+                  - streetNumber
+                  - streetName
+                  - city
+                  - state
+                  - postalCode
+                companyName:
+                  type: string
+                  description: The company name that the contact belongs to.
+                agentLicenseNumber:
+                  type: string
+                  description: The agent license number of the contact.
+                agentMLSCode:
+                  type: string
+                  description: The agent mls code of the contact.
+                brokerLicenseNumber:
+                  type: string
+                  description: The broker license number of the contact.
+                brokerMLSCode:
+                  type: string
+                  description: The broker mls code of the contact.
+                brokerageLicenseNumber:
+                  type: string
+                  description: The brokerage license number of the contact.
+                brokerageMLSCode:
+                  type: string
+                  description: The brokerage mls code of the contact.
+                lenderLicenseNumber:
+                  type: string
+                  description: The lender license number of the contact.
+        required: true
+        description: The body of the request to add a contact to a file.
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: contactId
+        required: true
+        description: The id of the contact to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contactId:
+                    type: number
+                    description: The id of the contact that was added to the file.
+              example:
+                contactId: 123456
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/contacts/bulk:
+    post:
+      summary: Add Contacts to File
+      tags:
+      - Files
+      - Contacts
+      description: 'Add one or more contacts to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The body of the request to add multiple contacts to a file.
+              properties:
+                contacts:
+                  type: array
+                  description: The contacts to add to the file.
+                  items:
+                    type: object
+                    description: The body of the request to add a contact to a file.
+                    required:
+                    - firstName
+                    - lastName
+                    - type
+                    additionalProperties: false
+                    properties:
+                      actionAttribute:
+                        type: string
+                        enum:
+                        - Empty
+                        - NeedsToSign
+                        - CanView
+                        - ReceivesCopy
+                        - NoAction
+                        description: "Actions for contact to participate in.\n <br><p><strong>NeedsToSign:</strong>\
+                          \ Contact will will receive an email containing a document needing to be signed\n\
+                          </p><p><strong>ReceivesCopy:</strong> Contact to receive a copy of Signed Documents\
+                          \ once signing is complete</p><p><strong>No Action:</strong> Contact needs not\
+                          \ further action</p>"
+                      type:
+                        type: string
+                        enum:
+                        - Broker
+                        - Buyer
+                        - BuyerAgent
+                        - BuyersLawyer
+                        - EscrowOfficer
+                        - LoanOfficer
+                        - Other
+                        - Seller
+                        - SellerAgent
+                        - SellersLawyer
+                        - TitleOfficer
+                        description: The role that a contact has been assigned.
+                      isEntity:
+                        type: boolean
+                        description: Evaluates to true if the contact is an entity.
+                      isUser:
+                        type: boolean
+                        description: Evaluates to true if the contact is the also the agent (self).
+                      firstName:
+                        type: string
+                        description: The first name of the contact.
+                      middleName:
+                        type: string
+                        description: The middle name of the contact.
+                      lastName:
+                        type: string
+                        description: The last name of the contact.
+                      suffix:
+                        type: string
+                        description: The suffix of the contact.
+                      email:
+                        type: string
+                        description: The email of the contact.
+                      primaryPhoneNumber:
+                        type: string
+                        description: The primary phone number of the contact.
+                      brokeragePhoneNumber:
+                        type: string
+                        description: The brokerage phone number of the contact.
+                      faxPhoneNumber:
+                        type: string
+                        description: The fax phone number of the contact.
+                      primaryAddress:
+                        type: object
+                        description: The primary address of the contact.
+                        additionalProperties: false
+                        properties:
+                          streetNumber:
+                            type: string
+                            description: The street number of the property.
+                          streetName:
+                            type: string
+                            description: The street name of the property.
+                          unitNumber:
+                            type: string
+                            description: The unit number of the property.
+                          city:
+                            type: string
+                            description: The city of the property.
+                          state:
+                            type: string
+                            description: The abbreviation for the state/province of the property.
+                            minLength: 2
+                            maxLength: 2
+                          postalCode:
+                            type: string
+                            description: The postal code of the property.
+                          county:
+                            type: string
+                            description: The county of the property.
+                        required:
+                        - streetNumber
+                        - streetName
+                        - city
+                        - state
+                        - postalCode
+                      companyName:
+                        type: string
+                        description: The company name that the contact belongs to.
+                      agentLicenseNumber:
+                        type: string
+                        description: The agent license number of the contact.
+                      agentMLSCode:
+                        type: string
+                        description: The agent mls code of the contact.
+                      brokerLicenseNumber:
+                        type: string
+                        description: The broker license number of the contact.
+                      brokerMLSCode:
+                        type: string
+                        description: The broker mls code of the contact.
+                      brokerageLicenseNumber:
+                        type: string
+                        description: The brokerage license number of the contact.
+                      brokerageMLSCode:
+                        type: string
+                        description: The brokerage mls code of the contact.
+                      lenderLicenseNumber:
+                        type: string
+                        description: The lender license number of the contact.
+        description: The body of the request to add multiple contacts to a file.
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to add the contacts to.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecordsAdded:
+                    type: number
+                    description: The total number of contacts that were added to the file.
+              example:
+                totalRecordsAdded: 3
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/contacts/{contactId}:
+    delete:
+      summary: Delete Contact from File.
+      tags:
+      - Files
+      - Contacts
+      description: 'Delete a contact from a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: contactId
+        required: true
+        description: The id of the contact to delete.
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to delete the contact from.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - contactId
+                properties:
+                  contactId:
+                    type: number
+                    description: The id of the contact that was deleted from the file.
+              example:
+                contactId: 123456
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /documents/{documentId}:
+    get:
+      summary: Get Document
+      tags:
+      - Documents
+      description: 'Retrieve the details and field definitions for a document by its id.<div style="color:
+        rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED
+        SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.documents</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+          default: 1
+        in: query
+        name: page
+        required: false
+        description: The page number of fields to retrieve.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 10
+        in: query
+        name: pageSize
+        required: false
+        description: The number of fields returned per page.
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: documentId
+        required: true
+        description: The id of the document to retrieve.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the details of the document.
+                properties:
+                  id:
+                    type: number
+                    description: The id of the document.
+                  formName:
+                    type: string
+                    description: The name of the document.
+                  formId:
+                    type:
+                    - 'null'
+                    - number
+                    description: The id of the form.
+                  formVersionId:
+                    type: number
+                    description: The id of the form version.
+                  fileId:
+                    type: number
+                    description: The id of the file that the document belongs to.
+                  formURL:
+                    type: string
+                    description: The URL to the form in storage.
+                  thumbnailURL:
+                    type: string
+                    description: The url of the thumbnail of the document.
+                  pageCount:
+                    type:
+                    - 'null'
+                    - number
+                    description: The number of pages in the document.
+                  documentType:
+                    type: string
+                    description: The type of the document.
+                  createdBy:
+                    type: string
+                    description: The id of the user who created the document.
+                  updatedBy:
+                    type:
+                    - 'null'
+                    - string
+                    description: The id of the user who last updated the document.
+                  createdOn:
+                    type: string
+                    description: The date and time the document was created.
+                  updatedOn:
+                    type: string
+                    description: The date and time the document was last updated.
+                  ownedBy:
+                    type: string
+                    description: The id of the user who owns the document.
+                  page:
+                    type: number
+                    description: The current page number.
+                  pageSize:
+                    type: number
+                    description: The number of fields returned per page.
+                  totalItems:
+                    type: number
+                    description: The total number of fields on the document.
+                  totalPages:
+                    type: number
+                    description: The total number of pages available.
+                  fields:
+                    type: array
+                    description: A paginated array of the fields defined on the document.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The unique identifier for the field.
+                        name:
+                          type: string
+                          description: The name of the field.
+                        dataRef:
+                          type: string
+                          description: The data reference key for the field.
+                        type:
+                          type: string
+                          description: The field type (e.g. "text", "checkbox").
+                        originalType:
+                          type: string
+                          description: The original field type as defined in the form template.
+                        xCoordinate:
+                          type: number
+                          description: The X coordinate position of the field on the page.
+                        yCoordinate:
+                          type: number
+                          description: The Y coordinate position of the field on the page.
+                        width:
+                          type: number
+                          description: The width of the field.
+                        height:
+                          type: number
+                          description: The height of the field.
+                        pageNumber:
+                          type: number
+                          description: The zero-based page number the field appears on.
+                        fontSize:
+                          type: number
+                          description: The font size for the field.
+                        isReadOnly:
+                          type: boolean
+                          description: Evaluates to true if the field is read-only.
+                        isTabbable:
+                          type: boolean
+                          description: Evaluates to true if the field is reachable via tab.
+                        isFirstAggregateField:
+                          type: boolean
+                          description: Evaluates to true if the field is the first in an aggregate group.
+                        isGlobal:
+                          type: boolean
+                          description: Evaluates to true if the field is globally scoped across forms.
+                        isOptional:
+                          type: boolean
+                          description: Evaluates to true if the field is optional.
+                        isDefaultToday:
+                          type: boolean
+                          description: Evaluates to true if the field defaults to today's date.
+                        digisignAllowOverrideIsOptional:
+                          type: boolean
+                          description: Evaluates to true if DigiSign is allowed to override the optional
+                            setting.
+                        format:
+                          type:
+                          - 'null'
+                          - string
+                          description: The format string applied to the field value.
+                        order:
+                          type:
+                          - 'null'
+                          - number
+                          description: The tab order of the field.
+                        clientType:
+                          type:
+                          - 'null'
+                          - string
+                          description: The contact type associated with the field.
+                        position:
+                          type:
+                          - 'null'
+                          - number
+                          description: The position of the field within its group.
+                        entityDisplayRule:
+                          type:
+                          - 'null'
+                          - string
+                          description: Display rule controlling field visibility.
+                        fieldDisplay:
+                          type:
+                          - 'null'
+                          - string
+                          description: Additional display metadata for the field.
+                        listingFieldName:
+                          type:
+                          - 'null'
+                          - string
+                          description: The listing field name mapped to this field.
+                        listingTableName:
+                          type:
+                          - 'null'
+                          - string
+                          description: The listing table name mapped to this field.
+                        referenceListingFieldName:
+                          type:
+                          - 'null'
+                          - string
+                          description: The reference listing field name mapped to this field.
+                        group:
+                          type:
+                          - 'null'
+                          - object
+                          description: The field group this field belongs to.
+                        domainFieldMetaData:
+                          type:
+                          - 'null'
+                          - object
+                          description: Domain-specific metadata for the field.
+                        associatedDataRefs:
+                          type: array
+                          description: Data references associated with this field.
+                          items:
+                            type: string
+              example:
+                id: 211469
+                formName: Purchase Agreement Form
+                formId: null
+                formVersionId: 28081
+                fileId: 582186
+                formURL: https://s3.us-west-2.amazonaws.com/example-bucket/forms/28081.pdf
+                thumbnailURL: https://s3.us-west-2.amazonaws.com/example-bucket/thumbnails/28081.png
+                pageCount: 3
+                documentType: Forms
+                createdBy: 00u1j6qlmwclWMB9O357
+                updatedBy: null
+                createdOn: '2024-01-15T10:30:00Z'
+                updatedOn: '2026-02-02T18:32:58Z'
+                ownedBy: 00u1j6qlmwclWMB9O357
+                page: 1
+                pageSize: 10
+                totalItems: 1
+                totalPages: 1
+                fields:
+                - id: Text1-482.70001220703125-104.5369873046875-0
+                  name: Text1
+                  dataRef: Text1
+                  type: text
+                  originalType: textinputblock
+                  xCoordinate: 482.70001220703125
+                  yCoordinate: 104.5369873046875
+                  width: 92.16796875
+                  height: 11.880000114440918
+                  pageNumber: 0
+                  fontSize: 8
+                  isReadOnly: false
+                  isTabbable: true
+                  isFirstAggregateField: false
+                  isGlobal: false
+                  isOptional: false
+                  isDefaultToday: false
+                  digisignAllowOverrideIsOptional: true
+                  format: null
+                  order: null
+                  clientType: null
+                  position: null
+                  entityDisplayRule: null
+                  fieldDisplay: null
+                  listingFieldName: null
+                  listingTableName: null
+                  referenceListingFieldName: null
+                  group: null
+                  domainFieldMetaData: null
+                  associatedDataRefs: []
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    patch:
+      summary: Update Document
+      tags:
+      - Documents
+      description: 'Update the field values of a document. Only the fields supplied in the request body
+        will be updated; existing values of other fields are preserved.<div style="color: rgba(38, 50,
+        56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              description: A JSON object containing the document field data references and their values
+                to be updated. Only the fields supplied will be updated; existing values of other fields
+                are preserved.
+        description: A JSON object containing the document field data references and their values to be
+          updated. Only the fields supplied will be updated; existing values of other fields are preserved.
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: documentId
+        required: true
+        description: The id of the document to update.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentId:
+                    type: number
+                    description: The id of the document that was updated.
+                  didAddendumsChange:
+                    type: boolean
+                    description: Evaluates to true if the number of addendum pages changed as a result
+                      of the update.
+              example:
+                documentId: 123456
+                didAddendumsChange: false
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    delete:
+      summary: Delete Document.
+      tags:
+      - Documents
+      description: 'Delete a document.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid
+        rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex;
+        gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: documentId
+        required: true
+        description: The id of the document to delete.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - documentId
+                properties:
+                  documentId:
+                    type: number
+                    description: The id of the document that was deleted from the file.
+              example:
+                documentId: 123456
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/documents:
+    get:
+      summary: Get File Documents
+      tags:
+      - Documents
+      - Files
+      description: 'Retrieve the documents metadata for a file. To download documents with proper branding
+        and data stamping, use the /files/:fileId/documents/download or /files/:fileId/documents/download/pdf
+        endpoints.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56,
+        0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px;
+        padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color:
+        rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div><div style="border-radius: 2px;
+        border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px
+        5px;">forms.documents.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to retrieve documents for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the documents found for the file.
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of documents found for the file.
+                  documents:
+                    type: array
+                    description: An array containing the documents found for the file.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: The id of the document.
+                        formName:
+                          type: string
+                          description: The name of the document.
+                        formId:
+                          type: number
+                          description: The id of the form.
+                        formVersionId:
+                          type: number
+                          description: The id of the form version.
+                        fileId:
+                          type: number
+                          description: The id of the file that the document belongs to.
+                        thumbnailURL:
+                          type: string
+                          description: The url of the thumbnail of the document.
+                        pageCount:
+                          type:
+                          - 'null'
+                          - number
+                          description: The number of pages in the document.
+                        documentType:
+                          type: string
+                          description: The type of the document.
+                        createdBy:
+                          type: string
+                          description: The id of the user who created the document.
+                        updatedBy:
+                          type: string
+                          description: The id of the user who last updated the document.
+                        createdOn:
+                          type: string
+                          description: The date and time the document was created.
+                        updatedOn:
+                          type: string
+                          description: The date and time the document was last updated.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the document.
+              example:
+                totalRecords: 1
+                documents:
+                - id: 123456
+                  formName: Purchase Agreement Form
+                  formId: 789
+                  formVersionId: 1011
+                  fileId: 456789
+                  thumbnailURL: https://example.com/thumbnails/form-12345.png
+                  pageCount: 5
+                  documentType: Forms
+                  createdBy: 00u123456789abcdef
+                  updatedBy: 00u123456789abcdef
+                  createdOn: '2024-01-15T10:30:00Z'
+                  updatedOn: '2024-01-15T10:30:00Z'
+                  ownedBy: 00u123456789abcdef
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    patch:
+      summary: Add Documents to File
+      tags:
+      - Documents
+      - Files
+      description: 'Add one or more documents to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.documents</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - formIds
+              properties:
+                formIds:
+                  type: array
+                  description: An array of the Form Ids of the Forms to add to the file.
+                  minItems: 1
+                  items:
+                    type: integer
+                    description: A Form Id of the Form to add to the file.
+        required: true
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to add the documents to.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documentIds:
+                    type: array
+                    description: An array of the documentIds that were added to the file.
+                    items:
+                      type: number
+              example:
+                documentIds:
+                - 1
+                - 2
+                - 3
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /documents/signed/{fileId}:
+    get:
+      summary: Get Signed Documents
+      tags:
+      - Documents
+      - Files
+      description: 'Retrieve the signed documents for a file.<div style="color: rgba(38, 50, 56, 0.5);
+        border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div><div
+        style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25);
+        padding: 0px 5px;">forms.documents.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to retrieve signed documents for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the signed documents found for the authenticated user.
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of signed documents found for the authenticated user.
+                  documents:
+                    type: array
+                    description: An array containing the signed documents found for the authenticated
+                      user.
+                    items:
+                      type: object
+                      properties:
+                        documentId:
+                          type: number
+                          description: The id of the document.
+                        documentName:
+                          type: string
+                          description: The name of the document.
+                        filename:
+                          type: string
+                          description: The name of the file that the document belongs to.
+                        pageCount:
+                          type: number
+                          description: The number of pages in the document.
+                        externalDocumentId:
+                          type: string
+                          description: The external id of the document.
+                        fileId:
+                          type: number
+                          description: The id of the file that the document belongs to.
+                        envelopeId:
+                          type: string
+                          description: The id of the envelope that the document belongs to.
+                        envelopeName:
+                          type: string
+                          description: The name of the envelope that the document belongs to.
+                        envelopeDocumentId:
+                          type: number
+                          description: The id of the envelope document.
+                        digisignDocumentGuid:
+                          type: string
+                          description: The digisign document guid of the document.
+                        documentUrl:
+                          type: string
+                          description: The url that can be used to download the document.
+                        thumbnailUrl:
+                          type: string
+                          description: The url of the thumbnail of the document.
+                        documentAddedDate:
+                          type: string
+                          description: The date and time the document was added.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the document.
+              example:
+              - envelopeDocumentId: 1
+                envelopeId: 1
+                digisignDocumentGuid: asdimfao9im38-a98sdng-9
+                envelopeName: Envelope Name
+                dateSigned: '2023-12-31T12:12:12.123Z'
+                fileId: 1
+                documentId: 1
+                externalDocumentId: asdimfao9im38-a98sdng-9
+                documentAddedDate: '2024-01-02T17:51:38Z'
+                documentName: Addendum
+                documentUrl: https://document-url/document1.pdf
+                pageCount: 6
+                filename: document1.pdf
+                thumbnailUrl: https://thumbnail-url/document1.pdf
+                ownedBy: 00u24fri71ChN970u357
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /documents/sign/subscribe/{fileId}:
+    post:
+      summary: Subscribe To Signed Documents Webhook
+      tags:
+      - Webhooks
+      - Documents
+      - Files
+      description: 'Subscribe a file to the signed documents webhook.<div style="color: rgba(38, 50, 56,
+        0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.webhooks</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - webhookUrl
+              properties:
+                webhookUrl:
+                  type: string
+                  description: The url to send the webhook response to when documents are signed documents.
+        required: true
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to subscribe to the signed documents webhook.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  subscribed:
+                    type: boolean
+                    description: Evaluates to true if the user was successfully subscribed to the webhook.
+        '208':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/envelopes:
+    get:
+      summary: Get Envelopes in File
+      tags:
+      - Envelopes
+      - Files
+      description: 'Get the envelopes associated with a file.<div style="color: rgba(38, 50, 56, 0.5);
+        border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div
+        style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25);
+        padding: 0px 5px;">forms.files.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+          default: 1
+        in: query
+        name: page
+        required: false
+        description: The page number to retrieve.
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 10
+        in: query
+        name: pageSize
+        required: false
+        description: The number of files returned per page.
+      - schema:
+          type: string
+        in: query
+        name: filters
+        required: false
+        description: A sieve filter to that will be applied to the results.
+      - schema:
+          type: string
+        in: query
+        name: sorts
+        required: false
+        description: A sieve list of sort fields to sort the results by.
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to retrieve envelopes for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of envelopes found for the file.
+                  envelopes:
+                    type: array
+                    description: An array of the envelopes found for the file.
+                    items:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: string
+                          description: The id of the envelope.
+                        name:
+                          type: string
+                          description: The name of the envelope.
+                        status:
+                          type: string
+                          description: The status of the envelope.
+                        isDeleted:
+                          type: boolean
+                          description: Evaluates to true if the envelope has been deleted.
+                        fileId:
+                          type: number
+                          description: The id of the file that the envelope belongs to.
+                        externalId:
+                          type: string
+                          description: The external id of the envelope.
+                        dateSent:
+                          type: string
+                          description: The date and time the envelope was sent.
+                        updatedOn:
+                          type: string
+                          description: The date and time the envelope was last updated.
+                        ownedBy:
+                          type: string
+                          description: The id of the user who owns the envelope.
+                        documentIds:
+                          type: array
+                          description: An array of the ids of the documents in the envelope.
+                          items:
+                            type: number
+                        signers:
+                          type: array
+                          description: An array of the signers in the envelope.
+                          items:
+                            type: object
+                            additionalProperties: false
+                            properties:
+                              id:
+                                type: string
+                                description: The id of the signer.
+                              dateSigned:
+                                type: string
+                                description: The date and time the signer signed the document.
+                              contactId:
+                                type: string
+                                description: The id of the contact that is the signer.
+                              envelopeId:
+                                type: string
+                                description: The id of the envelope that the signer signed a document
+                                  in.
+                              externalId:
+                                type: string
+                                description: The external id of the signer.
+                              createdBy:
+                                type: string
+                                description: The id of the user who created the signer entry.
+                              updatedBy:
+                                type: string
+                                description: The id of the user who last updated the signer entry.
+                              createdOn:
+                                type: string
+                                description: The date and time the signer entry was created.
+                              updatedOn:
+                                type: string
+                                description: The date and time the signer entry was last updated.
+                              ownedBy:
+                                type: string
+                                description: The id of the user who owns the signer entry.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    post:
+      summary: Create Envelope in File
+      tags:
+      - Envelopes
+      - Files
+      description: 'Create an envelope for a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+              - envelopeName
+              - documentIds
+              properties:
+                envelopeName:
+                  type: string
+                  description: The name of the envelope to add to the file.
+                documentIds:
+                  type: array
+                  description: An array of the ids of the documents to add to the envelope.
+                  items:
+                    type: number
+        required: true
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to add the envelope to.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  fileId:
+                    type: number
+                    description: The id of the file that the envelope was added to.
+                  envelope:
+                    type: object
+                    description: The envelope that was added to the file.
+                    additionalProperties: false
+                    properties:
+                      id:
+                        type: string
+                        description: The id of the envelope that was added to the file.
+                      name:
+                        type: string
+                        description: The name of the envelope.
+              example:
+                fileId: 539181
+                envelope:
+                  id: 115682
+                  name: My Envelope Name
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /forms:
+    get:
+      summary: Get Forms
+      tags:
+      - Forms
+      description: 'Get all of the Forms that the currently authenticated user has access to.<div style="color:
+        rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED
+        SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.forms.read</div></div>'
+      parameters:
+      - schema:
+          type: array
+          items:
+            type: integer
+        in: query
+        name: libraryIds
+        required: false
+        description: 'Supply an array of library ids to filter the forms by. <b>NOTE: If a libraryId is
+          provided that the current user does not have access to, it will be ignored.</b>'
+      - schema:
+          type: integer
+          minimum: 1
+          default: 1
+        in: query
+        name: page
+        required: false
+        description: The page number to retrieve.
+      - schema:
+          type: integer
+          minimum: 1
+          default: 10
+        in: query
+        name: pageSize
+        required: false
+        description: The number of forms returned per page.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of forms found for the authenticated user.
+                  forms:
+                    type: array
+                    description: An array of the forms that the user has access to.
+                    items:
+                      type: object
+                      properties:
+                        formId:
+                          type: number
+                          description: The form id of the form.
+                        libraryId:
+                          type: number
+                          description: The library id of the form.
+                        name:
+                          type: string
+                          description: The name of the form.
+                        pageCount:
+                          type: number
+                          description: The number of pages in the form.
+                        url:
+                          type: string
+                          description: The url of the form.
+                        previewUrl:
+                          type: string
+                          description: The preview url of the form.
+                        thumbnailUrl:
+                          type: string
+                          description: The thumbnail url of the form.
+                        createdOn:
+                          type: string
+                          description: The date and time the form was created.
+                        updatedOn:
+                          type: string
+                          description: The date and time the form was last updated.
+                        source:
+                          type: string
+                          description: The source of the form.
+                        sources:
+                          type: array
+                          description: An array of sources for the form.
+                          items:
+                            type: string
+                        attributes:
+                          type: object
+                          description: An object containing the tags associated with the form.
+                          additionalProperties: true
+              example:
+                totalRecords: 2
+                forms:
+                - id: 36095
+                  name: Agreement Notice to Short Sale Addendum (Short Sale)
+                  libraryId: 14289
+                  attributes:
+                    form-type: BRBC
+                - id: 40144
+                  name: BRBC Buyer Representation And Broker Compensation Agreement
+                  libraryId: 14289
+                  attributes:
+                    form-type: BRBC
+                nextLink: https://forms.skyslope.com/library/api/forms?filter=libraryId==13456&formName=Buyer&orderBy=FormName&page=2&pageSize=10
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /users/profile:
+    get:
+      summary: Get User Profile
+      tags:
+      - Users
+      description: Retrieve the user profile of the currently authenticated user
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The id of the user who belongs to the profile.
+                  subscriberId:
+                    type: string
+                    description: The subscriber id of the user.
+                  firstName:
+                    type: string
+                    description: The first name of the user.
+                  middleName:
+                    type: string
+                    description: The middle name of the user.
+                  lastName:
+                    type: string
+                    description: The last name of the user.
+                  suffix:
+                    type: string
+                    description: The suffix of the user.
+                  email:
+                    type: string
+                    description: The email of the user.
+                  primaryPhoneNumber:
+                    type: string
+                    description: The primary phone number of the user.
+                  brokerageName:
+                    type: string
+                    description: The name of the brokerage that the user belongs to.
+                  brokerageAddress:
+                    type: object
+                    description: The address of the brokerage that the user belongs to.
+                    properties:
+                      streetAddress:
+                        type: string
+                        description: The street address of the brokerage.
+                      unitNumber:
+                        type: string
+                        description: The unit number of the brokerage.
+                      city:
+                        type: string
+                        description: The city of the brokerage.
+                      state:
+                        type: string
+                        description: The state of the brokerage.
+                      postalCode:
+                        type: string
+                        description: The postal code of the brokerage.
+                      county:
+                        type: string
+                        description: The county of the brokerage.
+                  brokeragePhone:
+                    type: string
+                    description: The phone number of the brokerage that the user belongs to.
+                  brokerageFax:
+                    type: string
+                    description: The fax number of the brokerage that the user belongs to.
+                  regions:
+                    type: array
+                    description: An array of regions that the user has access to.
+                    items:
+                      type: object
+                      properties:
+                        country:
+                          type: string
+                        region:
+                          type: string
+                  libraries:
+                    type: array
+                    description: An array of libraries that the user has access to.
+                    items:
+                      type: number
+                  authProfiles:
+                    type: array
+                    description: An array of the auth profiles of the user.
+                    items:
+                      additionalFields: true
+                  isInitialized:
+                    type: boolean
+                    description: Evaluates to true if the user profile has been on-boarded.
+                  termAcceptanceDate:
+                    type: string
+                    description: The date and time the user accepted the terms.
+                  mlsCode:
+                    type: string
+                    description: The mls code of the user.
+                  licenseNumber:
+                    type: string
+                    description: The license number of the user.
+                  brokerageLicenseNumber:
+                    type: string
+                    description: The license number of the brokerage that the user belongs to.
+                  brokerageMLSCode:
+                    type: string
+                    description: The mls code of the brokerage that the user belongs to.
+                  isAutoDeletePreDraftEnvelopeAllowed:
+                    type: boolean
+                    description: Evaluates to true if auto delete pre draft envelopes is enabled.
+                  isAutoDeleteFormAllowed:
+                    type: boolean
+                    description: Evaluates to true if auto delete forms is enabled.
+                  consentedAssociations:
+                    type: array
+                    description: An array of the consented associations for the user.
+                    items:
+                      type: string
+                  userPreferences:
+                    type: object
+                    properties:
+                      digitalSigningPlatformPreference:
+                        type: string
+                        description: The digital signing platform preference of the user.
+                      nhdProviderPreference:
+                        type: string
+                        description: The nhd provider preference of the user.
+                  location:
+                    type: string
+                    description: The location of the user.
+                  createdOn:
+                    type: string
+                    description: The date and time the user profile was created.
+                  createdBy:
+                    type: string
+                    description: The id of the user who created the user profile.
+                  updatedOn:
+                    type: string
+                    description: The date and time the user profile was last updated.
+                  updatedBy:
+                    type: string
+                    description: The id of the user who last updated the user profile.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /group:
+    post:
+      summary: Add Group
+      tags:
+      - Users
+      description: 'Create a new group via accounts-api.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">admin.groups</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brokerageId:
+                  type: string
+                  description: The brokerage id for the new group. If not provided, will be auto-generated
+                    with prefix "partnerApi_".
+                brokerageName:
+                  type: string
+                  description: The name of the brokerage.
+      responses:
+        '200':
+          description: Group already exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupId:
+                    type: string
+                    description: The id of the newly created group.
+                required:
+                - groupId
+        '201':
+          description: Group successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groupId:
+                    type: string
+                    description: The id of the newly created group.
+                required:
+                - groupId
+        '400':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        '401':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        '500':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /groups/{groupId}/child:
+    post:
+      summary: Add Child Group
+      tags:
+      - Users
+      description: 'Create a new child group for a parent group via accounts-api.<div style="color: rgba(38,
+        50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">admin.groups</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  description: The name of the child group.
+        required: true
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: groupId
+        required: true
+        description: The id of the parent group.
+      responses:
+        '200':
+          description: Child group already exists for the parent group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  childGroupId:
+                    type: string
+                    description: The id of the newly created child group.
+                required:
+                - childGroupId
+        '201':
+          description: Child group successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  childGroupId:
+                    type: string
+                    description: The id of the newly created child group.
+                required:
+                - childGroupId
+        '400':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        '401':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        '500':
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /users/{userId}/groups/{groupId}:
+    post:
+      summary: Add Group to User
+      tags:
+      - Users
+      description: 'Add group to a user.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid
+        rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex;
+        gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">admin.groups</div></div>'
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: userId
+        required: true
+        description: The id of the user to add to the group.
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: groupId
+        required: true
+        description: The id of the group to add the user to.
+      responses:
+        '204':
+          description: Group successfully added to user.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+    delete:
+      summary: Remove User from Group
+      tags:
+      - Users
+      description: 'Remove a user from a group.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">admin.groups</div></div>'
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: userId
+        required: true
+        description: The id of the user to remove from the group.
+      - schema:
+          type: string
+          minLength: 1
+        in: path
+        name: groupId
+        required: true
+        description: The id of the group to remove the user from.
+      responses:
+        '204':
+          description: User successfully removed from group.
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /tags:
+    get:
+      summary: Get Form Tags
+      tags:
+      - Libraries
+      description: 'Retrieve the tags that are associated with the forms.<div style="color: rgba(38, 50,
+        56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.forms.read</div></div>'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: ids
+        required: false
+        description: The form version ids to retrieve tags for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A response containing the tags.
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of records.
+                  records:
+                    type: array
+                    description: An array of the tags.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: The id of the tag.
+                        tags:
+                          type: object
+                          description: The tags object.
+                          additionalProperties: true
+              example:
+                totalRecords: 2
+                records:
+                - id: 28576
+                  tags:
+                    form-type: residential-purchase-contract
+                - id: 29533
+                  tags:
+                    gives-ds3-access: 'true'
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/templates:
+    post:
+      summary: Apply Template to File
+      tags:
+      - Files
+      description: 'Apply a template to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom:
+        1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display:
+        inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - templateId
+              properties:
+                templateId:
+                  type: integer
+                  description: The id of the template to apply to the file.
+        required: true
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to apply the template to.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileId:
+                    type: integer
+                    description: The id of the file the template was applied to.
+              example:
+                fileId: 667309
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /buyer-agreements/market:
+    get:
+      summary: Get Buyer Agreements By Market
+      tags:
+      - Buyer Agreements
+      description: 'Retrieve the buyer agreements for a specific market.<div style="color: rgba(38, 50,
+        56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.buyerAgreements.restrictedRead</div></div>'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: filters
+        required: false
+        description: A sieve list of filters that will be applied to the results.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of buyer agreement files found.
+                  files:
+                    type: array
+                    description: An array containing the buyer agreement files found.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: The SkySlope identifier for the file.
+                        memberName:
+                          type: string
+                          description: The date and time the file was created.
+                        memberId:
+                          type: string
+                          description: The MLS id of the user who owns the file.
+                        executionDate:
+                          type: string
+                          description: The date and time the file was executed.
+                        expirationDate:
+                          type: string
+                          description: The date and time the file expires.
+                        completedDate:
+                          type: string
+                          description: The date and time the file was completed.
+                        isCarBRBC:
+                          type: boolean
+                          description: Does this file contain a CAR Buyer Agreement?
+              example:
+                totalRecords: 1
+                files:
+                - id: 1
+                  memberName: Member Name
+                  memberId: Member ID
+                  executionDate: '2023-11-31T12:12:12.123Z'
+                  expirationDate: '2023-12-31T12:12:12.123Z'
+                  completedDate: '2023-12-21T12:12:12.123Z'
+                  isCarBRBC: true
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /libraries:
+    get:
+      summary: Get Libraries
+      tags:
+      - Libraries
+      description: 'Retrieve the libraries that the user is authorized to access.<div style="color: rgba(38,
+        50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.libraries.read</div></div>'
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - totalRecords
+                - libraries
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of authorized libraries.
+                  libraries:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - name
+                      - regionCodes
+                      properties:
+                        id:
+                          type: integer
+                          description: Library id
+                        name:
+                          type: string
+                          description: Name of library
+                        regionCodes:
+                          type: array
+                          items:
+                            type: string
+                          description: Serving Regions
+                    description: An array of libraries the user is authorized to access.
+                description: A response containing the authorized libraries for the user.
+              example:
+                totalRecords: 1
+                libraries:
+                - id: 1551
+                  name: Arizona Association of Realtors
+                  regionCodes:
+                  - US-AZ
+                  - US-CA
+        default:
+          description: An object containing the error that occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: An object containing the error that occurred.
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    description: An array of the errors that occurred.
+                    items:
+                      type: string
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /libraries/{libraryId}/form-versions:
+    get:
+      summary: Get Library Form Versions
+      tags:
+      - Libraries
+      description: 'Retrieve the form versions for a specific library.<div style="color: rgba(38, 50,
+        56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div
+        style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border:
+        1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.libraries.read</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: libraryId
+        required: true
+        description: The id of the library to retrieve form versions for.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - totalRecords
+                - formVersions
+                properties:
+                  totalRecords:
+                    type: number
+                    description: The total number of form versions.
+                  formVersions:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      - formId
+                      - name
+                      - attributes
+                      - publishedVersionId
+                      - thumbnailUrl
+                      properties:
+                        id:
+                          type: integer
+                          description: Form version id
+                        formId:
+                          type: integer
+                          description: A form has multiple versions, this is the id of the form that this
+                            version belongs to.
+                        name:
+                          type: string
+                          description: Form name
+                        attributes:
+                          type: object
+                          description: Dynamic attributes object containing form metadata. All attributes
+                            are optional and if present will be strings.
+                          additionalProperties:
+                            type: string
+                        publishedVersionId:
+                          type: integer
+                          description: In the case that a newer version is published, this will be the
+                            id of the newer version.
+                        thumbnailUrl:
+                          type: string
+                          description: URL to form thumbnail image
+                    description: An array of form versions from the specified library.
+                description: A response containing the form versions for a specific library.
+              example:
+                totalRecords: 5
+                formVersions:
+                - id: 36094
+                  formId: 35345
+                  name: Addendum Copy Test
+                  attributes:
+                    quickAction: delete
+                  publishedVersionId: 36094
+                  thumbnailUrl: url-here
+                - id: 36095
+                  formId: 35931
+                  name: BIC CAR TEST - FOO
+                  attributes:
+                    formType: BRBC
+                  publishedVersionId: 36095
+                  thumbnailUrl: url-here
+                - id: 41054
+                  formId: 40355
+                  name: BRBC - CRMLS testing
+                  attributes:
+                    formType: BRBC
+                    isCarBRBC: 'true'
+                    quickAction: BuyerAgreement
+                    hasStartDate: 'true'
+                    isCRMLSTracked: 'true'
+                  publishedVersionId: 41054
+                  thumbnailUrl: url-here
+                - id: 41063
+                  formId: 40362
+                  name: BRBC - CRMLS testing - no dates
+                  attributes:
+                    formType: BRBC
+                    isCarBRBC: 'true'
+                    quickAction: BuyerAgreement
+                    hasStartDate: 'true'
+                    isCRMLSTracked: 'true'
+                    downloadWithoutAddress: 'true'
+                  publishedVersionId: 41063
+                  thumbnailUrl: url-here
+                - id: 41046
+                  formId: 39761
+                  name: BRBC Buyer Representation And Broker Compensation Agreement - CAR
+                  attributes:
+                    formType: BRBC
+                    isCarBRBC: 'true'
+                    quickAction: BuyerAgreement
+                    QuickActions: BuyerAgreement
+                    hasStartDate: 'true'
+                    isCRMLSTracked: 'true'
+                  publishedVersionId: 41046
+                  thumbnailUrl: url-here
+        default:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - errors
+                - traceId
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: An array of the errors that occurred.
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/documents/download/pdf:
+    get:
+      summary: Download File Documents as PDF
+      tags:
+      - Files
+      description: 'Download one or more documents from a file as a combined PDF with file details stamped
+        on the documents. If the call is successful, the response will be a PDF file containing the requested
+        documents. If it is not successful, the response will be json containing the error.<div style="color:
+        rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED
+        SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: documentIds
+        required: true
+        description: 'Comma-separated list of document IDs to include in the PDF. Example: "123,456,789"'
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to download documents from.
+      responses:
+        '200':
+          description: PDF file containing the requested documents
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - errors
+                - traceId
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: An array of the errors that occurred.
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/documents/download:
+    get:
+      summary: Download File Documents
+      tags:
+      - Files
+      description: 'Download one or more documents from a file with file details stamped on the documents.
+        Returns a single PDF if one document ID is provided, or a ZIP file containing multiple documents
+        if more than one document ID is provided. The Content-Type header will reflect the appropriate
+        file type.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56,
+        0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px;
+        padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color:
+        rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents.read</div></div>'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: documentIds
+        required: true
+        description: 'Comma-separated list of document IDs to download. Single ID returns PDF, multiple
+          IDs return ZIP. Example: "123,456,789"'
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to download documents from.
+      responses:
+        '200':
+          description: Document file - PDF for single document, ZIP for multiple documents
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - errors
+                - traceId
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: An array of the errors that occurred.
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+  /files/{fileId}/documents/upload:
+    post:
+      summary: Upload Document to File
+      tags:
+      - Files
+      - Documents
+      description: 'Upload a PDF document to a file. Max size 25MB. Accepts multipart/form-data with fields:
+        DocumentName (string), DocumentBody (binary PDF file), IsSignedDocument (true/false, optional).<div
+        style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom:
+        1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius:
+        2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding:
+        0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5);
+        background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+        in: path
+        name: fileId
+        required: true
+        description: The id of the file to upload the document to.
+      responses:
+        '200':
+          description: Document uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - documentId
+                properties:
+                  documentId:
+                    type: integer
+        default:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - errors
+                - traceId
+                properties:
+                  code:
+                    type: string
+                    description: A code that represents the error that occurred.
+                  message:
+                    type: string
+                    description: A description of the error that occurred.
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: An array of the errors that occurred.
+                  traceId:
+                    type: string
+                    description: A request correlation ID.
+servers:
+- url: https://forms.skyslope.com/partner/api
+  description: Production server
+- url: https://staging-forms.skyslope.com/partner/api
+  description: Staging server
+- url: https://integ-forms.skyslope.com/partner/api
+  description: Integration server
