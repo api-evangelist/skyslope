@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Envelopes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Envelopes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Envelopes in File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/envelopes",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of files returned per page."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "A sieve filter to that will be applied to the results."
+              },
+              {
+                "name": "sorts",
+                "value": "",
+                "type": "query",
+                "description": "A sieve list of sort fields to sort the results by."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to retrieve envelopes for."
+              }
+            ]
+          },
+          "docs": "Get the envelopes associated with a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padd"
+        },
+        {
+          "info": {
+            "name": "Create Envelope in File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/envelopes",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to add the envelope to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an envelope for a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

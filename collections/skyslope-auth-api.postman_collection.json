@@ -1,0 +1,262 @@
+{
+  "item": [
+    {
+      "id": "b0f24728-ef51-4f80-b37d-946809244156",
+      "name": "Auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab80eaad-cf7d-47d0-b8d4-662ead520cc9",
+          "name": "Retrieve an access token",
+          "request": {
+            "name": "Retrieve an access token",
+            "description": {
+              "content": "Retrieve an access token to authenticate requests with.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ext",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f8162ae-c2a0-42ac-949b-c3b08a5adda4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Basic BASE64_CREDENTIALS</code>\n\n\"BASE64_CREDENTIALS\" is the Base64-encoded value of your Client ID and Client Secret, separated by a colon\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600,\n  \"access_token\": \"ACCESS_TOKEN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58261247-d4e4-422e-a571-a80c868ff820",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Basic BASE64_CREDENTIALS</code>\n\n\"BASE64_CREDENTIALS\" is the Base64-encoded value of your Client ID and Client Secret, separated by a colon\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7ef2a49-4735-4390-aad2-98ce55fd0185",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Basic BASE64_CREDENTIALS</code>\n\n\"BASE64_CREDENTIALS\" is the Base64-encoded value of your Client ID and Client Secret, separated by a colon\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5a2c6d4-c8a8-4c53-93a5-dd41c55aa4e3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Basic BASE64_CREDENTIALS</code>\n\n\"BASE64_CREDENTIALS\" is the Base64-encoded value of your Client ID and Client Secret, separated by a colon\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "529ddff2-c132-4f8a-b5f6-1a0476ce2eba",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Basic BASE64_CREDENTIALS</code>\n\n\"BASE64_CREDENTIALS\" is the Base64-encoded value of your Client ID and Client Secret, separated by a colon\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://forms.skyslope.com/partner/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "84f8df87-ba67-4ad0-86f5-2b6fae858569",
+    "name": "SkySlope Partnership API Reference Agents, Listings Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens\n\nContact Support:\n Name: Support\n Email: support@skyslope.com",
+      "type": "text/plain"
+    }
+  }
+}

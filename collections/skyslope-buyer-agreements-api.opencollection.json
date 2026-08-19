@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Buyer Agreements API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Buyer Agreements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Buyer Agreements By Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/buyer-agreements/market",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "A sieve list of filters that will be applied to the results."
+              }
+            ]
+          },
+          "docs": "Retrieve the buyer agreements for a specific market.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.buyerAgreements.restrictedRead</div></div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

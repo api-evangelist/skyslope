@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "d567601d-0620-435a-a480-294f7c739653",
+      "name": "Report",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8780ef57-9d1c-41fa-8bba-9a7949e8a1d9",
+          "name": "Retrieve count of listings & offers",
+          "request": {
+            "name": "Retrieve count of listings & offers",
+            "description": {
+              "content": "Retrieves a count of listings & offers for the provided date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ext",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<Date>",
+                  "description": "(Required) <code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<Date>",
+                  "description": "(Required) <code>2023-05-01</code>\n\nThe end of the date range in UTC format\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d430b17-3933-46fa-af81-4045e3dc74ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mlsMarket\": \"your-market\",\n  \"offerCount\": 100,\n  \"listingCount\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d1a8d41-07a5-4d3d-af7c-e01f45a5b3ab",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "620dda04-9165-406b-b1bd-d640e131839c",
+              "name": "Bad Request - Missing or invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8775e4bc-5b2d-4667-8882-8b00b3466d68",
+              "name": "Unauthorized - Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7193945b-5bc0-41d3-8f68-6d7924dd406d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://forms.skyslope.com/partner/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ca293bde-b2ca-4e15-b3b1-9a7f8ba2278e",
+    "name": "SkySlope Partnership API Reference Agents, Listings Report API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens\n\nContact Support:\n Name: Support\n Email: support@skyslope.com",
+      "type": "text/plain"
+    }
+  }
+}

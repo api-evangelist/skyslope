@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Offers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the offer details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/ext/offer/:offerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "path",
+                "description": "Offer Identifier\n"
+              }
+            ]
+          },
+          "docs": "Retrieves the offer details given the offer identifier"
+        },
+        {
+          "info": {
+            "name": "Retrieve all offers for a given date range.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/ext/offers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "<code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "<code>2023-01-31</code>\n\nThe end of the date range in UTC format.  Max date range is 31 days.  When larger range is requested, result for 31 days is returned.\n"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ]
+          },
+          "docs": "Retrieve all offers for a given date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,656 @@
+{
+  "item": [
+    {
+      "id": "6f1d9491-14c1-4dbe-9347-8fbcba29ef4c",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28b5103b-f0fe-43c0-b05d-fa09a89e5d0f",
+          "name": "Retrieve the offer details",
+          "request": {
+            "name": "Retrieve the offer details",
+            "description": {
+              "content": "Retrieves the offer details given the offer identifier",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ext",
+                "offer",
+                ":offerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<String>",
+                  "key": "offerId",
+                  "description": "(Required) Offer Identifier\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bb5eb3a-8a3d-430d-932b-0421701b48fc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offer",
+                    ":offerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<String>",
+                      "key": "offerId",
+                      "description": "(Required) Offer Identifier\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"OfferId\": \"64510abe7d7e1f1dfac47393\",\n  \"OfferOriginatingSystemId\": \"SkySlope\",\n  \"OfferSourceSystemId\": \"SkySlope\",\n  \"ModificationTimestamp\": \"2023-05-02T13:18:21.439Z\",\n  \"OfferSubmissionDate\": \"2023-05-01T13:18:21.439Z\",\n  \"OfferProperty\": {\n    \"OfferAgentId\": \"Agent123\",\n    \"ListingId\": \"Listing456\",\n    \"ListingKey\": \"Key789\",\n    \"Market\": \"Residential\",\n    \"PropertyType\": \"Single Family\",\n    \"ListingStatus\": \"Active\",\n    \"StreetNumber\": \"1266\",\n    \"StreetName\": \"Ocala\",\n    \"UnitNumber\": \"Apt 4\",\n    \"City\": \"TALLAHASSEE\",\n    \"StateOrProvince\": \"FL\",\n    \"PostalCode\": \"32304\",\n    \"CountyOrParish\": \"Leon\",\n    \"ParcelNumber\": \"Parcel123\"\n  },\n  \"OfferTerms\": {\n    \"OfferPrice\": 250000,\n    \"OfferStatus\": \"Submitted\",\n    \"CreditAtClosing\": \"To be determined\",\n    \"EarnestMoney\": 1000,\n    \"OfferClosingDate\": \"2023-06-01T04:00:00.000Z\",\n    \"OfferClosingDays\": 30,\n    \"Deposit\": 3000,\n    \"OfferExpirationDate\": \"2023-05-15T04:00:00.000Z\",\n    \"AdditionalTerms\": \"Small pets allowed\",\n    \"Contingencies\": [],\n    \"EscalationClause\": \"None\",\n    \"HomeWarranty\": \"Seller\",\n    \"IncreasedDeposit\": 500,\n    \"BuyerFinancing\": \"Conventional\",\n    \"OfferVersionNumber\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d59dedc0-d1e9-4b7a-ada1-d816702c220b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offer",
+                    ":offerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<String>",
+                      "key": "offerId",
+                      "description": "(Required) Offer Identifier\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15dc8ec6-9a25-42f5-aaa1-c85459d34b88",
+              "name": "Bad Request - Missing or invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offer",
+                    ":offerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<String>",
+                      "key": "offerId",
+                      "description": "(Required) Offer Identifier\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4baed1e-57fe-4fb2-b470-2078f8ff04d3",
+              "name": "Unauthorized - Missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offer",
+                    ":offerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<String>",
+                      "key": "offerId",
+                      "description": "(Required) Offer Identifier\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a210520e-73ec-4436-83f1-c012ec91bf26",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offer",
+                    ":offerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<String>",
+                      "key": "offerId",
+                      "description": "(Required) Offer Identifier\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0195a05a-2202-41ee-b78f-5f97c0d944bc",
+          "name": "Retrieve all offers for a given date range.",
+          "request": {
+            "name": "Retrieve all offers for a given date range.",
+            "description": {
+              "content": "Retrieve all offers for a given date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ext",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<Date>",
+                  "description": "(Required) <code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<Date>",
+                  "description": "<code>2023-01-31</code>\n\nThe end of the date range in UTC format.  Max date range is 31 days.  When larger range is requested, result for 31 days is returned.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<Number>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<Number>",
+                  "description": "Page size"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56fa01b2-d1eb-41dc-9b57-c16967d13742",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<Number>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<Number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"OfferId\": \"64510abe7d7e1f1dfac47393\",\n    \"OfferOriginatingSystemId\": \"SkySlope\",\n    \"OfferSourceSystemId\": \"SkySlope\",\n    \"ModificationTimestamp\": \"2023-05-02T13:18:21.439Z\",\n    \"OfferSubmissionDate\": \"2023-05-01T13:18:21.439Z\",\n    \"OfferProperty\": {\n      \"OfferAgentId\": \"Agent123\",\n      \"ListingId\": \"Listing456\",\n      \"ListingKey\": \"Key789\",\n      \"Market\": \"Residential\",\n      \"PropertyType\": \"Single Family\",\n      \"ListingStatus\": \"Active\",\n      \"StreetNumber\": \"1266\",\n      \"StreetName\": \"Ocala\",\n      \"UnitNumber\": \"Apt 4\",\n      \"City\": \"TALLAHASSEE\",\n      \"StateOrProvince\": \"FL\",\n      \"PostalCode\": \"32304\",\n      \"CountyOrParish\": \"Leon\",\n      \"ParcelNumber\": \"Parcel123\"\n    },\n    \"OfferTerms\": {\n      \"OfferPrice\": 250000,\n      \"OfferStatus\": \"Submitted\",\n      \"CreditAtClosing\": \"To be determined\",\n      \"EarnestMoney\": 1000,\n      \"OfferClosingDate\": \"2023-06-01T04:00:00.000Z\",\n      \"OfferClosingDays\": 30,\n      \"Deposit\": 3000,\n      \"OfferExpirationDate\": \"2023-05-15T04:00:00.000Z\",\n      \"AdditionalTerms\": \"Small pets allowed\",\n      \"Contingencies\": [],\n      \"EscalationClause\": \"None\",\n      \"HomeWarranty\": \"Seller\",\n      \"IncreasedDeposit\": 500,\n      \"BuyerFinancing\": \"Conventional\",\n      \"OfferVersionNumber\": 1\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88c3aba0-d391-46e5-b3d7-e4aea49ea2c1",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<Number>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<Number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c27caaa7-b20d-4ed2-bae3-a55605033ee0",
+              "name": "Bad Request - Missing or invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<Number>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<Number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de638b60-c31d-4491-8d2a-28c9db35ef70",
+              "name": "Unauthorized - Missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<Number>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<Number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14883c17-d38c-450a-b328-5515babce0e4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<Date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<Number>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<Number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n\"ACCESS_TOKEN\" is the token returned from /ext/token\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://forms.skyslope.com/partner/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a92b0390-d4e1-487e-a8df-bad5026e8992",
+    "name": "SkySlope Partnership API Reference Agents, Listings Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens\n\nContact Support:\n Name: Support\n Email: support@skyslope.com",
+      "type": "text/plain"
+    }
+  }
+}

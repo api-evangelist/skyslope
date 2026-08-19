@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Report API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve count of listings & offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/ext/report",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "<code>2023-01-01</code>\n\n The start of the date range in UTC format\n"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "<code>2023-05-01</code>\n\nThe end of the date range in UTC format\n"
+              }
+            ]
+          },
+          "docs": "Retrieves a count of listings & offers for the provided date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

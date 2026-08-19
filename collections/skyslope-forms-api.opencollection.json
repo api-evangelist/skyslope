@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Forms API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/forms",
+            "params": [
+              {
+                "name": "libraryIds",
+                "value": "",
+                "type": "query",
+                "description": "Supply an array of library ids to filter the forms by. <b>NOTE: If a libraryId is provided that the current user does not have access to, it will be ignored.</b>"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of forms returned per page."
+              }
+            ]
+          },
+          "docs": "Get all of the Forms that the currently authenticated user has access to.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.forms.read</div></div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

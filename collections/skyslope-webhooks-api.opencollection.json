@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Webhooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe To Signed Documents Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/documents/sign/subscribe/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to subscribe to the signed documents webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe a file to the signed documents webhook.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.webhooks</div></div>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3066 @@
+{
+  "item": [
+    {
+      "id": "0f3ba946-bbbf-438a-abbd-458efa0d369f",
+      "name": "Files",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8921966f-d491-4a9e-a560-81ccc9140209",
+          "name": "Create Listing or Transaction File",
+          "request": {
+            "name": "Create Listing or Transaction File",
+            "description": {
+              "content": "Creates a listing or a transaction file and returns the file id.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"representationType\": \"<string>\",\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc6f174d-1157-43af-ac9d-d3ab8b3324b0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"representationType\": \"<string>\",\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileId\": 477309\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c6e513e-7cc0-40b4-b7a2-7c1fefbfccaa",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"representationType\": \"<string>\",\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "631e9df4-43fa-4e8c-9d82-ce4ad4184c39",
+          "name": "Get Files",
+          "request": {
+            "name": "Get Files",
+            "description": {
+              "content": "Retrieve the files that the user has access to.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "The number of files returned per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "A comma separated sieve filter to that will be applied to the results. Ex: filters=representationtype==Buyer,(createddate)>=2024-01-01,(createddate)<=2024-01-31"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorts",
+                  "value": "<string>",
+                  "description": "A sieve list of sort fields to sort the results by."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6555e6e8-dc7e-4c2d-b9f6-3e2d4127b8de",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRecords\": 1,\n  \"files\": [\n    {\n      \"id\": 1,\n      \"name\": \"File Name\",\n      \"address\": \"111 One Drive Sacramento, CA 95826\",\n      \"contactInfo\": \"Contact info\",\n      \"type\": \"File\",\n      \"representationType\": \"Buyer\",\n      \"templateCategory\": \"Landlord\",\n      \"documentCount\": 1,\n      \"envelopeCount\": 0,\n      \"isArchived\": false,\n      \"createdDate\": \"2023-12-31T12:12:12.123Z\",\n      \"createdBy\": \"iajv98j498j98vasj4h\",\n      \"lastUpdated\": \"2023-12-31T12:12:12.123Z\",\n      \"updatedBy\": \"iajv98j498j98vasj4h\",\n      \"ownedBy\": \"iajv98j498j98vasj4h\",\n      \"meta\": {\n        \"status\": \"pre-contract\"\n      },\n      \"mlsNumber\": \"1589519\",\n      \"mlsMarketName\": \"treb\",\n      \"photoUrl\": \"http://image-source.com/image.png\",\n      \"transactionMeta\": {\n        \"status\": \"pre-contract\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6edcfa86-1622-4fb9-bddb-fb6fdd6b0369",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1f73e7e-c6c8-435c-af02-f4500109b859",
+          "name": "Update File Details",
+          "request": {
+            "name": "Update File Details",
+            "description": {
+              "content": "Update the file details of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"fileData\": {\n    \"mlsNumber\": \"<string>\",\n    \"purchasePrice\": \"<number>\",\n    \"closingDate\": \"<string>\",\n    \"acceptanceDate\": \"<string>\",\n    \"premisesAddress\": {\n      \"streetNumber\": \"<string>\",\n      \"streetName\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"unitNumber\": \"<string>\",\n      \"county\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4611b27d-3578-4aab-a762-616777748415",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fileData\": {\n    \"mlsNumber\": \"<string>\",\n    \"purchasePrice\": \"<number>\",\n    \"closingDate\": \"<string>\",\n    \"acceptanceDate\": \"<string>\",\n    \"premisesAddress\": {\n      \"streetNumber\": \"<string>\",\n      \"streetName\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"unitNumber\": \"<string>\",\n      \"county\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileId\": 477309,\n  \"didAddendumsChange\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30635a28-c31a-46fe-b671-be98f6df7949",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"fileData\": {\n    \"mlsNumber\": \"<string>\",\n    \"purchasePrice\": \"<number>\",\n    \"closingDate\": \"<string>\",\n    \"acceptanceDate\": \"<string>\",\n    \"premisesAddress\": {\n      \"streetNumber\": \"<string>\",\n      \"streetName\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"unitNumber\": \"<string>\",\n      \"county\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc244fb5-f0c0-4a05-8de9-8b239a05ab8a",
+          "name": "Update File",
+          "request": {
+            "name": "Update File",
+            "description": {
+              "content": "Update the file of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"commissions\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 8075,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 6200\n      }\n    }\n  ],\n  \"mlsNumber\": \"<string>\",\n  \"purchasePrice\": \"<number>\",\n  \"closingDateTime\": \"<string>\",\n  \"acceptanceDateTime\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf061cfa-1b49-4912-bdfc-1ba67febd389",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"commissions\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 2394,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 8870\n      }\n    }\n  ],\n  \"mlsNumber\": \"<string>\",\n  \"purchasePrice\": \"<number>\",\n  \"closingDateTime\": \"<string>\",\n  \"acceptanceDateTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileId\": 2254.982790695987,\n  \"commissions\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"Sale\",\n      \"calculationType\": \"Flat\",\n      \"amount\": 9653.529062550742,\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"createdOn\": \"string\",\n      \"updatedOn\": \"string\",\n      \"ownedBy\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"Sale\",\n      \"calculationType\": \"Flat\",\n      \"amount\": 4575.34992339606,\n      \"createdBy\": \"string\",\n      \"updatedBy\": \"string\",\n      \"createdOn\": \"string\",\n      \"updatedOn\": \"string\",\n      \"ownedBy\": \"string\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"LoanOfficer\",\n      \"actionAttribute\": \"NoAction\",\n      \"firstName\": \"string\",\n      \"middleName\": \"string\",\n      \"lastName\": \"string\",\n      \"suffix\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhoneNumber\": \"string\",\n      \"brokeragePhoneNumber\": \"string\",\n      \"faxPhoneNumber\": \"string\",\n      \"companyName\": \"string\",\n      \"isEntity\": true,\n      \"isUser\": false,\n      \"isFileOwner\": true,\n      \"lenderLicenseNumber\": \"string\",\n      \"agentLicenseNumber\": \"string\",\n      \"agentMLSCode\": \"string\",\n      \"brokerLicenseNumber\": \"string\",\n      \"brokerMLSCode\": \"string\",\n      \"brokerageLicenseNumber\": \"string\",\n      \"brokerageMLSCode\": \"string\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"string\",\n        \"streetName\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"st\",\n        \"postalCode\": \"string\",\n        \"unitNumber\": \"string\",\n        \"county\": \"string\"\n      },\n      \"contactInformation\": {\n        \"key_0\": false,\n        \"key_1\": 7616,\n        \"key_2\": 6926.57779891901\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"Seller\",\n      \"actionAttribute\": \"CanView\",\n      \"firstName\": \"string\",\n      \"middleName\": \"string\",\n      \"lastName\": \"string\",\n      \"suffix\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhoneNumber\": \"string\",\n      \"brokeragePhoneNumber\": \"string\",\n      \"faxPhoneNumber\": \"string\",\n      \"companyName\": \"string\",\n      \"isEntity\": true,\n      \"isUser\": true,\n      \"isFileOwner\": false,\n      \"lenderLicenseNumber\": \"string\",\n      \"agentLicenseNumber\": \"string\",\n      \"agentMLSCode\": \"string\",\n      \"brokerLicenseNumber\": \"string\",\n      \"brokerMLSCode\": \"string\",\n      \"brokerageLicenseNumber\": \"string\",\n      \"brokerageMLSCode\": \"string\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"string\",\n        \"streetName\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"st\",\n        \"postalCode\": \"string\",\n        \"unitNumber\": \"string\",\n        \"county\": \"string\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 2747.5337047011703,\n        \"key_1\": 2263.2682902046877\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3c2720b-e2de-4e68-a099-7c5b271feb99",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"property\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"commissions\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"calculationType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\",\n      \"createdOn\": \"<string>\",\n      \"updatedOn\": \"<string>\",\n      \"ownedBy\": \"<string>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 2394,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"isFileOwner\": \"<boolean>\",\n      \"lenderLicenseNumber\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"contactInformation\": {\n        \"key_0\": 8870\n      }\n    }\n  ],\n  \"mlsNumber\": \"<string>\",\n  \"purchasePrice\": \"<number>\",\n  \"closingDateTime\": \"<string>\",\n  \"acceptanceDateTime\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90461b94-3f3f-440f-a663-557c27e25035",
+          "name": "Get File",
+          "request": {
+            "name": "Get File",
+            "description": {
+              "content": "Retrieve the details of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d33bf87f-7c3a-4cc9-a57d-af689a03fe90",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"File Name\",\n  \"type\": \"File\",\n  \"representationType\": \"Buyer\",\n  \"templateCategory\": \"Landlord\",\n  \"closingDateTime\": \"2023-12-31T12:12:12.123Z\",\n  \"acceptanceDateTime\": \"2023-12-31T12:12:12.123Z\",\n  \"meta\": {\n    \"status\": \"pre-contract\"\n  },\n  \"mlsNumber\": \"1589519\",\n  \"purchasePrice\": 1598000,\n  \"fileData\": {\n    \"mlsNumber\": \"1589519\"\n  },\n  \"transactionMeta\": {\n    \"status\": \"pre-contract\"\n  },\n  \"property\": {\n    \"streetNumber\": \"9999\",\n    \"streetName\": \"Main Street\",\n    \"unitNumber\": \"12\",\n    \"state\": \"CA\",\n    \"county\": null,\n    \"postalCode\": \"95825\",\n    \"isCompleteAddress\": true\n  },\n  \"contacts\": [\n    {\n      \"id\": 1,\n      \"type\": \"Buyer\",\n      \"actionAttribute\": \"NeedsToSign\",\n      \"lastName\": \"Jonsey\",\n      \"middleName\": \"\",\n      \"firstName\": \"Jimmy\",\n      \"suffix\": \"\",\n      \"email\": \"someone@email.com\",\n      \"primaryPhoneNumber\": \"5558887777\",\n      \"brokeragePhoneNumber\": \"\",\n      \"faxPhoneNumber\": \"\",\n      \"companyName\": \"Your Realty\",\n      \"isEntity\": false,\n      \"isUser\": false,\n      \"isFileOwner\": false,\n      \"lenderLicenseNumber\": null,\n      \"agentLicenseNumber\": null,\n      \"agentMLSCode\": null,\n      \"brokerageLicenseNumber\": null,\n      \"brokerageMLSCode\": null,\n      \"brokerLicenseNumber\": null,\n      \"brokerMLSCode\": null,\n      \"primaryAddress\": {\n        \"id\": 1,\n        \"streetNumber\": \"7380\",\n        \"streetName\": \"N. La What Blvd\",\n        \"unitNumber\": \"\",\n        \"city\": \"Tucson\",\n        \"state\": \"AZ\",\n        \"postalCode\": \"85555\",\n        \"county\": \"\"\n      },\n      \"contactInformation\": {\n        \"lenderLicenseNumber\": \"2929849\",\n        \"agentLicenseNumber\": null,\n        \"agentMlsCode\": null,\n        \"brokerageLicenseNumber\": null,\n        \"brokerageMlsCode\": null,\n        \"brokerLicenseNumber\": null,\n        \"brokerMlsCode\": null\n      },\n      \"createdBy\": \"iajv98j498j98vasj4h\",\n      \"updatedBy\": \"iajv98j498j98vasj4h\",\n      \"createdOn\": \"2023-12-26T20:51:09Z\",\n      \"updatedOn\": \"2023-12-26T20:51:09Z\",\n      \"ownedBy\": \"iajv98j498j98vasj4h\"\n    }\n  ],\n  \"commissions\": [\n    {\n      \"id\": 1,\n      \"type\": \"Listing\",\n      \"calculationType\": \"Flat\",\n      \"amount\": 0,\n      \"createdBy\": \"iajv98j498j98vasj4h\",\n      \"updatedBy\": \"iajv98j498j98vasj4h\",\n      \"createdOn\": \"2020-01-22T23:39:10Z\",\n      \"updatedOn\": \"2021-09-07T16:34:21Z\",\n      \"ownedBy\": \"iajv98j498j98vasj4h\"\n    }\n  ],\n  \"documentData\": [\n    \"184629\",\n    \"185099\",\n    \"185100\"\n  ],\n  \"isDeleted\": false,\n  \"isArchived\": false,\n  \"createdDate\": \"2023-12-31T12:12:12.123Z\",\n  \"createdBy\": \"iajv98j498j98vasj4h\",\n  \"lastUpdated\": \"2023-12-31T12:12:12.123Z\",\n  \"updatedBy\": \"iajv98j498j98vasj4h\",\n  \"ownedBy\": \"iajv98j498j98vasj4h\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e7cb682-2a9e-475f-8539-ba4d57304a8c",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef1847f9-2364-4a05-885a-95b862d879c7",
+          "name": "Add Contact to File",
+          "request": {
+            "name": "Add Contact to File",
+            "description": {
+              "content": "Add a contact to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to add the contact to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17041bb5-4bdd-4120-a029-4397cb8bc2fe",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the contact to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contactId\": 123456\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca045d0b-5a06-47ca-9b51-fb48d7751af9",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the contact to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1ec9d59-aff2-4e02-9b56-9e84fdd43d2e",
+          "name": "Update Contact in File.",
+          "request": {
+            "name": "Update Contact in File.",
+            "description": {
+              "content": "Update a contact in a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                "contacts",
+                ":contactId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contactId",
+                  "description": "(Required) The id of the contact to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd8f8882-cb49-4569-afef-5245e0805e92",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    "contacts",
+                    ":contactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contactId",
+                      "description": "(Required) The id of the contact to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contactId\": 123456\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59c7d8fb-8d54-40a0-8c94-a101d5bc61c3",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    "contacts",
+                    ":contactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contactId",
+                      "description": "(Required) The id of the contact to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"actionAttribute\": \"<string>\",\n  \"isEntity\": \"<boolean>\",\n  \"isUser\": \"<boolean>\",\n  \"middleName\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhoneNumber\": \"<string>\",\n  \"brokeragePhoneNumber\": \"<string>\",\n  \"faxPhoneNumber\": \"<string>\",\n  \"primaryAddress\": {\n    \"streetNumber\": \"<string>\",\n    \"streetName\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"unitNumber\": \"<string>\",\n    \"county\": \"<string>\"\n  },\n  \"companyName\": \"<string>\",\n  \"agentLicenseNumber\": \"<string>\",\n  \"agentMLSCode\": \"<string>\",\n  \"brokerLicenseNumber\": \"<string>\",\n  \"brokerMLSCode\": \"<string>\",\n  \"brokerageLicenseNumber\": \"<string>\",\n  \"brokerageMLSCode\": \"<string>\",\n  \"lenderLicenseNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cce03166-aef7-4442-9688-22c946d96dfc",
+          "name": "Add Contacts to File",
+          "request": {
+            "name": "Add Contacts to File",
+            "description": {
+              "content": "Add one or more contacts to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "contacts",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to add the contacts to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contacts\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    },\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e88b133b-0057-479c-9ee5-97009abba8b3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the contacts to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    },\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRecordsAdded\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acac7bca-2b37-4471-8b9b-aecc1e48146c",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the contacts to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contacts\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    },\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"type\": \"<string>\",\n      \"actionAttribute\": \"<string>\",\n      \"isEntity\": \"<boolean>\",\n      \"isUser\": \"<boolean>\",\n      \"middleName\": \"<string>\",\n      \"suffix\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhoneNumber\": \"<string>\",\n      \"brokeragePhoneNumber\": \"<string>\",\n      \"faxPhoneNumber\": \"<string>\",\n      \"primaryAddress\": {\n        \"streetNumber\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"unitNumber\": \"<string>\",\n        \"county\": \"<string>\"\n      },\n      \"companyName\": \"<string>\",\n      \"agentLicenseNumber\": \"<string>\",\n      \"agentMLSCode\": \"<string>\",\n      \"brokerLicenseNumber\": \"<string>\",\n      \"brokerMLSCode\": \"<string>\",\n      \"brokerageLicenseNumber\": \"<string>\",\n      \"brokerageMLSCode\": \"<string>\",\n      \"lenderLicenseNumber\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3b3a50d-dd83-41c7-aaf4-1d8e09509cc5",
+          "name": "Delete Contact from File.",
+          "request": {
+            "name": "Delete Contact from File.",
+            "description": {
+              "content": "Delete a contact from a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "contacts",
+                ":contactId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contactId",
+                  "description": "(Required) The id of the contact to delete."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to delete the contact from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5472b295-2a2f-4141-aec7-be36a3e4840c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts",
+                    ":contactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contactId",
+                      "description": "(Required) The id of the contact to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to delete the contact from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contactId\": 123456\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c05cb3b6-2ad9-4714-a34e-7fb9e3583966",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "contacts",
+                    ":contactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contactId",
+                      "description": "(Required) The id of the contact to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to delete the contact from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1046d4b5-0ae4-4b72-9a4f-5e1998aa82a6",
+          "name": "Get File Documents",
+          "request": {
+            "name": "Get File Documents",
+            "description": {
+              "content": "Retrieve the documents metadata for a file. To download documents with proper branding and data stamping, use the /files/:fileId/documents/download or /files/:fileId/documents/download/pdf endpoints.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to retrieve documents for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f198e065-8b9b-4d41-8b91-09c5f7af065e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve documents for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRecords\": 1,\n  \"documents\": [\n    {\n      \"id\": 123456,\n      \"formName\": \"Purchase Agreement Form\",\n      \"formId\": 789,\n      \"formVersionId\": 1011,\n      \"fileId\": 456789,\n      \"thumbnailURL\": \"https://example.com/thumbnails/form-12345.png\",\n      \"pageCount\": 5,\n      \"documentType\": \"Forms\",\n      \"createdBy\": \"00u123456789abcdef\",\n      \"updatedBy\": \"00u123456789abcdef\",\n      \"createdOn\": \"2024-01-15T10:30:00Z\",\n      \"updatedOn\": \"2024-01-15T10:30:00Z\",\n      \"ownedBy\": \"00u123456789abcdef\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54524027-943b-4b3b-a76a-44b91c72d37f",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve documents for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af9b4013-f988-451d-a102-039be58e4c21",
+          "name": "Add Documents to File",
+          "request": {
+            "name": "Add Documents to File",
+            "description": {
+              "content": "Add one or more documents to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to add the documents to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"formIds\": [\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06c96fdf-00e1-4d65-ad2d-1ba350c84234",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the documents to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"formIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentIds\": [\n    1,\n    2,\n    3\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f07f841a-214e-4511-bb0c-3fc3f364b0e1",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the documents to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"formIds\": [\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f561cb88-2e10-4a84-867f-5cf8c034d416",
+          "name": "Get Signed Documents",
+          "request": {
+            "name": "Get Signed Documents",
+            "description": {
+              "content": "Retrieve the signed documents for a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "signed",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to retrieve signed documents for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28169701-d535-42e4-8b1d-00f7278b9cb8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "signed",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve signed documents for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"envelopeDocumentId\": 1,\n    \"envelopeId\": 1,\n    \"digisignDocumentGuid\": \"asdimfao9im38-a98sdng-9\",\n    \"envelopeName\": \"Envelope Name\",\n    \"dateSigned\": \"2023-12-31T12:12:12.123Z\",\n    \"fileId\": 1,\n    \"documentId\": 1,\n    \"externalDocumentId\": \"asdimfao9im38-a98sdng-9\",\n    \"documentAddedDate\": \"2024-01-02T17:51:38Z\",\n    \"documentName\": \"Addendum\",\n    \"documentUrl\": \"https://document-url/document1.pdf\",\n    \"pageCount\": 6,\n    \"filename\": \"document1.pdf\",\n    \"thumbnailUrl\": \"https://thumbnail-url/document1.pdf\",\n    \"ownedBy\": \"00u24fri71ChN970u357\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b2a412d-2202-4b56-83c0-ab754da82ad8",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "signed",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve signed documents for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a964580-8de9-4740-93f7-ea70bc5413f4",
+          "name": "Subscribe To Signed Documents Webhook",
+          "request": {
+            "name": "Subscribe To Signed Documents Webhook",
+            "description": {
+              "content": "Subscribe a file to the signed documents webhook.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.webhooks</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "sign",
+                "subscribe",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to subscribe to the signed documents webhook."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhookUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "600e9e20-6704-4e39-9c62-1f359933cdcc",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "sign",
+                    "subscribe",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to subscribe to the signed documents webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookUrl\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscribed\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce870a93-5922-44b2-a645-2d9965302fb1",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "sign",
+                    "subscribe",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to subscribe to the signed documents webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookUrl\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Already Reported (WebDAV) (RFC 5842)",
+              "code": 208,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ffc296-ddcf-4b8e-88c6-2e93d27f588e",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "sign",
+                    "subscribe",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to subscribe to the signed documents webhook."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookUrl\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c2b5ee0-5912-4a3a-a60e-c1491ebae25d",
+          "name": "Get Envelopes in File",
+          "request": {
+            "name": "Get Envelopes in File",
+            "description": {
+              "content": "Get the envelopes associated with a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "envelopes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "The number of files returned per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "A sieve filter to that will be applied to the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sorts",
+                  "value": "<string>",
+                  "description": "A sieve list of sort fields to sort the results by."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to retrieve envelopes for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60d64ebb-78b4-4b15-88a1-44570096dc2a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "envelopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve envelopes for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRecords\": 9475.535941452605,\n  \"envelopes\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"isDeleted\": false,\n      \"fileId\": 2787.295550099553,\n      \"externalId\": \"string\",\n      \"dateSent\": \"string\",\n      \"updatedOn\": \"string\",\n      \"ownedBy\": \"string\",\n      \"documentIds\": [\n        8160.933051655979,\n        8342.881225201836\n      ],\n      \"signers\": [\n        {\n          \"id\": \"string\",\n          \"dateSigned\": \"string\",\n          \"contactId\": \"string\",\n          \"envelopeId\": \"string\",\n          \"externalId\": \"string\",\n          \"createdBy\": \"string\",\n          \"updatedBy\": \"string\",\n          \"createdOn\": \"string\",\n          \"updatedOn\": \"string\",\n          \"ownedBy\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"dateSigned\": \"string\",\n          \"contactId\": \"string\",\n          \"envelopeId\": \"string\",\n          \"externalId\": \"string\",\n          \"createdBy\": \"string\",\n          \"updatedBy\": \"string\",\n          \"createdOn\": \"string\",\n          \"updatedOn\": \"string\",\n          \"ownedBy\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"isDeleted\": true,\n      \"fileId\": 8628.630558814673,\n      \"externalId\": \"string\",\n      \"dateSent\": \"string\",\n      \"updatedOn\": \"string\",\n      \"ownedBy\": \"string\",\n      \"documentIds\": [\n        7981.3518035733,\n        7250.8660284126845\n      ],\n      \"signers\": [\n        {\n          \"id\": \"string\",\n          \"dateSigned\": \"string\",\n          \"contactId\": \"string\",\n          \"envelopeId\": \"string\",\n          \"externalId\": \"string\",\n          \"createdBy\": \"string\",\n          \"updatedBy\": \"string\",\n          \"createdOn\": \"string\",\n          \"updatedOn\": \"string\",\n          \"ownedBy\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"dateSigned\": \"string\",\n          \"contactId\": \"string\",\n          \"envelopeId\": \"string\",\n          \"externalId\": \"string\",\n          \"createdBy\": \"string\",\n          \"updatedBy\": \"string\",\n          \"createdOn\": \"string\",\n          \"updatedOn\": \"string\",\n          \"ownedBy\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a62393d-23d3-459a-9cb0-26b9f94a8890",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "envelopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to retrieve envelopes for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18112888-9235-4194-905c-2ea93f3914a8",
+          "name": "Create Envelope in File",
+          "request": {
+            "name": "Create Envelope in File",
+            "description": {
+              "content": "Create an envelope for a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "envelopes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to add the envelope to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"envelopeName\": \"<string>\",\n  \"documentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99c0e626-47fb-448e-9423-f6ec26d13d7d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "envelopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the envelope to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"envelopeName\": \"<string>\",\n  \"documentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileId\": 539181,\n  \"envelope\": {\n    \"id\": 115682,\n    \"name\": \"My Envelope Name\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c3470c3-bd93-4712-93cb-c7f3bf2c5a78",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "envelopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to add the envelope to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"envelopeName\": \"<string>\",\n  \"documentIds\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f091b4a-541e-4758-bba0-c4e3aeb4d2de",
+          "name": "Apply Template to File",
+          "request": {
+            "name": "Apply Template to File",
+            "description": {
+              "content": "Apply a template to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to apply the template to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"templateId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cc4621d-30d6-4294-995a-00011bd48a0b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to apply the template to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"templateId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileId\": 667309\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d43eb12-5641-483d-a3e9-018de106ccfa",
+              "name": "An object containing the error that occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to apply the template to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"templateId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bbaa6a0-2ddf-4c7c-8c39-e563dba072ac",
+          "name": "Download File Documents as PDF",
+          "request": {
+            "name": "Download File Documents as PDF",
+            "description": {
+              "content": "Download one or more documents from a file as a combined PDF with file details stamped on the documents. If the call is successful, the response will be a PDF file containing the requested documents. If it is not successful, the response will be json containing the error.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "documents",
+                "download",
+                "pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of document IDs to include in the PDF. Example: \"123,456,789\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to download documents from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e6a3c57-c8d3-44cc-8a26-b96f67c4908c",
+              "name": "PDF file containing the requested documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "download",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to download documents from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7a80c25-98b3-4373-bf64-940057f8ac78",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "download",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to download documents from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfeed334-9784-4257-acb1-3077355031cf",
+          "name": "Download File Documents",
+          "request": {
+            "name": "Download File Documents",
+            "description": {
+              "content": "Download one or more documents from a file with file details stamped on the documents. Returns a single PDF if one document ID is provided, or a ZIP file containing multiple documents if more than one document ID is provided. The Content-Type header will reflect the appropriate file type.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents.read</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "documents",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of document IDs to download. Single ID returns PDF, multiple IDs return ZIP. Example: \"123,456,789\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to download documents from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b52254e8-e573-40e2-a448-1dec4cefbf69",
+              "name": "Document file - PDF for single document, ZIP for multiple documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to download documents from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81c76888-49d3-46fc-8c51-5120c07d16a2",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to download documents from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce1693fb-b621-4135-ac32-2e387249e562",
+          "name": "Upload Document to File",
+          "request": {
+            "name": "Upload Document to File",
+            "description": {
+              "content": "Upload a PDF document to a file. Max size 25MB. Accepts multipart/form-data with fields: DocumentName (string), DocumentBody (binary PDF file), IsSignedDocument (true/false, optional).<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div></div>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "documents",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The id of the file to upload the document to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2152a096-28a6-4fb8-bd1b-345cc196e703",
+              "name": "Document uploaded successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to upload the document to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentId\": 5837\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04ecdb48-4945-45ee-941b-de37fd404c4d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "documents",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The id of the file to upload the document to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"traceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://forms.skyslope.com/partner/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0fec2c85-4df1-4764-9f45-eeae6a2550cd",
+    "name": "SkySlope Partnership API Reference Agents, Listings Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens\n\nContact Support:\n Name: Support\n Email: support@skyslope.com",
+      "type": "text/plain"
+    }
+  }
+}

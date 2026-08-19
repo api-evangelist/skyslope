@@ -1,0 +1,358 @@
+{
+  "item": [
+    {
+      "id": "6be681d9-9625-4d8b-ae73-b047cb9a833b",
+      "name": "Agents, Listings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9964b60e-8996-43ac-975f-af10c44237e0",
+          "name": "Retrieve an up-to-date agent listings & offers count",
+          "request": {
+            "name": "Retrieve an up-to-date agent listings & offers count",
+            "description": {
+              "content": "Retrieve the ten listings owned by this agent, that have most recently received offers. Sorted descending by offer submission date (most recent first).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ext",
+                "agent",
+                ":agentId",
+                "listings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-01-01"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<Date>",
+                  "description": "<code>yyyy-mm-dd</code>\n<p>Optional parameter in ISO format <code>yyyy-mm-ddT00:00:00.000Z</code> to help separating listings with new offers from the rest.</p>\n<p>If <code>startDate</code> is not provided, it's assumed to be 7 days prior to today.</p>\n<p>If there exists listings with offers newer than <code>startDate</code>, the <code>hasNewOffers</code> indicator will be true otherwise false.</p>\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agentId",
+                  "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90a254ce-fc80-4ae0-bc78-fab97e66f4ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "agent",
+                    ":agentId",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n<p>\"ACCESS_TOKEN\" is the token returned from /ext/token</p>\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hasNewOffers\": true,\n  \"listings\": [\n    {\n      \"fileId\": 12345,\n      \"listingName\": \"property X\",\n      \"offersCount\": 3,\n      \"hasNewOffers\": true,\n      \"latestOfferDate\": \"2023-06-27T14:58:25.439Z\",\n      \"viewOffersLink\": \"https://offers.skyslope.com/file/12345\"\n    },\n    {\n      \"fileId\": 67890,\n      \"listingName\": \"property Y\",\n      \"offersCount\": 4,\n      \"hasNewOffers\": false,\n      \"latestOfferDate\": \"2022-06-27T14:58:25.439Z\",\n      \"viewOffersLink\": \"https://offers.skyslope.com/file/67890\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c663c83-b3ac-4dfc-ab20-4b5ff267dac6",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "agent",
+                    ":agentId",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n<p>\"ACCESS_TOKEN\" is the token returned from /ext/token</p>\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb03045f-4a54-4447-8f30-cb02b86c660c",
+              "name": "Bad Request - Missing or invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "agent",
+                    ":agentId",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n<p>\"ACCESS_TOKEN\" is the token returned from /ext/token</p>\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "689eb546-2988-4f4b-8de9-178dd6c90312",
+              "name": "Unauthorized - Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "agent",
+                    ":agentId",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n<p>\"ACCESS_TOKEN\" is the token returned from /ext/token</p>\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3300068-f863-498a-8c3d-a0aad246a0eb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ext",
+                    "agent",
+                    ":agentId",
+                    "listings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<Date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agentId",
+                      "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) <code>Bearer ACCESS_TOKEN</code>\n\n<p>\"ACCESS_TOKEN\" is the token returned from /ext/token</p>\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://forms.skyslope.com/partner/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f380237c-ae63-49b7-a281-fbd813a19f90",
+    "name": "SkySlope Partnership API Reference Agents, Listings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens\n\nContact Support:\n Name: Support\n Email: support@skyslope.com",
+      "type": "text/plain"
+    }
+  }
+}

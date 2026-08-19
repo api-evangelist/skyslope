@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents, Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an up-to-date agent listings & offers count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/ext/agent/:agentId/listings?startDate=2023-01-01",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "path",
+                "description": "The agent id used to filter the listings.  Contact SkySlope for your MLS field mapping.\n"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "<code>yyyy-mm-dd</code>\n<p>Optional parameter in ISO format <code>yyyy-mm-ddT00:00:00.000Z</code> to help separating listings with new offers from the rest.</p>\n<p>If <code>startDate</code> is not provided, it's assumed to be 7 days prior to today.</p>\n<p>If there exists listings with offers newer than <code>startDate</code>, the <code>hasNewOffers</code> indicator will be true otherwise false.</p>\n"
+              }
+            ]
+          },
+          "docs": "Retrieve the ten listings owned by this agent, that have most recently received offers. Sorted descending by offer submission date (most recent first).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

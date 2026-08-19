@@ -1,0 +1,471 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SkySlope Partnership API Reference Agents, Listings Files API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of files returned per page."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated sieve filter to that will be applied to the results. Ex: filters=representationtype==Buyer,(createddate)>=2024-01-01,(createddate)<=2024-01-31"
+              },
+              {
+                "name": "sorts",
+                "value": "",
+                "type": "query",
+                "description": "A sieve list of sort fields to sort the results by."
+              }
+            ]
+          },
+          "docs": "Retrieve the files that the user has access to.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25)"
+        },
+        {
+          "info": {
+            "name": "Create Listing or Transaction File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a listing or a transaction file and returns the file id.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Get File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,25"
+        },
+        {
+          "info": {
+            "name": "Update File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the file of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Update File Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the file details of a listing or transaction file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Add Contact to File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/contacts",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to add the contact to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a contact to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Update Contact in File.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://forms.skyslope.com/partner/api/files/contacts/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the contact to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contact in a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Add Contacts to File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/contacts/bulk",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to add the contacts to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more contacts to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Delete Contact from File.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/contacts/:contactId",
+            "params": [
+              {
+                "name": "contactId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the contact to delete."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to delete the contact from."
+              }
+            ]
+          },
+          "docs": "Delete a contact from a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Get File Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/documents",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to retrieve documents for."
+              }
+            ]
+          },
+          "docs": "Retrieve the documents metadata for a file. To download documents with proper branding and data stamping, use the /files/:fileId/documents/download or /files/:fileId/documents/download/pdf endpoints.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0."
+        },
+        {
+          "info": {
+            "name": "Add Documents to File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/documents",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to add the documents to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more documents to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: "
+        },
+        {
+          "info": {
+            "name": "Get Signed Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/documents/signed/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to retrieve signed documents for."
+              }
+            ]
+          },
+          "docs": "Retrieve the signed documents for a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.documents</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); "
+        },
+        {
+          "info": {
+            "name": "Subscribe To Signed Documents Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/documents/sign/subscribe/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to subscribe to the signed documents webhook."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe a file to the signed documents webhook.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.webhooks</div></div>"
+        },
+        {
+          "info": {
+            "name": "Get Envelopes in File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/envelopes",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of files returned per page."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "A sieve filter to that will be applied to the results."
+              },
+              {
+                "name": "sorts",
+                "value": "",
+                "type": "query",
+                "description": "A sieve list of sort fields to sort the results by."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to retrieve envelopes for."
+              }
+            ]
+          },
+          "docs": "Get the envelopes associated with a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padd"
+        },
+        {
+          "info": {
+            "name": "Create Envelope in File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/envelopes",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to add the envelope to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an envelope for a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Apply Template to File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/templates",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to apply the template to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a template to a file.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;\">forms.files</div></div>"
+        },
+        {
+          "info": {
+            "name": "Download File Documents as PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/documents/download/pdf",
+            "params": [
+              {
+                "name": "documentIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of document IDs to include in the PDF. Example: \"123,456,789\""
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to download documents from."
+              }
+            ]
+          },
+          "docs": "Download one or more documents from a file as a combined PDF with file details stamped on the documents. If the call is successful, the response will be a PDF file containing the requested documents. If it is not successful, the response will be json containing the error.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; bor"
+        },
+        {
+          "info": {
+            "name": "Download File Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/documents/download",
+            "params": [
+              {
+                "name": "documentIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of document IDs to download. Single ID returns PDF, multiple IDs return ZIP. Example: \"123,456,789\""
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to download documents from."
+              }
+            ]
+          },
+          "docs": "Download one or more documents from a file with file details stamped on the documents. Returns a single PDF if one document ID is provided, or a ZIP file containing multiple documents if more than one document ID is provided. The Content-Type header will reflect the appropriate file type.<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border"
+        },
+        {
+          "info": {
+            "name": "Upload Document to File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forms.skyslope.com/partner/api/files/:fileId/documents/upload",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the file to upload the document to."
+              }
+            ]
+          },
+          "docs": "Upload a PDF document to a file. Max size 25MB. Accepts multipart/form-data with fields: DocumentName (string), DocumentBody (binary PDF file), IsSignedDocument (true/false, optional).<div style=\"color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;\">REQUIRED SCOPES:</div><div style=\"display: inline-flex; gap: 5px; padding: 5px;\"><div style=\"border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
