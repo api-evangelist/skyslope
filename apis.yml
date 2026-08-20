@@ -29,6 +29,14 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/skyslope.png
 tags:
+- Real-Estate
+- Transaction Management
+- Digital Forms
+- E-Signature
+- Compliance
+- PropTech
+- Documents
+tags_raw:
 - Real Estate
 - Transaction Management
 - Digital Forms
@@ -43,6 +51,11 @@ apis:
 - aid: skyslope:skyslope-transaction-management-api
   name: SkySlope Transaction Management API (BETA)
   tags:
+  - Transaction
+  - Reporting
+  - Enterprise
+  - Beta
+  tags_raw:
   - Transactions
   - Reporting
   - Enterprise
@@ -79,6 +92,8 @@ apis:
   humanURL: https://forms.skyslope.com/partner/api/docs
   baseURL: https://forms.skyslope.com/partner/api
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -149,6 +164,8 @@ apis:
   humanURL: https://forms.skyslope.com/partner/api/docs
   baseURL: https://forms.skyslope.com/partner/api
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -233,6 +250,8 @@ apis:
   humanURL: https://forms.skyslope.com/partner/api/docs
   baseURL: https://forms.skyslope.com/partner/api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -247,6 +266,8 @@ apis:
   humanURL: https://forms.skyslope.com/partner/api/docs
   baseURL: https://forms.skyslope.com/partner/api
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
