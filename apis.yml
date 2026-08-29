@@ -15,6 +15,18 @@ description: SkySlope is a real estate transaction management and digital forms
   reporting and enterprise integration. API access is partner/brokerage-gated -
   reference documentation is public but obtaining OAuth client credentials
   requires working with SkySlope.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: approval
