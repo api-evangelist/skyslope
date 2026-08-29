@@ -289,6 +289,9 @@ apis:
   - type: APIReference
     url: https://offers.skyslope.com/offers-api/reference
 common:
+- type: CapabilityMap
+  url: capabilities/skyslope-capability-edges.yml
+  name: SkySlope Business Capability Map
 - type: AgenticAccess
   url: agentic-access/skyslope-agentic-access.yml
 - type: DomainSecurity

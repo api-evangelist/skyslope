@@ -1,0 +1,26 @@
+slug: skyslope
+provider: SkySlope
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Real Estate
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Offers
+  spec_file: skyslope-offers-api-openapi.yml
+  capability_id: BC-4960.60
+  capability_id_l1: BC-4960
+  capability_name: Offer & Negotiation Management
+  confidence: 0.78
+  evidence: GET /ext/offer/:offerId — "Retrieve the offer details"; GET /ext/offers — "Retrieve all offers
+    for a given date range."; schema RESOOffer
+  reason: Operations expose real-estate purchase offers (RESO-standard Offer schema) on listings, which
+    is the offer handling side of brokerage intermediation. Read-only access limits certainty about negotiation
+    workflow, hence 0.78.
