@@ -1,24 +1,48 @@
-openapi: 3.1.3
+openapi: 3.2.0
 info:
+  title: SkySlope Offers API Reference Auth API
   x-logo:
-    url: https://s3.amazonaws.com/cdn.skyslope.com/forms/forms-logo-w-top-padding.png
-    href: https://skyslope.com/
-    altText: SkySlope
-  title: SkySlope Partnership API Reference Agents, Listings Auth API
-  version: 1.0.0
-  description: "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens"
+    url: https://s3.amazonaws.com/cdn.skyslope.com/offer-management/om-logo-w-padding.png
+    altText: Offers Logo
+    href: https://skyslope.com/offer-management-login/
+  description: '# Introduction
+
+    The SkySlope Offers API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
+
+    Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,
+
+    and uses standard HTTP response codes, authentication, and verbs.
+
+    # Authentication
+
+    The SkySlope Offers API uses [OAuth 2.0 client credentials flow](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/)
+
+    to obtain an access token that can be used to authenticate subsequent API requests.
+
+
+    To obtain an access token, see **[this endpoint](https://offers.skyslope.com/offers-api/reference#tag/Auth/paths/~1mls~1token/post)**.
+
+
+    Authentication to the API is performed by including your access token in the **Authorization** header of your
+
+    API requests with the Bearer authentication scheme.
+
+
+    All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.
+
+    API requests without authentication will also fail.
+
+    '
   termsOfService: https://skyslope.com/terms-conditions/
   contact:
     name: Support
     url: https://support.skyslope.com/hc/en-us
     email: support@skyslope.com
 servers:
-- url: https://forms.skyslope.com/partner/api
+- url: https://offers.skyslope.com/offers-api
   description: Production server
-- url: https://staging-forms.skyslope.com/partner/api
+- url: https://staging-offers.skyslope.com/offers-api
   description: Staging server
-- url: https://integ-forms.skyslope.com/partner/api
-  description: Integration server
 tags:
 - name: Auth
 paths:

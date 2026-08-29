@@ -1,24 +1,10 @@
 {
   "provider": "skyslope",
   "sources": [
-    "skyslope-agents-listings-api-openapi.yml",
-    "skyslope-auth-api-openapi.yml",
-    "skyslope-buyer-agreements-api-openapi.yml",
-    "skyslope-contacts-api-openapi.yml",
-    "skyslope-documents-api-openapi.yml",
-    "skyslope-envelopes-api-openapi.yml",
-    "skyslope-files-api-openapi.yml",
-    "skyslope-forms-api-openapi.yml",
-    "skyslope-libraries-api-openapi.yml",
-    "skyslope-offers-api-openapi.yml",
-    "skyslope-report-api-openapi.yml",
-    "skyslope-templates-api-openapi.yml",
-    "skyslope-users-api-openapi.yml",
-    "skyslope-webhooks-api-openapi.yml"
+    "_original/skyslope-forms-partnership-openapi.yml",
+    "_original/skyslope-offers-openapi.yml"
   ],
   "outputs": [
-    "skyslope-agents-listings-api-openapi.yml",
-    "skyslope-auth-api-openapi.yml",
     "skyslope-buyer-agreements-api-openapi.yml",
     "skyslope-contacts-api-openapi.yml",
     "skyslope-documents-api-openapi.yml",
@@ -26,15 +12,52 @@
     "skyslope-files-api-openapi.yml",
     "skyslope-forms-api-openapi.yml",
     "skyslope-libraries-api-openapi.yml",
-    "skyslope-offers-api-openapi.yml",
-    "skyslope-report-api-openapi.yml",
     "skyslope-templates-api-openapi.yml",
     "skyslope-users-api-openapi.yml",
-    "skyslope-webhooks-api-openapi.yml"
+    "skyslope-webhooks-api-openapi.yml",
+    "skyslope-agents-listings-api-openapi.yml",
+    "skyslope-auth-api-openapi.yml",
+    "skyslope-offers-api-openapi.yml",
+    "skyslope-report-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "skyslope-offers-openapi.yml: info.version missing"
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "skyslope-forms-partnership-openapi.yml: upgraded openapi 3.1.3 -> OpenAPI 3.2.0",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Buyer Agreements",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Contacts",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Documents",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Envelopes",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Files",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Forms",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Libraries",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Templates",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Users",
+    "skyslope-forms-partnership-openapi.yml: declared missing tag: Webhooks",
+    "skyslope-offers-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "skyslope-offers-openapi.yml: declared missing tag: Agents, Listings",
+    "skyslope-offers-openapi.yml: declared missing tag: Auth",
+    "skyslope-offers-openapi.yml: declared missing tag: Offers",
+    "skyslope-offers-openapi.yml: declared missing tag: Report"
+  ],
+  "skipped": [
+    "skyslope-agents-listings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-buyer-agreements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-envelopes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-libraries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-report-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "skyslope-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
