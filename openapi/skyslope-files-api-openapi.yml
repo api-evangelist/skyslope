@@ -6,7 +6,9 @@ info:
     altText: SkySlope
   title: SkySlope Partnership API Reference Files API
   version: 1.0.0
-  description: "# Introduction\n  The SkySlope Forms API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).\n  Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses,\n  and uses standard HTTP response codes, authentication, and verbs.<br/><br/>\n  NOTE: Endpoints marked with an asterisk (*) will be available to our partners in the near future.\n  # Authentication\n  This API uses [OAuth 2.0 authorization code flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)\n  to obtain an access token that can be used to authenticate subsequent API requests.\n  ## Access Tokens\n  ### Request\n  To obtain an access token, first redirect the user to the authorization endpoint:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &redirect_uri={YOUR_REDIRECT_URI}\n    &scope=forms.files\n    &state={RANDOM_STATE_VALUE}\n    &code_challenge={CODE_CHALLENGE}\n    &code_challenge_method=S256\n  ```\n  After the user authorizes your application, they'll be redirected back to your redirect URI with an authorization code.\n  Exchange this code for an access token by making a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=authorization_code\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &code={AUTHORIZATION_CODE}\n  &redirect_uri={YOUR_REDIRECT_URI}\n  &code_verifier={CODE_VERIFIER}\n  ```\n  ### Usage\n  Authentication to the API is performed by including your access token in the **Authorization** header of your\n  API requests with the Bearer authentication scheme:\n  ```\n  GET /partner/api/files HTTP/1.1\n  Host: forms.skyslope.com\n  Authorization: Bearer {YOUR_ACCESS_TOKEN}\n  ```\n  All API requests must be made over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Calls made over plain HTTP will fail.\n  API requests without authentication will also fail.\n  ## Refresh Tokens\n  Refresh tokens allow you to obtain new access tokens without requiring the user to re-authenticate. When you first\n  complete the OAuth flow, you'll receive both an access token and a refresh token.\n  ### Request\n  To receive a refresh token, include the `offline_access` scope in your initial authorization request:\n  ```\n  https://accounts.skyslope.com/oauth2/authorize?\n    response_type=code\n    &client_id={YOUR_CLIENT_ID}\n    &scope=forms.files offline_access\n    &redirect_uri={YOUR_REDIRECT_URI}\n  ```\n  ### Usage\n  When your access token expires, make a POST request to the token endpoint:\n  ```\n  POST /oauth2/token HTTP/1.1\n  Host: accounts.skyslope.com\n  Content-Type: application/x-www-form-urlencoded\n  \n  grant_type=refresh_token\n  &client_id={YOUR_CLIENT_ID}\n  &client_secret={YOUR_CLIENT_SECRET}\n  &refresh_token={YOUR_REFRESH_TOKEN}\n  ```\n  This will return a new access token and refresh token pair.\n  ### Security Best Practices\n  - Store refresh tokens securely on your backend server, never on client side\n  - Encrypt refresh tokens at rest using strong encryption\n  - Rotate refresh token on each use\n  - Set up monitoring for unusual refresh token usage patterns\n  - If a refresh token is compromised, revoke it immediately using the token revocation endpoint\n  - Implement automatic cleanup of unused refresh tokens"
+  description: '# Introduction
+
+    The SkySlope Forms API is organized around REST.'
   termsOfService: https://skyslope.com/terms-conditions/
   contact:
     name: Support
@@ -27,7 +29,12 @@ paths:
       summary: Create Listing or Transaction File
       tags:
       - Files
-      description: 'Creates a listing or a transaction file and returns the file id.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Creates a listing or a transaction file and returns the file id.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -115,11 +122,21 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFiles
+      x-operation-id-source: derived
     get:
       summary: Get Files
       tags:
       - Files
-      description: 'Retrieve the files that the user has access to.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files.read</div></div>'
+      description: 'Retrieve the files that the user has access to.
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.files.read'
       parameters:
       - schema:
           type: integer
@@ -328,12 +345,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFiles
+      x-operation-id-source: derived
   /files/{fileId}:
     patch:
       summary: Update File Details
       tags:
       - Files
-      description: 'Update the file details of a listing or transaction file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Update the file details of a listing or transaction file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -441,11 +465,18 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: patchFilesByFileId
+      x-operation-id-source: derived
     put:
       summary: Update File
       tags:
       - Files
-      description: 'Update the file of a listing or transaction file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Update the file of a listing or transaction file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -882,11 +913,21 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: putFilesByFileId
+      x-operation-id-source: derived
     get:
       summary: Get File
       tags:
       - Files
-      description: 'Retrieve the details of a listing or transaction file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files.read</div></div>'
+      description: 'Retrieve the details of a listing or transaction file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.files.read'
       parameters:
       - schema:
           type: integer
@@ -1358,12 +1399,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFilesByFileId
+      x-operation-id-source: derived
   /files/{fileId}/contacts:
     post:
       summary: Add Contact to File
       tags:
       - Files
-      description: 'Add a contact to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Add a contact to a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -1533,12 +1581,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFilesByFileIdContacts
+      x-operation-id-source: derived
   /files/contacts/{contactId}:
     put:
-      summary: Update Contact in File.
+      summary: Update Contact in File
       tags:
       - Files
-      description: 'Update a contact in a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Update a contact in a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -1708,12 +1763,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: putFilesContactsByContactId
+      x-operation-id-source: derived
   /files/{fileId}/contacts/bulk:
     post:
       summary: Add Contacts to File
       tags:
       - Files
-      description: 'Add one or more contacts to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Add one or more contacts to a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -1889,12 +1951,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFilesByFileIdContactsBulk
+      x-operation-id-source: derived
   /files/{fileId}/contacts/{contactId}:
     delete:
-      summary: Delete Contact from File.
+      summary: Delete Contact from File
       tags:
       - Files
-      description: 'Delete a contact from a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Delete a contact from a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       parameters:
       - schema:
           type: integer
@@ -1947,12 +2016,22 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: deleteFilesByFileIdContactsByContactId
+      x-operation-id-source: derived
   /files/{fileId}/documents:
     get:
       summary: Get File Documents
       tags:
       - Files
-      description: 'Retrieve the documents metadata for a file. To download documents with proper branding and data stamping, use the /files/:fileId/documents/download or /files/:fileId/documents/download/pdf endpoints.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents.read</div></div>'
+      description: 'Retrieve the documents metadata for a file. To download documents with proper branding and data stamping, use the /files/:fileId/documents/download or /files/:fileId/documents/download/pdf endpoints.
+
+        REQUIRED SCOPES:
+
+
+        forms.documents
+
+
+        forms.documents.read'
       parameters:
       - schema:
           type: integer
@@ -2058,11 +2137,21 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFilesByFileIdDocuments
+      x-operation-id-source: derived
     patch:
       summary: Add Documents to File
       tags:
       - Files
-      description: 'Add one or more documents to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      description: 'Add one or more documents to a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.documents'
       requestBody:
         content:
           application/json:
@@ -2128,12 +2217,22 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: patchFilesByFileIdDocuments
+      x-operation-id-source: derived
   /documents/signed/{fileId}:
     get:
       summary: Get Signed Documents
       tags:
       - Files
-      description: 'Retrieve the signed documents for a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents.read</div></div>'
+      description: 'Retrieve the signed documents for a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.documents
+
+
+        forms.documents.read'
       parameters:
       - schema:
           type: integer
@@ -2240,12 +2339,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getDocumentsSignedByFileId
+      x-operation-id-source: derived
   /documents/sign/subscribe/{fileId}:
     post:
       summary: Subscribe To Signed Documents Webhook
       tags:
       - Files
-      description: 'Subscribe a file to the signed documents webhook.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.webhooks</div></div>'
+      description: 'Subscribe a file to the signed documents webhook.
+
+        REQUIRED SCOPES:
+
+
+        forms.webhooks'
       requestBody:
         content:
           application/json:
@@ -2323,12 +2429,22 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postDocumentsSignSubscribeByFileId
+      x-operation-id-source: derived
   /files/{fileId}/envelopes:
     get:
       summary: Get Envelopes in File
       tags:
       - Files
-      description: 'Get the envelopes associated with a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files.read</div></div>'
+      description: 'Get the envelopes associated with a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.files.read'
       parameters:
       - schema:
           type: integer
@@ -2476,11 +2592,18 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFilesByFileIdEnvelopes
+      x-operation-id-source: derived
     post:
       summary: Create Envelope in File
       tags:
       - Files
-      description: 'Create an envelope for a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Create an envelope for a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -2558,12 +2681,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFilesByFileIdEnvelopes
+      x-operation-id-source: derived
   /files/{fileId}/templates:
     post:
       summary: Apply Template to File
       tags:
       - Files
-      description: 'Apply a template to a file.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div></div>'
+      description: 'Apply a template to a file.
+
+        REQUIRED SCOPES:
+
+
+        forms.files'
       requestBody:
         content:
           application/json:
@@ -2619,12 +2749,22 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFilesByFileIdTemplates
+      x-operation-id-source: derived
   /files/{fileId}/documents/download/pdf:
     get:
       summary: Download File Documents as PDF
       tags:
       - Files
-      description: 'Download one or more documents from a file as a combined PDF with file details stamped on the documents. If the call is successful, the response will be a PDF file containing the requested documents. If it is not successful, the response will be json containing the error.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      description: 'Download one or more documents from a file as a combined PDF with file details stamped on the documents. If the call is successful, the response will be a PDF file containing the requested documents. If it is not successful, the response will be json containing the error.
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.documents'
       parameters:
       - schema:
           type: string
@@ -2673,12 +2813,19 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFilesByFileIdDocumentsDownloadPdf
+      x-operation-id-source: derived
   /files/{fileId}/documents/download:
     get:
       summary: Download File Documents
       tags:
       - Files
-      description: 'Download one or more documents from a file with file details stamped on the documents. Returns a single PDF if one document ID is provided, or a ZIP file containing multiple documents if more than one document ID is provided. The Content-Type header will reflect the appropriate file type.<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents.read</div></div>'
+      description: 'Download one or more documents from a file with file details stamped on the documents. Returns a single PDF if one document ID is provided, or a ZIP file containing multiple documents if more than one document ID is provided. The Content-Type header will reflect the appropriate file type.
+
+        REQUIRED SCOPES:
+
+
+        forms.documents.read'
       parameters:
       - schema:
           type: string
@@ -2731,12 +2878,22 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: getFilesByFileIdDocumentsDownload
+      x-operation-id-source: derived
   /files/{fileId}/documents/upload:
     post:
       summary: Upload Document to File
       tags:
       - Files
-      description: 'Upload a PDF document to a file. Max size 25MB. Accepts multipart/form-data with fields: DocumentName (string), DocumentBody (binary PDF file), IsSignedDocument (true/false, optional).<div style="color: rgba(38, 50, 56, 0.5); border-bottom: 1px solid rgba(38, 50, 56, 0.3); padding-bottom: 1px;">REQUIRED SCOPES:</div><div style="display: inline-flex; gap: 5px; padding: 5px;"><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.files</div><div style="border-radius: 2px; border: 1px solid rgba(128,128,255,0.5); background-color: rgba(64,64,255,0.25); padding: 0px 5px;">forms.documents</div></div>'
+      description: 'Upload a PDF document to a file. Max size 25MB. Accepts multipart/form-data with fields: DocumentName (string), DocumentBody (binary PDF file), IsSignedDocument (true/false, optional).
+
+        REQUIRED SCOPES:
+
+
+        forms.files
+
+
+        forms.documents'
       parameters:
       - schema:
           type: integer
@@ -2783,3 +2940,5 @@ paths:
                   traceId:
                     type: string
                     description: A request correlation ID.
+      operationId: postFilesByFileIdDocumentsUpload
+      x-operation-id-source: derived

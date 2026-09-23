@@ -42,7 +42,8 @@
     "skyslope-offers-openapi.yml: declared missing tag: Agents, Listings",
     "skyslope-offers-openapi.yml: declared missing tag: Auth",
     "skyslope-offers-openapi.yml: declared missing tag: Offers",
-    "skyslope-offers-openapi.yml: declared missing tag: Report"
+    "skyslope-offers-openapi.yml: declared missing tag: Report",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "skyslope-agents-listings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
