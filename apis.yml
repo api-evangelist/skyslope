@@ -58,7 +58,7 @@ tags_raw:
 - Documents
 - Real-Estate
 created: '2026-07-04'
-modified: '2026-07-04'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: skyslope:skyslope-transaction-management-api
@@ -292,6 +292,8 @@ apis:
   - type: APIReference
     url: https://offers.skyslope.com/offers-api/reference
 common:
+- url: https://skyslope.com/feed/
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/skyslope-capability-edges.yml
   name: SkySlope Business Capability Map
