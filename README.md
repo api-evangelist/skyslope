@@ -1,4 +1,4 @@
-# SkySlope (skyslope)
+# SkySlope
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,108 +64,141 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-SkySlope is a real estate transaction management and digital forms platform used by brokerages, teams, and agents across the U.S. and Canada to store, manage, and audit transaction documents for compliance, prepare and e-sign forms, and manage offers. SkySlope reports it serves over 900,000 real estate professionals and manages more than 3 million transactions annually.
+SkySlope is a real estate transaction management and digital forms platform used by brokerages, teams, and agents across the U.S. and Canada to store, manage, and audit transaction documents for compliance, prepare and e-sign forms, and manage offers. SkySlope exposes a partner-oriented public API program - a Partnership / Forms API (OAuth 2.0 authorization-code flow with PKCE) for creating and managing listing and transaction files, documents, contacts, envelopes, forms libraries, and templates; an Offers API (OAuth 2.0 client-credentials flow) for retrieving listings, offers, and offer/listing analytics from SkySlope Offers; and a broader Transaction Management API (BETA) positioned for brokerages to query and extract their SkySlope data for reporting and enterprise integration. API access is partner/brokerage-gated - reference documentation is public but obtaining OAuth client credentials requires working with SkySlope.
 
-SkySlope runs a partner-oriented public API program. Reference documentation is public, but obtaining OAuth client credentials is **partner/brokerage-gated** - you work with SkySlope to get access, and some endpoints are marked partner-only / coming soon in the published reference.
+**Areas:** Real Estate · Transaction Management · Digital Forms · E-Signature · Compliance · PropTech · Documents
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/skyslope/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/skyslope/refs/heads/main/apis.yml)
+## SkySlope on APIs.io
 
-## Access Model
+Everything profiled for SkySlope is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/skyslope/](https://apis.io/providers/skyslope/)** — or go straight to one of the APIs or properties below.
 
-- **Partner / brokerage-gated.** The Partnership / Forms API and Offers API reference docs are publicly viewable (rendered with Redoc), but credentials are issued through a SkySlope partner/brokerage relationship, not via public self-service signup.
-- **OAuth 2.0.** The Partnership / Forms API uses the authorization-code flow with PKCE (authorize/token at `accounts.skyslope.com`, scope `forms.files`). The Offers API uses the client-credentials flow (`POST /ext/token`). All requests are Bearer-authenticated over HTTPS.
-- **BETA surface.** A broader Transaction Management API is referenced on `api.skyslope.com`; the host is live and returns `401` without a token, but a complete public reference was not reachable at review time, so its endpoints are intentionally not modeled here.
+### APIs (15)
 
-## Tags
+- [SkySlope Transaction Management API (BETA)](https://apis.io/apis/skyslope/skyslope-transaction-management-api/) — SkySlope's broader enterprise Transaction Management API, positioned for brokerages to query, extract, and build on top of their SkySlope transaction data…
+- [SkySlope Agents, Listings API](https://apis.io/apis/skyslope/skyslope-agents-listings-api/) — The Agents, Listings API from SkySlope — 1 operation(s) for agents, listings.
+- [SkySlope Auth API](https://apis.io/apis/skyslope/skyslope-auth-api/) — The Auth API from SkySlope — 1 operation(s) for auth.
+- [SkySlope Buyer Agreements API](https://apis.io/apis/skyslope/skyslope-buyer-agreements-api/) — The Buyer Agreements API from SkySlope — 1 operation(s) for buyer agreements.
+- [SkySlope Contacts API](https://apis.io/apis/skyslope/skyslope-contacts-api/) — The Contacts API from SkySlope — 4 operation(s) for contacts.
+- [SkySlope Documents API](https://apis.io/apis/skyslope/skyslope-documents-api/) — The Documents API from SkySlope — 5 operation(s) for documents.
+- [SkySlope Envelopes API](https://apis.io/apis/skyslope/skyslope-envelopes-api/) — The Envelopes API from SkySlope — 1 operation(s) for envelopes.
+- [SkySlope Files API](https://apis.io/apis/skyslope/skyslope-files-api/) — The Files API from SkySlope — 14 operation(s) for files.
+- [SkySlope Forms API](https://apis.io/apis/skyslope/skyslope-forms-api/) — The Forms API from SkySlope — 1 operation(s) for forms.
+- [SkySlope Libraries API](https://apis.io/apis/skyslope/skyslope-libraries-api/) — The Libraries API from SkySlope — 3 operation(s) for libraries.
+- [SkySlope Offers API](https://apis.io/apis/skyslope/skyslope-offers-api/) — The Offers API from SkySlope — 2 operation(s) for offers.
+- [SkySlope Report API](https://apis.io/apis/skyslope/skyslope-report-api/) — The Report API from SkySlope — 1 operation(s) for report.
+- [SkySlope Templates API](https://apis.io/apis/skyslope/skyslope-templates-api/) — The Templates API from SkySlope — 1 operation(s) for templates.
+- [SkySlope Users API](https://apis.io/apis/skyslope/skyslope-users-api/) — The Users API from SkySlope — 4 operation(s) for users.
+- [SkySlope Webhooks API](https://apis.io/apis/skyslope/skyslope-webhooks-api/) — The Webhooks API from SkySlope — 1 operation(s) for webhooks.
 
-- Real Estate
-- Transaction Management
-- Digital Forms
-- E-Signature
-- Compliance
-- PropTech
-- Documents
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-04
-- **Modified:** 2026-07-04
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### SkySlope Partnership (Forms) API
+- [Skyslope Agentic Access](https://apis.io/agentic-access/skyslope/skyslope-agentic-access/)
 
-Create and manage SkySlope listing and transaction files and their documents, contacts, envelopes, forms, libraries, and templates; retrieve signed documents; and subscribe to a signed-documents webhook. OAuth 2.0 authorization-code flow with PKCE.
+#### Collections (14)
 
-- **Human URL:** [https://forms.skyslope.com/partner/api/docs](https://forms.skyslope.com/partner/api/docs)
-- **Base URL:** `https://forms.skyslope.com/partner/api`
+Postman and Open Collection request collections.
 
-#### Tags
+- [SkySlope Partnership API Reference Agents, Listings API](https://apis.io/collections/skyslope/open-skyslope-agents-listings-api/)
+- [SkySlope Partnership API Reference Agents, Listings Auth API](https://apis.io/collections/skyslope/open-skyslope-auth-api/)
+- [SkySlope Partnership API Reference Agents, Listings Buyer Agreements API](https://apis.io/collections/skyslope/open-skyslope-buyer-agreements-api/)
+- [SkySlope Partnership API Reference Agents, Listings Contacts API](https://apis.io/collections/skyslope/open-skyslope-contacts-api/)
+- [SkySlope Partnership API Reference Agents, Listings Documents API](https://apis.io/collections/skyslope/open-skyslope-documents-api/)
+- [SkySlope Partnership API Reference Agents, Listings Envelopes API](https://apis.io/collections/skyslope/open-skyslope-envelopes-api/)
+- [SkySlope Partnership API Reference Agents, Listings Files API](https://apis.io/collections/skyslope/open-skyslope-files-api/)
+- [SkySlope Partnership API Reference Agents, Listings Forms API](https://apis.io/collections/skyslope/open-skyslope-forms-api/)
+- [SkySlope Partnership API Reference Agents, Listings Libraries API](https://apis.io/collections/skyslope/open-skyslope-libraries-api/)
+- [SkySlope Partnership API Reference Agents, Listings Offers API](https://apis.io/collections/skyslope/open-skyslope-offers-api/)
+- [SkySlope Partnership API Reference Agents, Listings Report API](https://apis.io/collections/skyslope/open-skyslope-report-api/)
+- [SkySlope Partnership API Reference Agents, Listings Templates API](https://apis.io/collections/skyslope/open-skyslope-templates-api/)
+- [SkySlope Partnership API Reference Agents, Listings Users API](https://apis.io/collections/skyslope/open-skyslope-users-api/)
+- [SkySlope Partnership API Reference Agents, Listings Webhooks API](https://apis.io/collections/skyslope/open-skyslope-webhooks-api/)
 
-- Files
-- Documents
-- Forms
-- Contacts
-- Envelopes
+#### Security (1)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [API Reference](https://forms.skyslope.com/partner/api/docs)
-- [OpenAPI](openapi/skyslope-forms-partnership-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Skyslope Domain Security](https://apis.io/security/skyslope/skyslope-domain-security/)
 
-### SkySlope Offers API
+#### Plans and pricing (1)
 
-Retrieve listings, offers, offer details, and counts/analytics of listings and offers from SkySlope Offers for a given agent or date range. OAuth 2.0 client-credentials flow.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://offers.skyslope.com/offers-api/reference](https://offers.skyslope.com/offers-api/reference)
-- **Base URL:** `https://offers.skyslope.com/offers-api`
+- [Skyslope Plans Pricing](https://apis.io/plans/skyslope/skyslope-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Offers
-- Listings
-- Analytics
-- Reporting
+Published request limits.
 
-#### Properties
+- [Skyslope Rate Limits](https://apis.io/rate-limits/skyslope/skyslope-rate-limits/)
 
-- [API Reference](https://offers.skyslope.com/offers-api/reference)
-- [OpenAPI](openapi/skyslope-offers-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### FinOps (1)
 
-### SkySlope Transaction Management API (BETA)
+What the API costs to run, by operation.
 
-SkySlope's broader enterprise Transaction Management API, positioned for brokerages to query, extract, and build on top of their SkySlope transaction data for reporting tools, dashboards, and enterprise applications. Host is live and requires authentication; a full public reference was not reachable at review time, so endpoints are not modeled here.
+- [Skyslope Finops](https://apis.io/finops/skyslope/skyslope-finops/)
 
-- **Human URL:** [https://skyslope.com/general/unlocking-the-power-of-your-data/](https://skyslope.com/general/unlocking-the-power-of-your-data/)
-- **Base URL:** `https://api.skyslope.com/api`
+## Where to find this API
 
-#### Tags
-
-- Transactions
-- Reporting
-- Enterprise
-- Beta
-
-#### Properties
-
-- [Documentation](https://skyslope.com/general/unlocking-the-power-of-your-data/)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://skyslope.com)
-- [LinkedIn](https://www.linkedin.com/company/skyslope)
 - [Documentation](https://forms.skyslope.com/partner/api/docs)
-- [Documentation](https://skyslope.com/general/unlocking-the-power-of-your-data/)
-- [Integrations](https://skyslope.com/integrations/)
-- [Plans](plans/skyslope-plans-pricing.yml)
-- [Rate Limits](rate-limits/skyslope-rate-limits.yml)
-- [Fin Ops](finops/skyslope-finops.yml)
 
-## Pricing
+## API Evangelist rating
 
-SkySlope does not publicly list exact prices; plans are quote-based and vary by brokerage size, transaction volume, and add-ons. Third-party sources describe tiered plans (Essentials, Professional, Enterprise) with reported per-user rates in the low-tens up to roughly $60/user/month, and the SkySlope Suite reported starting around $340/month for brokerages. See [plans/skyslope-plans-pricing.yml](plans/skyslope-plans-pricing.yml). All figures are third-party estimates - verify with SkySlope sales.
+**Kin Score 22.6** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 16.7 |
+| Access clarity | 7.9 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/skyslope/](https://apis.io/providers/skyslope/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SkySlope: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/skyslope/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
